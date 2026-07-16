@@ -210,7 +210,7 @@
       height: 100vh;
       display: flex; align-items: flex-end;
     }
-    .hero-photo img {
+    .hero-photo img, .hero-photo video {
       width: 100%; height: 92%;
       object-fit: cover; object-position: center top;
       display: block;
@@ -643,7 +643,9 @@
     </div>
   </div>
   <div class="hero-photo">
-    <img src="kuda.png" alt="Kudakwashe Masango — Founder, Marimba Studios">
+    <video autoplay muted loop playsinline>
+      <source src="kuda.mp4" type="video/mp4">
+    </video>
   </div>
   <div class="scroll-hint">Scroll</div>
 </section>
