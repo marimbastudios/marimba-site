@@ -924,6 +924,129 @@ const nav = document.getElementById('main-nav');
 window.addEventListener('scroll', () => {
   nav.classList.toggle('scrolled', window.scrollY > 60);
 }, { passive: true });
+
+// ── CUSTOM CURSOR ─────────────────────────────────────────────
+(function() {
+  // Don't run on touch devices
+  if (window.matchMedia('(pointer: coarse)').matches) return;
+
+  // Inject cursor styles
+  const style = document.createElement('style');
+  style.textContent = `
+    * { cursor: none !important; }
+    #ms-cursor {
+      position: fixed; top: 0; left: 0; z-index: 99999;
+      pointer-events: none; mix-blend-mode: screen;
+    }
+    #ms-cursor-dot {
+      position: fixed; top: 0; left: 0; z-index: 100000;
+      width: 6px; height: 6px; border-radius: 50%;
+      background: #C4A86A;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      transition: transform 0.1s ease, opacity 0.2s;
+    }
+    #ms-cursor-ring {
+      position: fixed; top: 0; left: 0; z-index: 99999;
+      width: 36px; height: 36px; border-radius: 50%;
+      border: 1px solid rgba(196,168,106,0.5);
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      transition: width 0.3s ease, height 0.3s ease,
+                  border-color 0.3s ease, transform 0.08s linear;
+    }
+    body.cursor-hover #ms-cursor-ring {
+      width: 56px; height: 56px;
+      border-color: rgba(196,168,106,0.9);
+      background: rgba(196,168,106,0.05);
+    }
+    body.cursor-hover #ms-cursor-dot {
+      transform: translate(-50%, -50%) scale(1.8);
+    }
+  `;
+  document.head.appendChild(style);
+
+  // Create cursor glow canvas
+  const canvas = document.createElement('canvas');
+  canvas.id = 'ms-cursor';
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  document.body.appendChild(canvas);
+  const ctx = canvas.getContext('2d');
+
+  window.addEventListener('resize', () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  });
+
+  // Create dot and ring
+  const dot = document.createElement('div');
+  dot.id = 'ms-cursor-dot';
+  document.body.appendChild(dot);
+
+  const ring = document.createElement('div');
+  ring.id = 'ms-cursor-ring';
+  document.body.appendChild(ring);
+
+  let mx = -200, my = -200;
+  let rx = -200, ry = -200;
+  const trail = [];
+  const MAX_TRAIL = 18;
+
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    dot.style.left = mx + 'px';
+    dot.style.top  = my + 'px';
+    trail.push({ x: mx, y: my, a: 1 });
+    if (trail.length > MAX_TRAIL) trail.shift();
+  });
+
+  // Hover state on interactive elements
+  const hoverEls = 'a, button, .svc-card, .btn-gold, .btn-line, .cta-item';
+  document.querySelectorAll(hoverEls).forEach(el => {
+    el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+    el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+  });
+
+  function lerp(a, b, t) { return a + (b - a) * t; }
+
+  function render() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Ambient glow that follows cursor
+    const grd = ctx.createRadialGradient(mx, my, 0, mx, my, 120);
+    grd.addColorStop(0, 'rgba(196,168,106,0.07)');
+    grd.addColorStop(1, 'rgba(196,168,106,0)');
+    ctx.fillStyle = grd;
+    ctx.beginPath();
+    ctx.arc(mx, my, 120, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Beam trail
+    for (let i = 1; i < trail.length; i++) {
+      const t = i / trail.length;
+      const alpha = t * 0.6;
+      const width = t * 3;
+      ctx.beginPath();
+      ctx.moveTo(trail[i - 1].x, trail[i - 1].y);
+      ctx.lineTo(trail[i].x, trail[i].y);
+      ctx.strokeStyle = `rgba(196,168,106,${alpha})`;
+      ctx.lineWidth = width;
+      ctx.lineCap = 'round';
+      ctx.stroke();
+    }
+
+    // Lag the ring slightly for smooth feel
+    rx = lerp(rx, mx, 0.12);
+    ry = lerp(ry, my, 0.12);
+    ring.style.left = rx + 'px';
+    ring.style.top  = ry + 'px';
+
+    requestAnimationFrame(render);
+  }
+
+  render();
+})();
 </script>
 
 </body>
