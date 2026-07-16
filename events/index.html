@@ -555,7 +555,7 @@
   <div class="grid">
 
     <!-- 01 — Conference Coverage 01 -->
-    <div class="tile" onclick="openModal('ev-01.mp4','Corporate','Conference Coverage 01')">
+    <div class="tile" onclick="openModal('Nwpww9bqdxM','Corporate','Conference Coverage 01')">
       <span class="tile-num">01</span>
       <video class="tile-thumb" autoplay muted loop playsinline>
         <source src="ev-01.mp4" type="video/mp4">
@@ -575,7 +575,7 @@
     </div>
 
     <!-- 02 — Birthday Event -->
-    <div class="tile" onclick="openModal('ev-02.mp4','Celebration','Birthday Event')">
+    <div class="tile" onclick="openModal('tQD3pvCnQA4','Celebration','Birthday Event')">
       <span class="tile-num">02</span>
       <video class="tile-thumb" autoplay muted loop playsinline>
         <source src="ev-02.mp4" type="video/mp4">
@@ -595,7 +595,7 @@
     </div>
 
     <!-- 03 — Conference Coverage 02 -->
-    <div class="tile" onclick="openModal('ev-03.mp4','Corporate','Conference Coverage 02')">
+    <div class="tile" onclick="openModal('0Mop_gPo1m4','Corporate','Conference Coverage 02')">
       <span class="tile-num">03</span>
       <video class="tile-thumb" autoplay muted loop playsinline>
         <source src="ev-03.mp4" type="video/mp4">
@@ -673,27 +673,24 @@
       <span class="modal-title" id="modalTitle"></span>
     </div>
     <div class="video-wrap">
-      <video id="modalVideo" controls playsinline style="position:absolute;inset:0;width:100%;height:100%;background:#000;border:none;"></video>
+      <iframe id="modalFrame" src="" allow="autoplay; fullscreen" allowfullscreen style="position:absolute;inset:0;width:100%;height:100%;border:none;"></iframe>
     </div>
     <div class="modal-accent"></div>
   </div>
 </div>
 
 <script>
-  function openModal(videoSrc, label, title) {
+  function openModal(videoId, label, title) {
     document.getElementById('modalLabel').textContent = label;
     document.getElementById('modalTitle').textContent = title;
-    const vid = document.getElementById('modalVideo');
-    vid.src = videoSrc;
-    vid.play();
+    document.getElementById('modalFrame').src =
+      'https://www.youtube.com/embed/' + videoId + '?autoplay=1&rel=0&modestbranding=1';
     document.getElementById('modal').classList.add('open');
     document.body.style.overflow = 'hidden';
   }
   function closeModal() {
     document.getElementById('modal').classList.remove('open');
-    const vid = document.getElementById('modalVideo');
-    vid.pause();
-    vid.src = '';
+    document.getElementById('modalFrame').src = '';
     document.body.style.overflow = '';
   }
   function handleBackdropClick(e) {
