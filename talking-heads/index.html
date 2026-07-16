@@ -261,35 +261,50 @@
       padding: 0 52px;
       animation: fadeUp 0.8s 0.2s ease both;
     }
-    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; }
+
+    /* Hero layout: first tile full-width, tiles 2+3 side by side below */
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto auto;
+      gap: 4px;
+    }
+    .tile:first-child {
+      grid-column: 1 / -1; /* spans full width */
+    }
 
     /* ── TILE ── */
     .tile {
-      position: relative; aspect-ratio: 16 / 9;
+      position: relative;
       overflow: hidden; cursor: pointer; background: #0e0c10;
     }
+    /* Hero tile taller */
+    .tile:first-child { aspect-ratio: 21 / 9; }
+    /* Secondary tiles */
+    .tile:not(:first-child) { aspect-ratio: 16 / 9; }
+
     .tile-num {
-      position: absolute; top: 20px; left: 24px;
+      position: absolute; top: 24px; left: 28px;
       font-family: 'Cormorant Garamond', serif;
-      font-size: 11px; letter-spacing: 0.22em;
-      color: rgba(196,168,106,0.2); z-index: 2; transition: color 0.3s;
+      font-size: 12px; letter-spacing: 0.22em;
+      color: rgba(196,168,106,0.25); z-index: 2; transition: color 0.3s;
     }
-    .tile:hover .tile-num { color: var(--gold); opacity: 0.7; }
+    .tile:hover .tile-num { color: var(--gold); opacity: 0.8; }
     .tile-thumb {
       position: absolute; inset: 0; width: 100%; height: 100%;
-      object-fit: cover;
-      transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      object-fit: cover; object-position: center top;
+      transition: transform 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
     .tile-thumb[data-src] { display: none; }
     video.tile-thumb { object-position: center; }
-    .tile:hover .tile-thumb { transform: scale(1.06); }
+    .tile:hover .tile-thumb { transform: scale(1.04); }
     .tile-overlay {
       position: absolute; inset: 0;
       background: linear-gradient(
         to top,
-        rgba(8,6,14,0.97)  0%,
-        rgba(20,14,40,0.5) 40%,
-        rgba(11,11,11,0.08) 100%
+        rgba(8,6,14,0.96)  0%,
+        rgba(20,14,40,0.45) 38%,
+        rgba(11,11,11,0.05) 100%
       );
       transition: background 0.4s;
     }
@@ -297,19 +312,19 @@
       background: linear-gradient(
         to top,
         rgba(8,6,14,0.98)  0%,
-        rgba(30,20,55,0.62) 45%,
-        rgba(11,11,11,0.12) 100%
+        rgba(30,20,55,0.58) 42%,
+        rgba(11,11,11,0.08) 100%
       );
     }
 
-    /* Play button — gold on hover */
+    /* Play button */
     .play-btn {
       position: absolute; top: 50%; left: 50%;
       transform: translate(-50%, -60%);
-      width: 62px; height: 62px; border-radius: 50%;
-      border: 1.5px solid rgba(196,168,106,0.25);
-      background: rgba(8,6,14,0.55);
-      backdrop-filter: blur(8px);
+      width: 72px; height: 72px; border-radius: 50%;
+      border: 1.5px solid rgba(196,168,106,0.3);
+      background: rgba(8,6,14,0.5);
+      backdrop-filter: blur(10px);
       display: flex; align-items: center; justify-content: center;
       transition: border-color 0.3s, background 0.3s, transform 0.4s;
       z-index: 3;
@@ -319,39 +334,46 @@
       border: 1px solid var(--gold); opacity: 0; transition: opacity 0.3s;
     }
     .tile:hover .play-btn::after { animation: pulse-ring 1.5s ease-out infinite; opacity: 1; }
-    .play-btn svg { width: 18px; height: 18px; margin-left: 3px; }
+    .play-btn svg { width: 22px; height: 22px; margin-left: 4px; }
     .tile:hover .play-btn {
-      border-color: rgba(196,168,106,0.6);
-      background: rgba(196,168,106,0.12);
-      transform: translate(-50%, -60%) scale(1.1);
+      border-color: rgba(196,168,106,0.7);
+      background: rgba(196,168,106,0.14);
+      transform: translate(-50%, -60%) scale(1.12);
     }
 
     .tile-info {
       position: absolute; bottom: 0; left: 0; right: 0;
-      padding: 20px 22px; z-index: 2;
+      padding: 28px 32px; z-index: 2;
     }
+    .tile:first-child .tile-info { padding: 36px 44px; }
+
     .tile-label {
-      font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
-      color: var(--gold); margin-bottom: 5px; opacity: 0.7;
+      font-size: 10px; letter-spacing: 0.26em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 8px; opacity: 0.8;
     }
     .tile-title {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 19px; font-weight: 400;
-      color: var(--ivory); line-height: 1.2; margin-bottom: 7px;
+      font-size: 26px; font-weight: 300;
+      color: var(--ivory); line-height: 1.15; margin-bottom: 10px;
+      letter-spacing: -0.01em;
     }
+    .tile:first-child .tile-title { font-size: 38px; }
+
     .tile-desc {
-      font-size: 11px; font-weight: 300; color: var(--muted); line-height: 1.6;
-      opacity: 0; transform: translateY(6px);
-      transition: opacity 0.35s, transform 0.35s;
+      font-size: 12px; font-weight: 300; color: var(--muted); line-height: 1.7;
+      max-width: 480px;
+      opacity: 0; transform: translateY(8px);
+      transition: opacity 0.4s, transform 0.4s;
     }
     .tile:hover .tile-desc { opacity: 1; transform: translateY(0); }
+
     .tile-arrow {
-      position: absolute; top: 22px; right: 22px;
+      position: absolute; top: 26px; right: 26px;
       display: flex; align-items: center; z-index: 3;
       opacity: 0; transition: opacity 0.3s, transform 0.3s;
       transform: translate(-5px, 5px);
     }
-    .tile-arrow svg { width: 15px; height: 15px; stroke: var(--gold); fill: none; }
+    .tile-arrow svg { width: 16px; height: 16px; stroke: var(--gold); fill: none; }
     .tile:hover .tile-arrow { opacity: 1; transform: translate(0, 0); }
 
     /* ── REFLECTION STRIP ── */
@@ -574,7 +596,7 @@
       .portfolio-row { padding: 32px 24px 18px; }
       .grid-section  { padding: 0 24px; }
       .grid          { grid-template-columns: 1fr; }
-      .tile          { aspect-ratio: 16 / 9; }
+      .tile          { aspect-ratio: 16 / 9 !important; grid-column: auto !important; }
       .reflection    { margin: 0 24px; grid-template-columns: 1fr; }
       .ref-col       { border-right: none; border-bottom: 1px solid var(--border); }
       .ref-col:last-child { border-bottom: none; }
