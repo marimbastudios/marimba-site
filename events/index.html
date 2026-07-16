@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Event Films — Marimba Studios</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black:        #0b0b0b;
+      --purple:       #6248CC;
+      --purple-vivid: #7C5CE8;
+      --purple-soft:  #A78BF0;
+      --purple-deep:  #2E1E6E;
+      --rose:         #C4688A;
+      --ivory:        #EDE9E3;
+      --muted:        #908A83;
+      --border:       #1A1820;
+      --border-mid:   #252030;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    @keyframes pulse-ring {
+      0%   { transform: translate(-50%,-60%) scale(1);   opacity: 0.8; }
+      80%  { transform: translate(-50%,-60%) scale(1.6); opacity: 0; }
+      100% { transform: translate(-50%,-60%) scale(1.6); opacity: 0; }
+    }
+    @keyframes modalIn {
+      from { opacity: 0; transform: scale(0.95) translateY(10px); }
+      to   { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    @keyframes rosePulse {
+      0%,100% { opacity: 1; }
+      50%      { opacity: 0.5; }
+    }
+
+    body {
+      background: var(--black);
+      color: var(--ivory);
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Film grain */
+    body::after {
+      content: '';
+      position: fixed; inset: 0; pointer-events: none; z-index: 9999;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+      opacity: 0.03; mix-blend-mode: overlay;
+    }
+
+    /* Purple → Rose top line */
+    body::before {
+      content: '';
+      position: fixed; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg,
+        transparent 0%, var(--purple) 20%,
+        var(--purple-vivid) 50%, var(--rose) 80%, transparent 100%);
+      opacity: 0.65; z-index: 100;
+    }
+
+    /* ── HEADER ── */
+    header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 28px 52px;
+      border-bottom: 1px solid var(--border);
+      position: sticky; top: 0;
+      background: rgba(11,11,11,0.95);
+      backdrop-filter: blur(16px);
+      z-index: 50;
+      animation: fadeIn 0.5s ease both;
+    }
+    .logo-wrap { display: flex; align-items: center; gap: 14px; text-decoration: none; }
+    .logo-mark  { width: 34px; height: 34px; flex-shrink: 0; }
+    .logo-text  {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 17px; font-weight: 400;
+      letter-spacing: 0.2em; text-transform: uppercase; color: var(--ivory);
+    }
+    .header-right { display: flex; align-items: center; gap: 20px; }
+    .header-service {
+      font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--purple-soft); opacity: 0.5;
+    }
+    @media (max-width: 560px) { .header-service { display: none; } }
+
+    .header-cta {
+      font-size: 11px; font-weight: 500;
+      letter-spacing: 0.13em; text-transform: uppercase;
+      color: var(--ivory); text-decoration: none;
+      padding: 10px 24px;
+      border: 1px solid var(--border-mid);
+      transition: border-color 0.25s, color 0.25s, background 0.25s;
+    }
+    .header-cta:hover {
+      border-color: var(--purple);
+      color: var(--purple-soft);
+      background: rgba(98,72,204,0.07);
+    }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 80px 52px 64px;
+      position: relative; overflow: hidden;
+      animation: fadeUp 0.85s ease both;
+    }
+
+    /* Glow layers */
+    .glow-purple {
+      position: absolute; top: -15%; left: -6%;
+      width: 60vw; height: 70vh;
+      background: radial-gradient(ellipse at 30% 40%,
+        rgba(98,72,204,0.12) 0%, transparent 70%);
+      pointer-events: none; z-index: 0;
+    }
+    .glow-rose {
+      position: absolute; bottom: -5%; right: 0%;
+      width: 35vw; height: 45vh;
+      background: radial-gradient(ellipse at 65% 65%,
+        rgba(196,104,138,0.07) 0%, transparent 65%);
+      pointer-events: none; z-index: 0;
+    }
+
+    .hero-inner { position: relative; z-index: 1; max-width: 820px; }
+
+    /* Problem pill */
+    .problem-pill {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: rgba(196,104,138,0.09);
+      border: 1px solid rgba(196,104,138,0.22);
+      padding: 8px 16px; margin-bottom: 36px;
+    }
+    .pill-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--rose); flex-shrink: 0;
+      animation: rosePulse 2.8s ease-in-out infinite;
+    }
+    .pill-text {
+      font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--rose); font-weight: 400;
+    }
+
+    .hero-headline {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(44px, 6.5vw, 80px);
+      font-weight: 300; line-height: 1.06;
+      margin-bottom: 30px; letter-spacing: -0.015em;
+    }
+    .hl-problem { color: var(--muted); display: block; }
+    .hl-solution {
+      display: block;
+      background: linear-gradient(120deg,
+        var(--purple-soft) 0%, var(--rose) 55%, var(--purple-soft) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      font-size: 15px; font-weight: 300; line-height: 1.82;
+      color: var(--muted); max-width: 490px; margin-bottom: 36px;
+    }
+
+    /* Event type tags */
+    .event-tags {
+      display: flex; align-items: center; flex-wrap: wrap;
+      gap: 8px; padding-top: 28px;
+      border-top: 1px solid var(--border);
+    }
+    .event-tag {
+      font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--muted); padding: 6px 14px;
+      border: 1px solid var(--border);
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .event-tag:hover { border-color: var(--purple); color: var(--purple-soft); }
+
+    /* ── PORTFOLIO ── */
+    .portfolio-row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 40px 52px 22px;
+      animation: fadeUp 0.8s 0.15s ease both;
+    }
+    .portfolio-eyebrow {
+      display: flex; align-items: center; gap: 14px;
+    }
+    .portfolio-eyebrow span {
+      font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase;
+      color: var(--purple-soft); opacity: 0.6;
+    }
+    .eyebrow-line {
+      width: 48px; height: 1px;
+      background: linear-gradient(90deg, var(--purple), transparent); opacity: 0.4;
+    }
+    .portfolio-sub {
+      font-size: 12px; font-weight: 300; color: var(--muted); opacity: 0.55;
+      letter-spacing: 0.03em;
+    }
+
+    /* ── VIDEO GRID ── */
+    .grid-section {
+      padding: 0 52px;
+      animation: fadeUp 0.8s 0.2s ease both;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3px;
+    }
+
+    /* ── TILE ── */
+    .tile {
+      position: relative;
+      aspect-ratio: 4 / 3;
+      overflow: hidden; cursor: pointer;
+      background: #0d0a18;
+    }
+    .tile-num {
+      position: absolute; top: 20px; left: 24px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 11px; letter-spacing: 0.22em;
+      color: rgba(167,139,240,0.2); z-index: 2; transition: color 0.3s;
+    }
+    .tile:hover .tile-num { color: var(--purple-soft); opacity: 0.75; }
+
+    .tile-thumb {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: cover;
+      background: #000;
+      transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .tile:hover .tile-thumb { transform: scale(1.06); }
+
+    .tile-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(
+        to top,
+        rgba(8,5,20,0.97)  0%,
+        rgba(25,14,55,0.5) 40%,
+        rgba(11,11,11,0.08) 100%
+      );
+      transition: background 0.4s;
+    }
+    .tile:hover .tile-overlay {
+      background: linear-gradient(
+        to top,
+        rgba(8,5,20,0.98)  0%,
+        rgba(40,22,80,0.62) 45%,
+        rgba(11,11,11,0.12) 100%
+      );
+    }
+
+    .play-btn {
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -60%);
+      width: 62px; height: 62px; border-radius: 50%;
+      border: 1.5px solid rgba(167,139,240,0.3);
+      background: rgba(8,5,20,0.55);
+      backdrop-filter: blur(8px);
+      display: flex; align-items: center; justify-content: center;
+      transition: border-color 0.3s, background 0.3s, transform 0.4s;
+      z-index: 3;
+    }
+    .play-btn::after {
+      content: ''; position: absolute; inset: -2px; border-radius: 50%;
+      border: 1px solid var(--rose); opacity: 0; transition: opacity 0.3s;
+    }
+    .tile:hover .play-btn::after { animation: pulse-ring 1.5s ease-out infinite; opacity: 1; }
+    .play-btn svg { width: 18px; height: 18px; margin-left: 3px; }
+    .tile:hover .play-btn {
+      border-color: rgba(196,104,138,0.55);
+      background: rgba(196,104,138,0.14);
+      transform: translate(-50%, -60%) scale(1.1);
+    }
+
+    .tile-info {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 32px 26px; z-index: 2;
+    }
+    .tile-label {
+      font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--purple-soft); margin-bottom: 8px; opacity: 0.7;
+    }
+    .tile-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 23px; font-weight: 400;
+      color: var(--ivory); line-height: 1.2; margin-bottom: 10px;
+    }
+    .tile-desc {
+      font-size: 12px; font-weight: 300;
+      color: var(--muted); line-height: 1.65;
+      opacity: 0; transform: translateY(8px);
+      transition: opacity 0.35s, transform 0.35s;
+    }
+    .tile:hover .tile-desc { opacity: 1; transform: translateY(0); }
+
+    .tile-arrow {
+      position: absolute; top: 22px; right: 22px;
+      display: flex; align-items: center; z-index: 3;
+      opacity: 0; transition: opacity 0.3s, transform 0.3s;
+      transform: translate(-5px, 5px);
+    }
+    .tile-arrow svg { width: 15px; height: 15px; stroke: var(--rose); fill: none; }
+    .tile:hover .tile-arrow { opacity: 1; transform: translate(0, 0); }
+
+    /* ── REFLECTION STRIP (below videos) ── */
+    .reflection {
+      margin: 0 52px;
+      border: 1px solid var(--border);
+      border-top: none;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      animation: fadeUp 0.8s 0.3s ease both;
+    }
+
+    .ref-col {
+      padding: 36px 36px 36px 32px;
+      border-right: 1px solid var(--border);
+      position: relative;
+      transition: background 0.25s;
+    }
+    .ref-col:last-child { border-right: none; }
+    .ref-col:hover { background: rgba(98,72,204,0.04); }
+
+    /* Thin purple top reveal on hover */
+    .ref-col::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, var(--purple), var(--rose), transparent);
+      opacity: 0; transition: opacity 0.35s;
+    }
+    .ref-col:hover::before { opacity: 0.6; }
+
+    .ref-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 11px; letter-spacing: 0.2em;
+      color: var(--purple-soft); opacity: 0.35;
+      margin-bottom: 12px;
+    }
+    .ref-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px; font-weight: 400;
+      color: var(--ivory); margin-bottom: 10px; line-height: 1.25;
+    }
+    .ref-desc {
+      font-size: 12px; font-weight: 300;
+      line-height: 1.75; color: var(--muted);
+    }
+
+    /* ── FOOTER CTA ── */
+    .footer-cta {
+      padding: 72px 52px;
+      border-top: 1px solid var(--border);
+      margin-top: 72px;
+      display: grid; grid-template-columns: 1fr auto;
+      gap: 40px; align-items: end;
+      animation: fadeUp 0.8s 0.35s ease both;
+    }
+
+    .cta-overline {
+      font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--rose); opacity: 0.75; margin-bottom: 16px;
+    }
+    .cta-headline {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(26px, 3.5vw, 42px); font-weight: 300;
+      color: var(--ivory); line-height: 1.2; max-width: 420px;
+    }
+    .cta-headline em { font-style: italic; color: var(--purple-soft); }
+
+    .cta-right {
+      display: flex; flex-direction: column;
+      align-items: flex-end; gap: 14px;
+    }
+
+    .wa-btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 15px 30px;
+      background: var(--purple); color: #fff;
+      font-size: 12px; font-weight: 500;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      text-decoration: none;
+      transition: background 0.25s, transform 0.2s;
+    }
+    .wa-btn:hover { background: var(--purple-vivid); transform: translateY(-1px); }
+    .wa-btn svg { width: 14px; height: 14px; stroke: currentColor; fill: none; }
+
+    /* ── FOOTER BAR ── */
+    .footer-bar {
+      padding: 22px 52px;
+      border-top: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 10px;
+    }
+    .footer-bar-left {
+      font-size: 11px; color: var(--muted); opacity: 0.45; letter-spacing: 0.05em;
+    }
+    .footer-bar-left strong { color: var(--purple-soft); opacity: 0.7; font-weight: 400; }
+    .footer-bar-right {
+      font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--border-mid);
+    }
+
+    /* ── FLOATING WHATSAPP ── */
+    .wa-float {
+      position: fixed; bottom: 28px; right: 28px;
+      width: 54px; height: 54px; background: #25D366; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 24px rgba(37,211,102,0.35);
+      z-index: 10001; text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .wa-float:hover { transform: scale(1.1); box-shadow: 0 6px 32px rgba(37,211,102,0.55); }
+
+    /* ── VIDEO MODAL ── */
+    .modal-backdrop {
+      display: none; position: fixed; inset: 0;
+      background: rgba(4,2,14,0.96); z-index: 10000;
+      align-items: center; justify-content: center;
+      padding: 24px; backdrop-filter: blur(12px);
+    }
+    .modal-backdrop.open { display: flex; }
+    .modal-inner {
+      position: relative; width: 100%; max-width: 960px;
+      animation: modalIn 0.35s ease both;
+    }
+    .modal-close {
+      position: absolute; top: -44px; right: 0;
+      background: none; border: none; cursor: pointer;
+      color: var(--muted); font-size: 11px; letter-spacing: 0.15em;
+      text-transform: uppercase;
+      display: flex; align-items: center; gap: 8px; transition: color 0.2s;
+    }
+    .modal-close:hover { color: var(--ivory); }
+    .modal-close svg { width: 13px; height: 13px; stroke: currentColor; fill: none; }
+    .modal-meta { display: flex; align-items: baseline; gap: 14px; margin-bottom: 14px; }
+    .modal-label {
+      font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--purple-soft); opacity: 0.75;
+    }
+    .modal-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 21px; font-weight: 300; color: var(--ivory);
+    }
+    .video-wrap {
+      position: relative; padding-bottom: 56.25%; height: 0;
+      background: #000; border: 1px solid var(--border-mid);
+    }
+    .video-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: none; }
+    .modal-accent {
+      height: 1px; margin-top: 14px;
+      background: linear-gradient(90deg, var(--purple-deep), transparent); opacity: 0.5;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      header          { padding: 20px 24px; }
+      .hero           { padding: 56px 24px 52px; }
+      .portfolio-row  { padding: 32px 24px 18px; }
+      .grid-section   { padding: 0 24px; }
+      .grid           { grid-template-columns: 1fr; }
+      .tile           { aspect-ratio: 4 / 3; }
+      .reflection     { margin: 0 24px; grid-template-columns: 1fr; }
+      .ref-col        { border-right: none; border-bottom: 1px solid var(--border); }
+      .ref-col:last-child { border-bottom: none; }
+      .footer-cta     { padding: 52px 24px; grid-template-columns: 1fr; margin-top: 52px; }
+      .cta-right      { align-items: flex-start; }
+      .footer-bar     { padding: 18px 24px; }
+    }
+    @media (max-width: 560px) {
+      .portfolio-sub  { display: none; }
+      .tile-desc      { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── HEADER ── -->
+<header>
+  <a href="#" class="logo-wrap">
+    <svg class="logo-mark" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="18,2 32,10 32,26 18,34 4,26 4,10"   fill="none" stroke="#6248CC" stroke-width="1.4"/>
+      <polygon points="18,7 27,12 27,24 18,29 9,24 9,12"   fill="none" stroke="#A78BF0" stroke-width="0.8" opacity="0.55"/>
+      <polygon points="18,12 23,15 23,21 18,24 13,21 13,15" fill="#6248CC" opacity="0.28"/>
+      <line x1="18" y1="2"  x2="18" y2="34" stroke="#6248CC" stroke-width="0.5" opacity="0.25"/>
+      <line x1="4"  y1="10" x2="32" y2="26" stroke="#6248CC" stroke-width="0.5" opacity="0.25"/>
+      <line x1="32" y1="10" x2="4"  y2="26" stroke="#6248CC" stroke-width="0.5" opacity="0.25"/>
+    </svg>
+    <span class="logo-text">Marimba Studios</span>
+  </a>
+  <div class="header-right">
+    <span class="header-service">Event Production</span>
+    <a href="https://wa.me/27614353601?text=Hi%20Kuda%2C%20I%27d%20like%20to%20discuss%20event%20coverage%20with%20Marimba%20Studios." class="header-cta" target="_blank">Book your event</a>
+  </div>
+</header>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="glow-purple" aria-hidden="true"></div>
+  <div class="glow-rose"   aria-hidden="true"></div>
+
+  <div class="hero-inner">
+    <div class="problem-pill">
+      <span class="pill-dot"></span>
+      <span class="pill-text">Solving the problem of events that disappear</span>
+    </div>
+
+    <h1 class="hero-headline">
+      <span class="hl-problem">Your event ends at midnight.</span>
+      <span class="hl-solution">The memory shouldn't.</span>
+    </h1>
+
+    <p class="hero-sub">
+      You planned for months. You invested in the venue, the people, the experience. Then the lights go off — and most of it is gone. We capture the energy, the emotion, and the story, and turn it into a film that outlives the night.
+    </p>
+
+    <div class="event-tags">
+      <span class="event-tag">Corporate conferences</span>
+      <span class="event-tag">Birthday celebrations</span>
+      <span class="event-tag">Brand activations</span>
+      <span class="event-tag">Product launches</span>
+      <span class="event-tag">Charity galas</span>
+      <span class="event-tag">Award ceremonies</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── PORTFOLIO LABEL ── -->
+<div class="portfolio-row">
+  <div class="portfolio-eyebrow">
+    <span>Our event work</span>
+    <div class="eyebrow-line"></div>
+  </div>
+  <span class="portfolio-sub">Watch what we create</span>
+</div>
+
+<!-- ── VIDEO GRID ──
+  Sequence: Corporate → Birthday → Corporate
+  Psychology: Open with credibility · Connect emotionally · Close with authority
+
+  TO UPDATE — replace the YouTube IDs when your videos are uploaded:
+  Tile 01 → Corporate Conference 01  (replace '78FkN0HC40Q')
+  Tile 02 → Birthday Event           (replace '4s9s-jrCvK0')
+  Tile 03 → Corporate Conference 02  (replace 'NNW4pVIkv6c')
+-->
+<section class="grid-section">
+  <div class="grid">
+
+    <!-- 01 — Corporate Conference 01 -->
+    <div class="tile" onclick="openModal('Nwpww9bqdxM','Corporate','Conference Coverage 01')">
+      <span class="tile-num">01</span>
+      <img class="tile-thumb" src="https://img.youtube.com/vi/Nwpww9bqdxM/hqdefault.jpg" alt="Conference Coverage 01" loading="lazy">
+      <div class="tile-overlay"></div>
+      <div class="play-btn">
+        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="rgba(255,255,255,0.88)"/></svg>
+      </div>
+      <div class="tile-arrow">
+        <svg viewBox="0 0 24 24" stroke-width="1.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7,7 17,7 17,17"/></svg>
+      </div>
+      <div class="tile-info">
+        <p class="tile-label">Corporate</p>
+        <h3 class="tile-title">Conference Coverage 01</h3>
+        <p class="tile-desc">Multi-speaker, full-day coverage edited into a highlight reel every delegate and sponsor is proud to share.</p>
+      </div>
+    </div>
+
+    <!-- 02 — Birthday Event -->
+    <div class="tile" onclick="openModal('tQD3pvCnQA4','Celebration','Birthday Event')">
+      <span class="tile-num">02</span>
+      <img class="tile-thumb" src="https://img.youtube.com/vi/tQD3pvCnQA4/hqdefault.jpg" alt="Birthday Event" loading="lazy">
+      <div class="tile-overlay"></div>
+      <div class="play-btn">
+        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="rgba(255,255,255,0.88)"/></svg>
+      </div>
+      <div class="tile-arrow">
+        <svg viewBox="0 0 24 24" stroke-width="1.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7,7 17,7 17,17"/></svg>
+      </div>
+      <div class="tile-info">
+        <p class="tile-label">Celebration</p>
+        <h3 class="tile-title">Birthday Event</h3>
+        <p class="tile-desc">The milestones, the emotion, the room full of people who showed up — preserved as a film that lives forever.</p>
+      </div>
+    </div>
+
+    <!-- 03 — Corporate Conference 02 -->
+    <div class="tile" onclick="openModal('0Mop_gPo1m4','Corporate','Conference Coverage 02')">
+      <span class="tile-num">03</span>
+      <img class="tile-thumb" src="https://img.youtube.com/vi/0Mop_gPo1m4/hqdefault.jpg" alt="Conference Coverage 02" loading="lazy">
+      <div class="tile-overlay"></div>
+      <div class="play-btn">
+        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="rgba(255,255,255,0.88)"/></svg>
+      </div>
+      <div class="tile-arrow">
+        <svg viewBox="0 0 24 24" stroke-width="1.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7,7 17,7 17,17"/></svg>
+      </div>
+      <div class="tile-info">
+        <p class="tile-label">Corporate</p>
+        <h3 class="tile-title">Conference Coverage 02</h3>
+        <p class="tile-desc">The keynotes, the conversations, the connections — shaped into a film that defines what your conference stood for.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── REFLECTION (what the viewer just experienced) ── -->
+<div class="reflection">
+  <div class="ref-col">
+    <p class="ref-num">01</p>
+    <h3 class="ref-title">Preserve the energy</h3>
+    <p class="ref-desc">The atmosphere in a room disappears when the doors close. Cinematic coverage captures it before it's gone — so the people who weren't there can feel what your guests felt.</p>
+  </div>
+  <div class="ref-col">
+    <p class="ref-num">02</p>
+    <h3 class="ref-title">Capture what words can't</h3>
+    <p class="ref-desc">The first dance. The standing ovation. The award reveal. These are moments no caption or recap can truly carry. Only film holds them — and holds them forever.</p>
+  </div>
+  <div class="ref-col">
+    <p class="ref-num">03</p>
+    <h3 class="ref-title">Create content that lasts</h3>
+    <p class="ref-desc">One event becomes a highlight film, a promo for next year, social reels, and sponsor deliverables. The shoot happens once. The content keeps working long after the night ends.</p>
+  </div>
+</div>
+
+<!-- ── FOOTER CTA ── -->
+<section class="footer-cta">
+  <div>
+    <p class="cta-overline">Your event is coming</p>
+    <h2 class="cta-headline">Don't let it disappear.<br>Let's make it <em>last.</em></h2>
+  </div>
+  <div class="cta-right">
+    <a href="https://wa.me/27614353601?text=Hi%20Kuda%2C%20I%27d%20like%20to%20discuss%20event%20coverage%20with%20Marimba%20Studios." class="wa-btn" target="_blank">
+      Message on WhatsApp
+      <svg viewBox="0 0 24 24" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" stroke="currentColor" fill="none"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- ── FOOTER BAR ── -->
+<footer class="footer-bar">
+  <span class="footer-bar-left">© 2026 Marimba Studios &nbsp;·&nbsp; <strong>Kuda Francis Jnr</strong> &nbsp;·&nbsp; South Africa</span>
+  <span class="footer-bar-right">marimbastudios.co.za</span>
+</footer>
+
+<!-- ── FLOATING WHATSAPP ── -->
+<a href="https://wa.me/27614353601?text=Hi%20Kuda%2C%20I%27d%20like%20to%20discuss%20event%20coverage%20with%20Marimba%20Studios." target="_blank" class="wa-float" aria-label="Chat on WhatsApp">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+</a>
+
+<!-- ── VIDEO MODAL ── -->
+<div class="modal-backdrop" id="modal" onclick="handleBackdropClick(event)">
+  <div class="modal-inner">
+    <button class="modal-close" onclick="closeModal()">
+      <svg viewBox="0 0 24 24" stroke-width="1.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      Close
+    </button>
+    <div class="modal-meta">
+      <span class="modal-label" id="modalLabel"></span>
+      <span class="modal-title" id="modalTitle"></span>
+    </div>
+    <div class="video-wrap">
+      <iframe id="modalFrame" src="" allow="autoplay; fullscreen" allowfullscreen></iframe>
+    </div>
+    <div class="modal-accent"></div>
+  </div>
+</div>
+
+<script>
+  function openModal(videoId, label, title) {
+    document.getElementById('modalLabel').textContent = label;
+    document.getElementById('modalTitle').textContent = title;
+    document.getElementById('modalFrame').src =
+      'https://www.youtube.com/embed/' + videoId + '?autoplay=1&rel=0&modestbranding=1';
+    document.getElementById('modal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal() {
+    document.getElementById('modal').classList.remove('open');
+    document.getElementById('modalFrame').src = '';
+    document.body.style.overflow = '';
+  }
+  function handleBackdropClick(e) {
+    if (e.target === document.getElementById('modal')) closeModal();
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+</script>
+
+</body>
+</html>
