@@ -280,6 +280,8 @@
       object-fit: cover;
       transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
+    .tile-thumb[data-src] { display: none; }
+    video.tile-thumb { object-position: center; }
     .tile:hover .tile-thumb { transform: scale(1.06); }
     .tile-overlay {
       position: absolute; inset: 0;
@@ -649,9 +651,11 @@
   <div class="grid">
 
     <!-- 01 — Customer Testimonial -->
-    <div class="tile" onclick="openModal('axQxalJN0A0','Social Proof','Customer Testimonial')">
+    <div class="tile" onclick="openModal('th-01.mp4','Social Proof','Customer Testimonial')">
       <span class="tile-num">01</span>
-      <img class="tile-thumb" src="https://img.youtube.com/vi/axQxalJN0A0/maxresdefault.jpg" alt="Customer Testimonial" loading="lazy">
+      <video class="tile-thumb" autoplay muted loop playsinline>
+        <source src="th-01.mp4" type="video/mp4">
+      </video>
       <div class="tile-overlay"></div>
       <div class="play-btn">
         <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="rgba(255,255,255,0.88)"/></svg>
@@ -667,9 +671,11 @@
     </div>
 
     <!-- 02 — Miss Teen Universe 2024 -->
-    <div class="tile" onclick="openModal('L3py8Fisp4o','Authority','Miss Teen Universe 2024')">
+    <div class="tile" onclick="openModal('th-02.mp4','Authority','Miss Teen Universe 2024')">
       <span class="tile-num">02</span>
-      <img class="tile-thumb" src="https://img.youtube.com/vi/L3py8Fisp4o/maxresdefault.jpg" alt="Miss Teen Universe 2024" loading="lazy">
+      <video class="tile-thumb" autoplay muted loop playsinline>
+        <source src="th-02.mp4" type="video/mp4">
+      </video>
       <div class="tile-overlay"></div>
       <div class="play-btn">
         <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="rgba(255,255,255,0.88)"/></svg>
@@ -685,9 +691,11 @@
     </div>
 
     <!-- 03 — Order Packing SOP -->
-    <div class="tile" onclick="openModal('f7upXILovAw','Corporate Training','Order Packing SOP')">
+    <div class="tile" onclick="openModal('th-03.mp4','Corporate Training','Order Packing SOP')">
       <span class="tile-num">03</span>
-      <img class="tile-thumb" src="https://img.youtube.com/vi/f7upXILovAw/maxresdefault.jpg" alt="Order Packing SOP" loading="lazy">
+      <video class="tile-thumb" autoplay muted loop playsinline>
+        <source src="th-03.mp4" type="video/mp4">
+      </video>
       <div class="tile-overlay"></div>
       <div class="play-btn">
         <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="rgba(255,255,255,0.88)"/></svg>
@@ -857,24 +865,27 @@
       <span class="modal-title" id="modalTitle"></span>
     </div>
     <div class="video-wrap">
-      <iframe id="modalFrame" src="" allow="autoplay; fullscreen" allowfullscreen></iframe>
+      <video id="modalVideo" controls playsinline style="position:absolute;inset:0;width:100%;height:100%;background:#000;border:none;"></video>
     </div>
     <div class="modal-accent"></div>
   </div>
 </div>
 
 <script>
-  function openModal(videoId, label, title) {
+  function openModal(videoSrc, label, title) {
     document.getElementById('modalLabel').textContent = label;
     document.getElementById('modalTitle').textContent = title;
-    document.getElementById('modalFrame').src =
-      'https://www.youtube.com/embed/' + videoId + '?autoplay=1&rel=0&modestbranding=1';
+    const vid = document.getElementById('modalVideo');
+    vid.src = videoSrc;
+    vid.play();
     document.getElementById('modal').classList.add('open');
     document.body.style.overflow = 'hidden';
   }
   function closeModal() {
     document.getElementById('modal').classList.remove('open');
-    document.getElementById('modalFrame').src = '';
+    const vid = document.getElementById('modalVideo');
+    vid.pause();
+    vid.src = '';
     document.body.style.overflow = '';
   }
   function handleBackdropClick(e) {
