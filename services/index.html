@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Services & Pricing — Marimba Studios | Johannesburg Video Production</title>
+  <meta name="description" content="Every Marimba Studios service package clearly defined. Know exactly what's included before you book — no surprises, no scope disputes.">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black:        #0b0b0b;
+      --purple:       #6248CC;
+      --purple-vivid: #7C5CE8;
+      --purple-soft:  #A78BF0;
+      --purple-deep:  #2E1E6E;
+      --gold:         #C4A86A;
+      --gold-vivid:   #D4924A;
+      --gold-dim:     #8a7347;
+      --gold-glow:    rgba(196,168,106,0.1);
+      --ivory:        #EDE9E3;
+      --muted:        #908A83;
+      --border:       #1A1820;
+      --border-mid:   #252030;
+      --border-gold:  rgba(196,168,106,0.15);
+      --no:           #6B3434;
+      --no-text:      #C47A7A;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    body {
+      background: var(--black);
+      color: var(--ivory);
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    body::after {
+      content: '';
+      position: fixed; inset: 0; pointer-events: none; z-index: 9999;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+      opacity: 0.03; mix-blend-mode: overlay;
+    }
+
+    body::before {
+      content: '';
+      position: fixed; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg,
+        transparent 0%, var(--purple) 25%,
+        var(--purple-vivid) 50%, var(--gold) 80%, transparent 100%);
+      opacity: 0.6; z-index: 100;
+    }
+
+    /* ── HEADER ── */
+    header {
+      position: sticky; top: 0; z-index: 50;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 22px 48px;
+      background: rgba(11,11,11,0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .logo-wrap { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ivory); }
+    .logo-mark { width: 32px; height: 32px; }
+    .logo-text { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 400; letter-spacing: 0.04em; }
+    .header-right { display: flex; align-items: center; gap: 20px; }
+    .header-service { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+    .header-cta {
+      font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;
+      text-decoration: none; color: var(--black); background: var(--gold);
+      padding: 9px 20px; border-radius: 2px; transition: background 0.2s, transform 0.2s;
+    }
+    .header-cta:hover { background: var(--gold-vivid); transform: translateY(-1px); }
+    @media (max-width: 560px) { .header-service { display: none; } header { padding: 20px 24px; } }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 88px 48px 72px; text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute; top: -80px; left: 50%; transform: translateX(-50%);
+      width: 700px; height: 500px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(98,72,204,0.1) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-inner { position: relative; max-width: 720px; margin: 0 auto; }
+    .eyebrow { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(36px, 5.5vw, 68px);
+      font-weight: 300; line-height: 1.1; margin-bottom: 24px;
+      animation: fadeUp 0.7s ease both;
+    }
+    .hero h1 em { color: var(--gold); font-style: italic; }
+    .hero p { font-size: 16px; font-weight: 300; color: var(--muted); line-height: 1.7; animation: fadeUp 0.7s ease 0.1s both; }
+    .hero-note {
+      margin-top: 32px;
+      display: inline-flex; align-items: center; gap: 10px;
+      border: 1px solid var(--border-gold); background: rgba(196,168,106,0.05);
+      padding: 10px 20px; border-radius: 40px; font-size: 12px; color: var(--gold);
+      letter-spacing: 0.06em;
+    }
+    .hero-note-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
+
+    /* ── SECTION DIVIDER ── */
+    .divider { height: 1px; background: var(--border); margin: 0 48px; }
+
+    /* ── PACKAGES ── */
+    .packages-section { padding: 88px 48px; max-width: 1200px; margin: 0 auto; }
+    .section-label { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(28px, 4vw, 48px);
+      font-weight: 300; line-height: 1.15; margin-bottom: 56px;
+    }
+    .section-title em { color: var(--gold); font-style: italic; }
+
+    .packages-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+
+    .pkg-card { background: var(--black); padding: 40px 32px; position: relative; }
+    .pkg-card:hover { background: #0f0e14; }
+
+    .pkg-tier {
+      font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .pkg-card:nth-child(1) .pkg-tier { color: var(--muted); }
+    .pkg-card:nth-child(2) .pkg-tier { color: var(--purple-soft); }
+    .pkg-card:nth-child(3) .pkg-tier { color: var(--gold); }
+    .pkg-card:nth-child(4) .pkg-tier { color: var(--gold-vivid); }
+
+    .pkg-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(20px, 2.5vw, 28px);
+      font-weight: 400; color: var(--ivory); line-height: 1.1; margin-bottom: 12px;
+    }
+
+    .pkg-tagline { font-size: 12px; font-weight: 300; color: var(--muted); line-height: 1.6; margin-bottom: 28px; min-height: 54px; }
+
+    .pkg-for {
+      font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 6px;
+    }
+    .pkg-audience { font-size: 12px; font-weight: 400; color: var(--ivory); margin-bottom: 28px; line-height: 1.5; }
+
+    .pkg-list-label { font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+    .pkg-list-label.no { color: var(--no-text); }
+
+    .pkg-list { list-style: none; margin-bottom: 24px; }
+    .pkg-list li {
+      display: flex; align-items: flex-start; gap: 10px;
+      font-size: 12px; font-weight: 300; color: var(--muted);
+      padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.04); line-height: 1.5;
+    }
+    .pkg-list li:last-child { border-bottom: none; }
+    .pkg-list li .icon { flex-shrink: 0; margin-top: 1px; }
+    .pkg-list.yes li .icon { color: var(--gold); }
+    .pkg-list.yes li { color: var(--ivory); }
+    .pkg-list.no li .icon { color: var(--no-text); }
+    .pkg-list.no { margin-bottom: 0; }
+
+    .pkg-divider { height: 1px; background: var(--border); margin: 24px 0; }
+
+    .pkg-cta {
+      margin-top: 32px; display: block; text-align: center;
+      font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+      text-decoration: none; padding: 12px 20px; border-radius: 2px;
+      transition: background 0.2s, border-color 0.2s, transform 0.2s;
+    }
+    .pkg-card:nth-child(4) .pkg-cta { background: var(--gold); color: var(--black); }
+    .pkg-card:nth-child(4) .pkg-cta:hover { background: var(--gold-vivid); transform: translateY(-1px); }
+    .pkg-card:not(:nth-child(4)) .pkg-cta {
+      border: 1px solid var(--border-gold); color: var(--gold); background: transparent;
+    }
+    .pkg-card:not(:nth-child(4)) .pkg-cta:hover { border-color: var(--gold); background: rgba(196,168,106,0.05); }
+
+    /* ── COMPARISON TABLE ── */
+    .comparison-section { padding: 0 48px 88px; max-width: 1200px; margin: 0 auto; }
+
+    .comparison-wrap { overflow-x: auto; }
+    .comparison-table { width: 100%; border-collapse: collapse; min-width: 700px; }
+    .comparison-table th {
+      text-align: left; padding: 16px 20px;
+      font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;
+      font-weight: 400; border-bottom: 1px solid var(--border-gold);
+    }
+    .comparison-table th:first-child { color: var(--muted); width: 30%; }
+    .comparison-table th:nth-child(2) { color: var(--muted); }
+    .comparison-table th:nth-child(3) { color: var(--purple-soft); }
+    .comparison-table th:nth-child(4) { color: var(--gold); }
+    .comparison-table th:nth-child(5) { color: var(--gold-vivid); }
+
+    .comparison-table td {
+      padding: 13px 20px; font-size: 12px; font-weight: 300;
+      border-bottom: 1px solid var(--border);
+    }
+    .comparison-table tr:last-child td { border-bottom: none; }
+    .comparison-table td:first-child { color: var(--muted); }
+    .comparison-table tr:hover td { background: rgba(255,255,255,0.015); }
+
+    .cat-row td {
+      padding: 20px 20px 8px;
+      font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--gold); background: rgba(196,168,106,0.03);
+    }
+
+    .check { color: var(--gold); font-size: 14px; }
+    .cross { color: var(--no-text); font-size: 13px; }
+    .dash { color: var(--border-mid); font-size: 16px; }
+
+    /* ── SCOPE EXPLAINER ── */
+    .scope-section { padding: 88px 48px; background: linear-gradient(180deg, transparent, rgba(98,72,204,0.04), transparent); }
+    .scope-inner { max-width: 1000px; margin: 0 auto; }
+    .scope-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-top: 56px; }
+    .scope-card { border: 1px solid var(--border); padding: 40px; }
+    .scope-card-label {
+      font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .scope-card.editorial .scope-card-label { color: var(--purple-soft); }
+    .scope-card.capture .scope-card-label { color: var(--gold); }
+    .scope-card-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 26px; font-weight: 300; color: var(--ivory);
+      margin-bottom: 16px; line-height: 1.2;
+    }
+    .scope-card-body { font-size: 13px; font-weight: 300; color: var(--muted); line-height: 1.8; }
+    .scope-card-body strong { color: var(--ivory); font-weight: 400; }
+
+    /* ── FAQ ── */
+    .faq-section { padding: 88px 48px; max-width: 800px; margin: 0 auto; }
+    .faq-item { border-bottom: 1px solid var(--border); }
+    .faq-q {
+      width: 100%; background: none; border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      padding: 24px 0; text-align: left;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px; font-weight: 300; color: var(--ivory);
+      transition: color 0.2s;
+    }
+    .faq-q:hover { color: var(--gold); }
+    .faq-icon { color: var(--gold); font-size: 20px; flex-shrink: 0; transition: transform 0.25s; }
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+    .faq-a {
+      font-size: 14px; font-weight: 300; color: var(--muted); line-height: 1.8;
+      max-height: 0; overflow: hidden; transition: max-height 0.35s ease, padding 0.3s;
+    }
+    .faq-item.open .faq-a { max-height: 300px; padding-bottom: 24px; }
+
+    /* ── CTA ── */
+    .cta-section { padding: 88px 48px; max-width: 1000px; margin: 0 auto; }
+    .cta-inner {
+      border: 1px solid var(--border-gold); padding: 72px 64px;
+      display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 48px;
+      position: relative; overflow: hidden;
+    }
+    .cta-inner::before {
+      content: ''; position: absolute; top: -120px; left: -80px;
+      width: 400px; height: 400px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(196,168,106,0.05) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .cta-label { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+    .cta-heading {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(28px, 4vw, 44px); font-weight: 300; line-height: 1.2; color: var(--ivory);
+    }
+    .cta-heading em { color: var(--gold); font-style: italic; }
+    .cta-sub { font-size: 13px; font-weight: 300; color: var(--muted); margin-top: 12px; line-height: 1.7; }
+    .cta-btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--gold); color: var(--black);
+      font-size: 12px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+      text-decoration: none; padding: 16px 28px; border-radius: 2px; white-space: nowrap;
+      transition: background 0.2s, transform 0.2s; flex-shrink: 0;
+    }
+    .cta-btn:hover { background: var(--gold-vivid); transform: translateY(-1px); }
+
+    /* ── FOOTER ── */
+    .footer-bar {
+      border-top: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 22px 48px;
+    }
+    .footer-bar-left { font-size: 12px; font-weight: 300; color: var(--muted); }
+    .footer-bar-left strong { color: var(--gold); opacity: 0.6; font-weight: 400; }
+    .footer-bar-right { display: flex; gap: 24px; }
+    .footer-link { font-size: 12px; font-weight: 300; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .footer-link:hover { color: var(--ivory); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1100px) {
+      .packages-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 900px) {
+      .hero, .packages-section, .comparison-section, .scope-section, .faq-section, .cta-section { padding-left: 24px; padding-right: 24px; }
+      .divider { margin: 0 24px; }
+      .scope-grid { grid-template-columns: 1fr; gap: 24px; }
+      .cta-inner { grid-template-columns: 1fr; padding: 40px 32px; }
+    }
+    @media (max-width: 640px) {
+      .packages-grid { grid-template-columns: 1fr; }
+      .footer-bar { flex-direction: column; gap: 12px; text-align: center; padding: 20px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <a href="/" class="logo-wrap">
+    <svg class="logo-mark" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="18" cy="18" r="17" stroke="#C4A86A" stroke-width="1" opacity="0.4"/>
+      <circle cx="18" cy="18" r="5" fill="#C4A86A" opacity="0.8"/>
+      <line x1="18" y1="1" x2="18" y2="10" stroke="#C4A86A" stroke-width="1" opacity="0.4"/>
+      <line x1="18" y1="26" x2="18" y2="35" stroke="#C4A86A" stroke-width="1" opacity="0.4"/>
+      <line x1="1" y1="18" x2="10" y2="18" stroke="#C4A86A" stroke-width="1" opacity="0.4"/>
+      <line x1="26" y1="18" x2="35" y2="18" stroke="#C4A86A" stroke-width="1" opacity="0.4"/>
+    </svg>
+    <span class="logo-text">Marimba Studios</span>
+  </a>
+  <div class="header-right">
+    <span class="header-service">Services</span>
+    <a href="https://wa.me/27614353601?text=Hi%20Kuda%2C%20I%27d%20like%20to%20discuss%20a%20project." class="header-cta" target="_blank">Get a quote</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <p class="eyebrow">Service packages</p>
+    <h1>Know exactly what you are<br><em>paying for before you book.</em></h1>
+    <p>Every package is clearly scoped. What's included is listed. What requires additional work is listed too. No surprises, no scope disputes — just clear agreements before we start.</p>
+    <div class="hero-note">
+      <span class="hero-note-dot"></span>
+      Send this page to any client who asks what's included
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PACKAGES -->
+<section class="packages-section">
+  <p class="section-label">Production packages</p>
+  <h2 class="section-title">Four clear service tiers.<br><em>Each one built for a different need.</em></h2>
+
+  <div class="packages-grid">
+
+    <!-- 01 Shoot & Dump -->
+    <div class="pkg-card">
+      <p class="pkg-tier">Tier 01</p>
+      <h3 class="pkg-name">Shoot &amp; Dump</h3>
+      <p class="pkg-tagline">Raw footage delivered as-shot. You handle everything from here.</p>
+      <p class="pkg-for">Designed for</p>
+      <p class="pkg-audience">Production houses, agencies &amp; broadcast clients with their own in-house editors.</p>
+
+      <p class="pkg-list-label">What's included</p>
+      <ul class="pkg-list yes">
+        <li><span class="icon">✓</span> Camera operation &amp; professional filming</li>
+        <li><span class="icon">✓</span> Secure on-site backup of all footage</li>
+        <li><span class="icon">✓</span> Delivery of original camera files (raw/native)</li>
+        <li><span class="icon">✓</span> Delivery of all recorded audio files</li>
+        <li><span class="icon">✓</span> Basic folder organisation by shoot date</li>
+      </ul>
+
+      <div class="pkg-divider"></div>
+
+      <p class="pkg-list-label no">Not included</p>
+      <ul class="pkg-list no">
+        <li><span class="icon">×</span> Reviewing or watching back footage</li>
+        <li><span class="icon">×</span> Selecting best takes</li>
+        <li><span class="icon">×</span> Renaming individual clips</li>
+        <li><span class="icon">×</span> Matching audio to video</li>
+        <li><span class="icon">×</span> Editing or assembly</li>
+        <li><span class="icon">×</span> Colour grading</li>
+        <li><span class="icon">×</span> Motion graphics</li>
+      </ul>
+
+      <a href="https://wa.me/27614353601?text=Hi%20Kuda%2C%20I%27m%20interested%20in%20the%20Shoot%20%26%20Dump%20package." class="pkg-cta" target="_blank">Enquire</a>
+    </div>
+
+    <!-- 02 Shoot & Organise -->
+    <div class="pkg-card">
+      <p class="pkg-tier">Tier 02</p>
+      <h3 class="pkg-name">Shoot &amp; Organise</h3>
+      <p class="pkg-tagline">Everything in Shoot &amp; Dump, plus footage reviewed, organised and editor-ready.</p>
+      <p class="pkg-for">Designed for</p>
+      <p class="pkg-audience">Agencies, creative directors &amp; editors who need a clean, structured project handoff.</p>
+
+      <p class="pkg-list-label">What's included</p>
+      <ul class="pkg-list yes">
+        <li><span class="icon">✓</span> Everything in Shoot &amp; Dump</li>
+        <li><span class="icon">✓</span> Full footage review after shoot</li>
+        <li><span class="icon">✓</span> Removal of unusable files (if agreed)</li>
+        <li><span class="icon">✓</span> Takes organised and grouped logically</li>
+        <li><span class="icon">✓</span> Clips renamed with clear, consistent naming</li>
+        <li><span class="icon">✓</span> Project folder structure ready for editing</li>
+      </ul>
+
+      <div class="pkg-divider"></div>
+
+      <p class="pkg-list-label no">Not included</p>
+      <ul class="pkg-list no">
+        <li><span class="icon">×</span> Story construction or editing decisions</li>
+        <li><span class="icon">×</span> Audio syncing to video</li>
+        <li><span class="icon">×</span> Colour grading</li>
+        <li><span class="icon">×</span> Sound design or mixing</li>
+        <li><span class="icon">×</span> Export or final deliverables</li>
+      </ul>
+
+      <a href="https://wa.me/27614353601?text=Hi%20Kuda%2C%20I%27m%20interested%20in%20the%20Shoot%20%26%20Organise%20package." class="pkg-cta" target="_blank">Enquire</a>
+    </div>
+
+    <!-- 03 Editing -->
+    <div class="pkg-card">
+      <p class="pkg-tier">Tier 03</p>
+      <h3 class="pkg-name">Editing</h3>
+      <p class="pkg-tagline">Post-production only. Bring your footage — we take it to a finished film.</p>
+      <p class="pkg-for">Designed for</p>
+      <p class="pkg-audience">Clients who already have footage and need a skilled editor to take it to completion.</p>
+
+      <p class="pkg-list-label">What's included</p>
+      <ul class="pkg-list yes">
+        <li><span class="icon">✓</span> Full footage review and logging</li>
+        <li><span class="icon">✓</span> Story construction and assembly</li>
+        <li><span class="icon">✓</span> Best take selection</li>
+        <li><span class="icon">✓</span> Audio sync (dual-system or in-camera)</li>
+        <li><span class="icon">✓</span> Colour grading</li>
+        <li><span class="icon">✓</span> Sound design &amp; audio mixing</li>
+        <li><span class="icon">✓</span> Motion graphics (basic)</li>
+        <li><span class="icon">✓</span> Export in agreed format(s)</li>
+        <li><span class="icon">✓</span> Up to 2 rounds of revisions</li>
+      </ul>
+
+      <div class="pkg-divider"></div>
+
+      <p class="pkg-list-label no">Not included</p>
+      <ul class="pkg-list no">
+        <li><span class="icon">×</span> Camera operation or shoot day</li>
+        <li><span class="icon">×</span> Complex VFX or compositing</li>
+        <li><span class="icon">×</span> Revisions beyond agreed rounds</li>
+      </ul>
+
+      <a href="https://wa.me/27614353601?text=Hi%20Kuda%2C%20I%27m%20interested%20in%20the%20Editing%20package." class="pkg-cta" target="_blank">Enquire</a>
+    </div>
+
+    <!-- 04 Full Production -->
+    <div class="pkg-card">
+      <p class="pkg-tier">Tier 04 · Full service</p>
+      <h3 class="pkg-name">Full Production</h3>
+      <p class="pkg-tagline">Concept to delivery. We handle every stage so you only have to show up.</p>
+      <p class="pkg-for">Designed for</p>
+      <p class="pkg-audience">Brands, corporates and event organisers who want a complete, managed production.</p>
+
+      <p class="pkg-list-label">What's included</p>
+      <ul class="pkg-list yes">
+        <li><span class="icon">✓</span> Pre-production planning &amp; brief</li>
+        <li><span class="icon">✓</span> Shot list &amp; schedule</li>
+        <li><span class="icon">✓</span> Professional filming (all camera work)</li>
+        <li><span class="icon">✓</span> Audio capture &amp; monitoring</li>
+        <li><span class="icon">✓</span> Secure backup on shoot day</li>
+        <li><span class="icon">✓</span> Footage review &amp; organisation</li>
+        <li><span class="icon">✓</span> Full edit with story construction</li>
+        <li><span class="icon">✓</span> Colour grading</li>
+        <li><span class="icon">✓</span> Sound design &amp; mixing</li>
+        <li><span class="icon">✓</span> Motion graphics (as agreed)</li>
+        <li><span class="icon">✓</span> Final export in agreed format(s)</li>
+        <li><span class="icon">✓</span> Up to 2 rounds of revisions</li>
+      </ul>
+
+      <a href="https://wa.me/27614353601?text=Hi%20Kuda%2C%20I%27m%20interested%20in%20Full%20Production." class="pkg-cta" target="_blank">Get a quote</a>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- COMPARISON TABLE -->
+<section class="comparison-section">
+  <div style="margin-bottom:48px;">
+    <p class="section-label">Feature breakdown</p>
+    <h2 class="section-title">Everything side by side.</h2>
+  </div>
+
+  <div class="comparison-wrap">
+    <table class="comparison-table">
+      <thead>
+        <tr>
+          <th>Feature</th>
+          <th>Shoot &amp; Dump</th>
+          <th>Shoot &amp; Organise</th>
+          <th>Editing</th>
+          <th>Full Production</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="cat-row"><td colspan="5">Capture</td></tr>
+        <tr><td>Camera operation &amp; filming</td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="dash">—</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td>Audio capture on set</td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="dash">—</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td>On-site footage backup</td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="dash">—</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td>Raw file delivery</td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="dash">—</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td>Basic folder organisation</td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="dash">—</span></td><td><span class="check">✓</span></td></tr>
+
+        <tr class="cat-row"><td colspan="5">Organisation</td></tr>
+        <tr><td>Full footage review</td><td><span class="cross">×</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td>Take organisation &amp; grouping</td><td><span class="cross">×</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td>Clip renaming (logical convention)</td><td><span class="cross">×</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td>Editor-ready project structure</td><td><span class="cross">×</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+
+        <tr class="cat-row"><td colspan="5">Post-production</td></tr>
+        <tr><td>Story construction</td><td><span class="cross">×</span></td><td><span class="cross">×</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td>Best take selection</td><td><span class="cross">×</span></td><td><span class="cross">×</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td>Audio sync (dual-system)</td><td><span class="cross">×</span></td><td><span class="cross">×</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td>Colour grading</td><td><span class="cross">×</span></td><td><span class="cross">×</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td>Sound design &amp; mixing</td><td><span class="cross">×</span></td><td><span class="cross">×</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td>Motion graphics</td><td><span class="cross">×</span></td><td><span class="cross">×</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td>Final export / deliverables</td><td><span class="cross">×</span></td><td><span class="cross">×</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td>Revisions included</td><td><span class="dash">—</span></td><td><span class="dash">—</span></td><td>2 rounds</td><td>2 rounds</td></tr>
+
+        <tr class="cat-row"><td colspan="5">Pre-production</td></tr>
+        <tr><td>Planning &amp; creative brief</td><td><span class="cross">×</span></td><td><span class="cross">×</span></td><td><span class="cross">×</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td>Shot list &amp; schedule</td><td><span class="cross">×</span></td><td><span class="cross">×</span></td><td><span class="cross">×</span></td><td><span class="check">✓</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SCOPE EXPLAINER -->
+<section class="scope-section">
+  <div class="scope-inner">
+    <p class="section-label">Why this matters</p>
+    <h2 class="section-title">Footage review is editorial work.<br><em>Not a free add-on.</em></h2>
+
+    <div class="scope-grid">
+      <div class="scope-card editorial">
+        <p class="scope-card-label">Editorial work</p>
+        <h3 class="scope-card-title">Opening footage is the start of editing</h3>
+        <p class="scope-card-body">
+          Identifying usable takes, matching audio to video, renaming clips and organising a project structure all require <strong>opening every file, watching it back and making editorial decisions</strong>. That is post-production work — it requires time, judgment and skill. It is not included in a Shoot &amp; Dump because it was not priced into a Shoot &amp; Dump.
+        </p>
+      </div>
+      <div class="scope-card capture">
+        <p class="scope-card-label">What a Shoot &amp; Dump is</p>
+        <h3 class="scope-card-title">You pay for the camera, not the edit suite</h3>
+        <p class="scope-card-body">
+          A Shoot &amp; Dump means: <strong>we show up, we film, we back everything up, we hand it over</strong>. The footage is yours as-captured. If you need anything done to it before it reaches your editor — review, naming, organisation — that is a separate scope of work. Choose Shoot &amp; Organise, or add it as an optional line item.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <p class="section-label" style="margin-bottom:16px;">Common questions</p>
+  <h2 class="section-title" style="margin-bottom:48px;">Answered before<br><em>you have to ask.</em></h2>
+
+  <div class="faq-list">
+
+    <div class="faq-item">
+      <button class="faq-q">Can I add footage organisation to a Shoot &amp; Dump? <span class="faq-icon">+</span></button>
+      <div class="faq-a">Yes. Organisation can be added as a line item to any shoot package. Let us know before the shoot so it is scoped and priced correctly before we start — not debated after delivery.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q">What format will my footage be delivered in? <span class="faq-icon">+</span></button>
+      <div class="faq-a">Footage is delivered in its original native format from the camera — typically MP4 or MOV depending on the camera used. If you need a specific codec or format, confirm this before the shoot so the right settings are applied on the day.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q">What happens if the scope changes during a project? <span class="faq-icon">+</span></button>
+      <div class="faq-a">Any work not listed under the agreed package is a change in scope. We will flag it, quote it and get your approval before doing it. This protects both parties and keeps expectations aligned from start to finish.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q">How long does editing take after the shoot? <span class="faq-icon">+</span></button>
+      <div class="faq-a">Turnaround depends on the length and complexity of the project. A typical corporate video or event film takes 5–10 working days from handoff of organised footage. Full production timelines are agreed during the pre-production phase.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q">Do you handle audio separately from video? <span class="faq-icon">+</span></button>
+      <div class="faq-a">Yes. On a dual-system shoot (external audio recorder + camera), audio syncing is an editorial task included in Editing and Full Production packages. It is not included in Shoot &amp; Dump or Shoot &amp; Organise — both deliver the audio files raw, separate from the video.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q">How many revision rounds are included? <span class="faq-icon">+</span></button>
+      <div class="faq-a">Editing and Full Production packages include 2 rounds of revisions. Each round covers a consolidated list of changes — not rolling individual requests. Additional revision rounds beyond the agreed number are scoped and quoted separately.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q">Can I book just the editing without a shoot? <span class="faq-icon">+</span></button>
+      <div class="faq-a">Yes. The Editing package is a standalone post-production service. You bring the footage — your own shoot, another crew, archive material — and we take it through the full edit to delivery.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-inner">
+    <div>
+      <p class="cta-label">Not sure which package fits?</p>
+      <h2 class="cta-heading">Tell us what you're making.<br><em>We'll tell you what you need.</em></h2>
+      <p class="cta-sub">Send a message on WhatsApp with a brief description of your project. We'll recommend the right package, scope it clearly and quote you before anything starts.</p>
+    </div>
+    <a href="https://wa.me/27614353601?text=Hi%20Kuda%2C%20I%27d%20like%20to%20discuss%20a%20project%20with%20Marimba%20Studios." class="cta-btn" target="_blank">
+      Message on WhatsApp
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer-bar">
+  <div class="footer-bar-left">© 2026 Marimba Studios · <strong>Kuda Francis Jnr</strong> · marimbastudios.co.za</div>
+  <div class="footer-bar-right">
+    <a href="/events" class="footer-link">Event Films</a>
+    <a href="/talking-heads" class="footer-link">Business Video</a>
+    <a href="/about" class="footer-link">About</a>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.parentElement;
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+</script>
+
+</body>
+</html>

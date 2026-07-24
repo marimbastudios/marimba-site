@@ -98,10 +98,119 @@
     }
     .header-cta:hover { background: var(--gold-vivid); transform: translateY(-1px); }
 
+    /* ── TWIN BANNERS ── */
+    @keyframes kenburns-l {
+      0%   { transform: scale(1)    translateX(0); }
+      100% { transform: scale(1.08) translateX(-2%); }
+    }
+    @keyframes kenburns-r {
+      0%   { transform: scale(1)    translateX(0); }
+      100% { transform: scale(1.08) translateX(2%); }
+    }
+    @keyframes banner-ping-events {
+      0%, 100% { box-shadow: inset 0 0 0 1px rgba(196,168,106,0.6), 0 0 40px rgba(196,168,106,0.18); }
+      50%       { box-shadow: inset 0 0 0 1px rgba(196,168,106,0.15), 0 0 0 rgba(196,168,106,0); }
+    }
+    @keyframes banner-ping-th {
+      0%, 100% { box-shadow: inset 0 0 0 1px rgba(98,72,204,0.15),  0 0 0 rgba(98,72,204,0); }
+      50%       { box-shadow: inset 0 0 0 1px rgba(98,72,204,0.7),   0 0 40px rgba(98,72,204,0.2); }
+    }
+
+    .twin-banners {
+      display: grid; grid-template-columns: 1fr 1fr;
+      height: 52vh; min-height: 280px; max-height: 520px;
+      overflow: hidden;
+    }
+
+    .tb-panel {
+      position: relative; overflow: hidden;
+      display: block; text-decoration: none;
+    }
+    .tb-panel.events {
+      animation: banner-ping-events 6s ease-in-out infinite;
+    }
+    .tb-panel.talking-heads {
+      animation: banner-ping-th 6s ease-in-out infinite;
+    }
+
+    .tb-img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%; object-fit: cover;
+      will-change: transform;
+    }
+    .tb-panel.events .tb-img {
+      animation: kenburns-l 12s ease-in-out infinite alternate;
+    }
+    .tb-panel.talking-heads .tb-img {
+      animation: kenburns-r 12s ease-in-out infinite alternate;
+    }
+
+    /* dark gradient so labels read */
+    .tb-panel::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(
+        to top,
+        rgba(11,11,11,0.82) 0%,
+        rgba(11,11,11,0.3) 45%,
+        rgba(11,11,11,0.1) 100%
+      );
+      z-index: 1;
+    }
+
+    /* vertical divider line */
+    .tb-panel.events::before {
+      content: '';
+      position: absolute; top: 0; right: 0; bottom: 0;
+      width: 1px; z-index: 3;
+      background: linear-gradient(to bottom,
+        transparent, rgba(196,168,106,0.5) 40%, rgba(196,168,106,0.5) 60%, transparent);
+    }
+
+    .tb-label {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 28px 32px;
+      z-index: 2;
+    }
+
+    .tb-tag {
+      display: block;
+      font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .tb-panel.events .tb-tag   { color: var(--gold); }
+    .tb-panel.talking-heads .tb-tag { color: var(--purple-soft); }
+
+    .tb-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(20px, 2.8vw, 32px);
+      font-weight: 300; color: var(--ivory); line-height: 1.2;
+    }
+
+    .tb-arrow {
+      position: absolute; bottom: 28px; right: 28px; z-index: 2;
+      width: 36px; height: 36px; border-radius: 50%;
+      border: 1px solid rgba(196,168,106,0.3);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--gold);
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .tb-panel:hover .tb-arrow {
+      background: var(--gold); border-color: var(--gold); color: var(--black);
+    }
+
+    @media (max-width: 640px) {
+      .twin-banners {
+        grid-template-columns: 1fr; grid-template-rows: 1fr 1fr;
+        height: 70vh; max-height: 600px;
+      }
+      .tb-panel.events::before { display: none; }
+    }
+
     /* ── HERO ── */
     .hero {
       position: relative; overflow: hidden;
-      padding: 100px 48px 80px;
+      padding: 80px 48px 60px;
       text-align: center;
     }
 
@@ -401,6 +510,111 @@
     }
     .cta-btn-secondary:hover { color: var(--ivory); }
 
+    /* ── CORE SERVICES ── */
+    .core-services {
+      padding: 0 0 0;
+      background: linear-gradient(180deg, var(--black) 0%, rgba(98,72,204,0.06) 50%, var(--black) 100%);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    .cs-header {
+      max-width: 1100px; margin: 0 auto;
+      padding: 80px 48px 56px;
+    }
+
+    /* Scrolling marquee */
+    .cs-ticker {
+      display: flex; overflow: hidden;
+      border-top: 1px solid var(--border-gold);
+      border-bottom: 1px solid var(--border-gold);
+      padding: 16px 0;
+      margin-bottom: 0;
+      background: rgba(196,168,106,0.03);
+    }
+    @keyframes ticker {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    .cs-ticker-track {
+      display: flex; gap: 0;
+      animation: ticker 22s linear infinite;
+      white-space: nowrap;
+    }
+    .cs-ticker-item {
+      display: inline-flex; align-items: center; gap: 20px;
+      padding: 0 40px;
+      font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--gold); opacity: 0.7;
+    }
+    .cs-ticker-dot {
+      width: 4px; height: 4px; border-radius: 50%;
+      background: var(--gold); flex-shrink: 0;
+    }
+
+    /* Service list */
+    .cs-list {
+      max-width: 1100px; margin: 0 auto;
+      padding: 0 48px 80px;
+    }
+    .cs-item {
+      display: grid; grid-template-columns: 72px 1fr auto;
+      align-items: start; gap: 32px;
+      padding: 36px 0;
+      border-bottom: 1px solid var(--border);
+      cursor: default;
+      transition: background 0.3s;
+      position: relative;
+    }
+    .cs-item::before {
+      content: '';
+      position: absolute; left: -48px; right: -48px; top: 0; bottom: 0;
+      background: rgba(196,168,106,0.03);
+      opacity: 0; transition: opacity 0.3s;
+      pointer-events: none;
+    }
+    .cs-item:hover::before { opacity: 1; }
+    .cs-item:last-child { border-bottom: none; }
+
+    .cs-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 13px; font-weight: 300; color: var(--gold);
+      letter-spacing: 0.1em; padding-top: 6px;
+    }
+
+    .cs-body {}
+    .cs-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(22px, 3vw, 34px);
+      font-weight: 300; color: var(--ivory);
+      line-height: 1.1; margin-bottom: 10px;
+      transition: color 0.2s;
+    }
+    .cs-item:hover .cs-name { color: var(--gold); }
+    .cs-desc {
+      font-size: 13px; font-weight: 300; color: var(--muted);
+      line-height: 1.7; max-width: 540px;
+    }
+
+    .cs-tags {
+      display: flex; flex-direction: column; align-items: flex-end;
+      gap: 6px; padding-top: 4px; flex-shrink: 0;
+    }
+    .cs-tag {
+      font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--muted); border: 1px solid var(--border);
+      padding: 4px 10px; border-radius: 20px;
+      white-space: nowrap;
+    }
+
+    @media (max-width: 900px) {
+      .cs-header { padding: 64px 24px 40px; }
+      .cs-list { padding: 0 24px 64px; }
+      .cs-item { grid-template-columns: 48px 1fr; gap: 16px; }
+      .cs-tags { display: none; }
+    }
+
     /* ── FOOTER ── */
     .footer-bar {
       border-top: 1px solid var(--border);
@@ -462,6 +676,37 @@
     <a href="https://wa.me/27614353601?text=Hi%20Kuda%2C%20I%27d%20like%20to%20discuss%20a%20project%20with%20Marimba%20Studios." class="header-cta" target="_blank">Start a project</a>
   </div>
 </header>
+
+<!-- TWIN BANNERS -->
+<div class="twin-banners">
+
+  <a href="/events" class="tb-panel events">
+    <img src="../banner-events.jpg.png" alt="Marimba Studios — Event Films" class="tb-img">
+    <div class="tb-label">
+      <span class="tb-tag">01 · Event Films</span>
+      <h2 class="tb-title">Corporate events.<br>Brand activations.<br>Award ceremonies.</h2>
+    </div>
+    <div class="tb-arrow">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M3 8h10M9 4l4 4-4 4"/>
+      </svg>
+    </div>
+  </a>
+
+  <a href="/talking-heads" class="tb-panel talking-heads">
+    <img src="../banner-talking-heads.jpg.png" alt="Marimba Studios — Talking Heads" class="tb-img">
+    <div class="tb-label">
+      <span class="tb-tag">02 · Business Video</span>
+      <h2 class="tb-title">Founder stories.<br>Executive interviews.<br>Brand authority.</h2>
+    </div>
+    <div class="tb-arrow">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M3 8h10M9 4l4 4-4 4"/>
+      </svg>
+    </div>
+  </a>
+
+</div>
 
 <!-- HERO -->
 <section class="hero">
@@ -635,6 +880,102 @@
         <p class="client-type-desc">Testimonial campaigns, product launches, social content, and thought leadership series for growing brands.</p>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- CORE SERVICES -->
+<section class="core-services">
+
+  <div class="cs-header">
+    <p class="section-eyebrow">Core services</p>
+    <h2 class="section-title">Five ways we work.<br><em>One standard of quality.</em></h2>
+  </div>
+
+  <!-- Scrolling ticker -->
+  <div class="cs-ticker" aria-hidden="true">
+    <div class="cs-ticker-track">
+      <!-- doubled for seamless loop -->
+      <span class="cs-ticker-item"><span class="cs-ticker-dot"></span>Event Films</span>
+      <span class="cs-ticker-item"><span class="cs-ticker-dot"></span>Business Video</span>
+      <span class="cs-ticker-item"><span class="cs-ticker-dot"></span>Behind The Scenes</span>
+      <span class="cs-ticker-item"><span class="cs-ticker-dot"></span>Wedding Films</span>
+      <span class="cs-ticker-item"><span class="cs-ticker-dot"></span>Brand & Commercial</span>
+      <span class="cs-ticker-item"><span class="cs-ticker-dot"></span>Event Films</span>
+      <span class="cs-ticker-item"><span class="cs-ticker-dot"></span>Business Video</span>
+      <span class="cs-ticker-item"><span class="cs-ticker-dot"></span>Behind The Scenes</span>
+      <span class="cs-ticker-item"><span class="cs-ticker-dot"></span>Wedding Films</span>
+      <span class="cs-ticker-item"><span class="cs-ticker-dot"></span>Brand & Commercial</span>
+    </div>
+  </div>
+
+  <!-- Service list -->
+  <div class="cs-list">
+
+    <div class="cs-item">
+      <span class="cs-num">01</span>
+      <div class="cs-body">
+        <h3 class="cs-name">Event Films</h3>
+        <p class="cs-desc">Cinematic coverage of corporate conferences, brand activations, award ceremonies, charity galas, and product launches. We capture the energy while it's alive and turn it into a film that works long after the night ends.</p>
+      </div>
+      <div class="cs-tags">
+        <span class="cs-tag">Corporate</span>
+        <span class="cs-tag">Activations</span>
+        <span class="cs-tag">Galas</span>
+      </div>
+    </div>
+
+    <div class="cs-item">
+      <span class="cs-num">02</span>
+      <div class="cs-body">
+        <h3 class="cs-name">Business Video (Talking Heads)</h3>
+        <p class="cs-desc">Interview-style content for founders, executives, coaches, and professional services firms. Founder stories, thought leadership, client testimonials — video that builds trust before the first conversation happens.</p>
+      </div>
+      <div class="cs-tags">
+        <span class="cs-tag">Founders</span>
+        <span class="cs-tag">Executives</span>
+        <span class="cs-tag">B2B</span>
+      </div>
+    </div>
+
+    <div class="cs-item">
+      <span class="cs-num">03</span>
+      <div class="cs-body">
+        <h3 class="cs-name">Behind The Scenes (BTS)</h3>
+        <p class="cs-desc">Production documentation that shows the process, the people, and the craft behind your brand. BTS content builds authenticity and gives your audience a window into how the work actually gets made.</p>
+      </div>
+      <div class="cs-tags">
+        <span class="cs-tag">Brand Culture</span>
+        <span class="cs-tag">Social</span>
+        <span class="cs-tag">Authenticity</span>
+      </div>
+    </div>
+
+    <div class="cs-item">
+      <span class="cs-num">04</span>
+      <div class="cs-body">
+        <h3 class="cs-name">Wedding & Private Events</h3>
+        <p class="cs-desc">Milestone moments captured with the same cinematic discipline we bring to corporate work. Because the most important days of your life deserve more than a highlight reel — they deserve a film.</p>
+      </div>
+      <div class="cs-tags">
+        <span class="cs-tag">Weddings</span>
+        <span class="cs-tag">Private</span>
+        <span class="cs-tag">Legacy</span>
+      </div>
+    </div>
+
+    <div class="cs-item">
+      <span class="cs-num">05</span>
+      <div class="cs-body">
+        <h3 class="cs-name">Brand & Commercial Content</h3>
+        <p class="cs-desc">Short-form and long-form video for campaigns, product launches, social media, and brand identity. Built to perform — not just to look good. Content designed for the platforms and audiences your business needs to reach.</p>
+      </div>
+      <div class="cs-tags">
+        <span class="cs-tag">Campaigns</span>
+        <span class="cs-tag">Social</span>
+        <span class="cs-tag">Commercial</span>
+      </div>
+    </div>
+
   </div>
 </section>
 
