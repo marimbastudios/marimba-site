@@ -1,0 +1,253 @@
+<!--
+  Marimba Studios — Client Experience Page
+  Deploy path: /clients/francois/index.html  (matches /events/, /about/ folder pattern)
+  Standalone look on purpose — this is NOT part of the main site nav/header/footer.
+  Private link only. Not meant to be discovered or indexed.
+
+  TO ADD A DELIVERABLE VIDEO FOR REVIEW: find "VIDEO_EMBED_HERE" below and replace
+  YOUTUBE_VIDEO_ID with the real ID from the YouTube share link (the part after "v=").
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Francois Lubbe — Marimba Studios</title>
+<style>
+  :root{
+    --ink:#f4f2ea; --sub:#a9a7ba;
+    --marimba:#7b6ef6; --marimba-glow:#9b8bff;
+    --forest:#4f7a5a; --rust:#e08a4f;
+    --panel:#15131f; --panel-line:#2a2740;
+    --done:#4fce8b; --done-bg:rgba(79,206,139,0.12);
+    --active:#e08a4f; --active-bg:rgba(224,138,79,0.12);
+    --queued:#7c7a8f; --queued-bg:rgba(124,122,143,0.12);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family:-apple-system,"Segoe UI",Inter,Helvetica,Arial,sans-serif;
+    color:var(--ink);
+    background:#0a0913;
+    min-height:100vh;
+    overflow-x:hidden;
+  }
+
+  /* animated aurora background */
+  .aurora{position:fixed; inset:0; z-index:0; overflow:hidden; pointer-events:none;}
+  .blob{position:absolute; border-radius:50%; filter:blur(90px); opacity:0.35;}
+  .b1{width:520px; height:520px; background:#6a5cf0; top:-160px; left:-120px; animation:drift1 22s ease-in-out infinite;}
+  .b2{width:460px; height:460px; background:#e08a4f; bottom:-140px; right:-100px; animation:drift2 26s ease-in-out infinite;}
+  .b3{width:380px; height:380px; background:#4f7a5a; top:40%; left:60%; animation:drift3 30s ease-in-out infinite;}
+  @keyframes drift1{0%,100%{transform:translate(0,0);}50%{transform:translate(60px,80px);}}
+  @keyframes drift2{0%,100%{transform:translate(0,0);}50%{transform:translate(-70px,-50px);}}
+  @keyframes drift3{0%,100%{transform:translate(0,0);}50%{transform:translate(-40px,60px);}}
+
+  .content{position:relative; z-index:1;}
+  .wrap{max-width:860px; margin:0 auto; padding:0 28px;}
+
+  /* hero */
+  .hero{padding:64px 0 40px;}
+  .lockup{display:flex; align-items:center; gap:14px; margin-bottom:34px; opacity:0; animation:fadeUp .7s ease forwards;}
+  .mark{width:38px; height:38px; flex:none; animation:spin-in 1.2s ease;}
+  @keyframes spin-in{from{transform:rotate(-25deg) scale(0.8); opacity:0;}to{transform:rotate(0) scale(1); opacity:1;}}
+  .m-word{font-weight:800; letter-spacing:0.14em; font-size:12.5px; color:var(--marimba-glow);}
+  .x{color:var(--sub); font-size:12px; margin:0 6px;}
+  .f-word{font-style:italic; font-family:Georgia,"Times New Roman",serif; font-size:13px; color:var(--sub);}
+
+  .hero h1{font-size:44px; margin:0 0 10px; letter-spacing:-0.02em; opacity:0; animation:fadeUp .7s ease .1s forwards;}
+  .hero h1 span{background:linear-gradient(90deg, var(--marimba-glow), #c9a8ff); -webkit-background-clip:text; background-clip:text; color:transparent;}
+  .hero .tag{font-style:italic; font-family:Georgia,"Times New Roman",serif; color:#cfd0e0; font-size:17px; max-width:480px; margin:0 0 30px; opacity:0; animation:fadeUp .7s ease .2s forwards;}
+  @keyframes fadeUp{from{opacity:0; transform:translateY(10px);}to{opacity:1; transform:translateY(0);}}
+
+  .stats-row{display:flex; gap:14px; flex-wrap:wrap; opacity:0; animation:fadeUp .7s ease .3s forwards;}
+  .stat{background:rgba(255,255,255,0.03); border:1px solid var(--panel-line); border-radius:16px; padding:16px 20px; backdrop-filter:blur(6px); min-width:120px;}
+  .stat-num{font-size:24px; font-weight:800;}
+  .stat-label{font-size:11px; color:var(--sub); text-transform:uppercase; letter-spacing:0.06em; margin-top:2px;}
+  .live-clock{font-variant-numeric:tabular-nums;}
+  .live-dot{display:inline-block; width:7px; height:7px; border-radius:50%; background:var(--done); margin-right:6px; animation:pulse 1.6s ease infinite;}
+  @keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.35;}}
+
+  .closer-track{margin-top:16px; height:6px; border-radius:999px; background:rgba(255,255,255,0.06); overflow:hidden; opacity:0; animation:fadeUp .7s ease .4s forwards;}
+  .closer-fill{height:100%; width:0%; border-radius:999px; background:linear-gradient(90deg, var(--marimba-glow), var(--rust)); transition:width 1.4s cubic-bezier(.22,.9,.3,1);}
+  .closer-label{margin-top:8px; font-size:11.5px; color:var(--sub); opacity:0; animation:fadeUp .7s ease .45s forwards;}
+  .closer-label span{color:var(--ink); font-weight:600;}
+
+  /* section titles */
+  .section{padding:36px 0;}
+  .sec-title{font-size:11.5px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--marimba-glow); margin-bottom:16px;}
+
+  /* progress board */
+  .category{margin-bottom:26px;}
+  .cat-label{font-size:12px; font-weight:600; color:var(--sub); margin-bottom:10px; text-transform:uppercase; letter-spacing:0.06em;}
+  .item{
+    background:rgba(255,255,255,0.035); border:1px solid var(--panel-line); border-radius:14px;
+    padding:14px 16px; margin-bottom:8px; display:flex; align-items:center; gap:14px;
+    opacity:0; transform:translateY(8px); animation:itemIn .5s ease forwards;
+    transition:border-color .2s ease, background .2s ease;
+  }
+  .item:hover{border-color:rgba(155,139,255,0.4); background:rgba(255,255,255,0.06);}
+  @keyframes itemIn{to{opacity:1; transform:translateY(0);}}
+  .icon{width:26px; height:26px; flex:none; border-radius:50%; display:flex; align-items:center; justify-content:center;}
+  .icon.done{background:var(--done-bg);}
+  .icon.active{background:var(--active-bg);}
+  .icon.queued{background:var(--queued-bg);}
+  .item .title{font-weight:600; font-size:14.5px;}
+  .item .note{font-size:12.5px; color:var(--sub); margin-top:2px;}
+  .item .body{flex:1; min-width:0;}
+  .pill{font-size:10.5px; font-weight:700; letter-spacing:0.03em; text-transform:uppercase; padding:5px 10px; border-radius:999px; flex:none;}
+  .pill.done{color:var(--done); background:var(--done-bg);}
+  .pill.active{color:var(--active); background:var(--active-bg);}
+  .pill.queued{color:var(--queued); background:var(--queued-bg);}
+
+  /* deliverable review */
+  .review-card{
+    border:1px solid var(--panel-line); border-radius:20px; overflow:hidden;
+    background:rgba(255,255,255,0.03);
+  }
+  .review-head{padding:18px 20px; border-bottom:1px solid var(--panel-line);}
+  .review-head .t{font-weight:700; font-size:15px;}
+  .review-head .s{font-size:12.5px; color:var(--sub); margin-top:2px;}
+  .video-frame{position:relative; width:100%; padding-top:56.25%; background:#000;}
+  .video-frame iframe{position:absolute; inset:0; width:100%; height:100%; border:0;}
+  .video-empty{padding:50px 20px; text-align:center; color:var(--sub); font-size:13.5px;}
+
+  .footer-note{padding:40px 0 60px; text-align:center; font-size:12px; color:var(--sub); border-top:1px solid var(--panel-line); margin-top:20px;}
+  .footer-note b{color:var(--ink);}
+</style>
+</head>
+<body>
+
+<div class="aurora">
+  <div class="blob b1"></div>
+  <div class="blob b2"></div>
+  <div class="blob b3"></div>
+</div>
+
+<div class="content">
+<div class="wrap">
+
+  <div class="hero">
+    <div class="lockup">
+      <svg class="mark" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="100,10 178,55 178,145 100,190 22,145 22,55" fill="none" stroke="#9b8bff" stroke-width="8"/>
+        <polyline points="100,10 100,90 178,55" fill="none" stroke="#9b8bff" stroke-width="6"/>
+        <polyline points="22,55 100,90 100,190" fill="none" stroke="#9b8bff" stroke-width="6"/>
+        <polyline points="22,145 100,90 178,145" fill="none" stroke="#9b8bff" stroke-width="6"/>
+      </svg>
+      <span class="m-word">MARIMBA STUDIOS</span><span class="x">×</span><span class="f-word">Francois Lubbe — The Bush Lessons Guy</span>
+    </div>
+
+    <h1>Your <span>Progress Space</span></h1>
+    <p class="tag">"Turning pressure into possibility." A private, always-current look at the work being built for you.</p>
+
+    <div class="stats-row">
+      <div class="stat"><div class="stat-num" id="pctNum">—</div><div class="stat-label">Complete</div></div>
+      <div class="stat"><div class="stat-num"><span class="live-dot"></span><span id="liveClock">--:--:--</span></div><div class="stat-label">Live — Right Now</div></div>
+      <div class="stat"><div class="stat-num" id="daysNum">—</div><div class="stat-label">Days Working Together</div></div>
+      <div class="stat"><div class="stat-num" id="countdownNum">—</div><div class="stat-label">Days to Foundation Complete</div></div>
+    </div>
+
+    <div class="closer-track">
+      <div class="closer-fill" id="closerFill"></div>
+    </div>
+    <div class="closer-label">Getting closer — Foundation phase wraps <span id="closerDate">—</span></div>
+  </div>
+
+  <div class="section">
+    <div class="sec-title">Progress Board</div>
+    <div id="board"></div>
+  </div>
+
+  <div class="section">
+    <div class="sec-title">For Your Review</div>
+    <div class="review-card">
+      <div class="review-head">
+        <div class="t">Latest Deliverable</div>
+        <div class="s">We'll drop the newest cut here the moment it's ready to watch.</div>
+      </div>
+      <!-- VIDEO_EMBED_HERE: replace the div below with the iframe when a deliverable is ready
+      <div class="video-frame">
+        <iframe src="https://www.youtube.com/embed/YOUTUBE_VIDEO_ID" title="Deliverable" allowfullscreen></iframe>
+      </div>
+      -->
+      <div class="video-empty">Nothing to review yet — first cut lands here once it's ready.</div>
+    </div>
+  </div>
+
+  <div class="footer-note">This page is private, built only for <b>Francois Lubbe</b> — not part of Marimba's public site. Bookmark it and check back any time.</div>
+
+</div>
+</div>
+
+<script>
+const ROWS = [
+  {category:"Brand Foundation", item:"Content Architecture framework", status:"done", note:"Six pillars mapped into a working content system"},
+  {category:"Brand Foundation", item:"Initial Research Workflow", status:"done", note:"Repeatable capture method for qualified-client research"},
+  {category:"Brand Foundation", item:"Brand assets recovered & filed", status:"done", note:"Logos and bio organized and ready to use"},
+  {category:"Brand Foundation", item:"Visual direction & palette confirmation", status:"active", note:"Checking working palette against real brand assets"},
+  {category:"Media Setup", item:"Access request sent", status:"done", note:"Confirmed what's needed to move on Instagram/TikTok"},
+  {category:"Media Setup", item:"Instagram + TikTok account build", status:"active", note:"Building fresh accounts; handle decision pending"},
+  {category:"Media Setup", item:"Media page setup", status:"queued", note:"Confirming platform details before this starts"},
+  {category:"Research & Content", item:"Target-client research", status:"active", note:"Qualified company list, sourced not guessed"},
+  {category:"Research & Content", item:"Relevant companies & decision-makers", status:"queued", note:"Follows target-client research"},
+  {category:"Research & Content", item:"Initial content direction", status:"queued", note:"Week 2 scope"},
+  {category:"Research & Content", item:"Outreach & system prep", status:"queued", note:"Week 2 scope"},
+  {category:"Research & Content", item:"Measurement set-up", status:"queued", note:"Week 2 scope"},
+  {category:"Reporting", item:"First progress report", status:"queued", note:"Midday, per payment-received timeline"}
+];
+const ICONS = {
+  done:'<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#4fce8b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  active:'<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#e08a4f" stroke-width="2.5"/><path d="M12 7v5l3.5 2" stroke="#e08a4f" stroke-width="2.5" stroke-linecap="round"/></svg>',
+  queued:'<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#7c7a8f" stroke-width="2.5" stroke-dasharray="3 3"/></svg>'
+};
+const LABEL = {done:"Done", active:"In Progress", queued:"Queued"};
+
+const counts = {done:0,active:0,queued:0};
+ROWS.forEach(r=>counts[r.status]++);
+document.getElementById("pctNum").textContent = Math.round((counts.done/ROWS.length)*100) + "%";
+
+// days working together — since work started 2026-08-19
+const start = new Date("2026-08-19T00:00:00");
+const daysDiff = Math.max(1, Math.ceil((new Date() - start) / 86400000));
+document.getElementById("daysNum").textContent = daysDiff;
+
+// Foundation countdown — two weeks from the day this page first went out (2026-08-20)
+const foundationStart = new Date("2026-08-20T00:00:00");
+const foundationEnd = new Date("2026-09-03T00:00:00");
+const now0 = new Date();
+const daysLeft = Math.max(0, Math.ceil((foundationEnd - now0) / 86400000));
+document.getElementById("countdownNum").textContent = daysLeft;
+const totalSpan = (foundationEnd - foundationStart) / 86400000;
+const elapsed = Math.min(totalSpan, Math.max(0, (now0 - foundationStart) / 86400000));
+const pctCloser = Math.round((elapsed / totalSpan) * 100);
+document.getElementById("closerFill").style.width = pctCloser + "%";
+document.getElementById("closerDate").textContent = foundationEnd.toLocaleDateString('en-ZA', {month:'long', day:'numeric'});
+
+// live ticking clock
+function tick(){
+  const now = new Date();
+  document.getElementById("liveClock").textContent = now.toLocaleTimeString('en-ZA', {hour12:false});
+}
+tick(); setInterval(tick, 1000);
+
+// render board with staggered entrance
+const byCat = {};
+ROWS.forEach(r => (byCat[r.category] = byCat[r.category] || []).push(r));
+let html = ""; let i = 0;
+Object.keys(byCat).forEach(cat => {
+  html += `<div class="category"><div class="cat-label">${cat}</div>`;
+  byCat[cat].forEach(r => {
+    html += `<div class="item" style="animation-delay:${(i++ * 0.05).toFixed(2)}s">
+      <div class="icon ${r.status}">${ICONS[r.status]}</div>
+      <div class="body"><div class="title">${r.item}</div><div class="note">${r.note}</div></div>
+      <span class="pill ${r.status}">${LABEL[r.status]}</span>
+    </div>`;
+  });
+  html += `</div>`;
+});
+document.getElementById("board").innerHTML = html;
+</script>
+</body>
+</html>
