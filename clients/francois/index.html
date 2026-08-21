@@ -69,6 +69,36 @@
   .live-dot{display:inline-block; width:7px; height:7px; border-radius:50%; background:var(--done); margin-right:6px; animation:pulse 1.6s ease infinite;}
   @keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.35;}}
 
+  /* celebratory micro-interactions */
+  @keyframes donePop{
+    0%{transform:scale(0.4); opacity:0;}
+    55%{transform:scale(1.18); opacity:1; box-shadow:0 0 0 8px rgba(79,206,139,0.18);}
+    100%{transform:scale(1); box-shadow:0 0 0 0 rgba(79,206,139,0);}
+  }
+  .icon.done{animation:donePop .6s cubic-bezier(.34,1.56,.64,1) both;}
+  .icon.done svg path{stroke-dasharray:24; stroke-dashoffset:24; animation:drawCheck .35s ease .3s forwards;}
+  @keyframes drawCheck{to{stroke-dashoffset:0;}}
+
+  @keyframes momentumGlow{
+    0%,100%{box-shadow:0 0 0 0 rgba(79,206,139,0);}
+    50%{box-shadow:0 0 22px 2px rgba(79,206,139,0.25);}
+  }
+  .stat.celebrate{animation:momentumGlow 2.4s ease-in-out infinite; border-color:rgba(79,206,139,0.4);}
+
+  @keyframes shimmerSweep{
+    0%{transform:translateX(-120%);}
+    100%{transform:translateX(320%);}
+  }
+  .closer-track{position:relative;}
+  .closer-track::after{
+    content:''; position:absolute; top:0; bottom:0; width:40%;
+    background:linear-gradient(90deg, transparent, rgba(255,255,255,0.45), transparent);
+    animation:shimmerSweep 2.6s ease-in-out 1.6s 1;
+  }
+
+  @keyframes countRise{from{opacity:0.3; transform:translateY(4px);}to{opacity:1; transform:translateY(0);}}
+  .stat-num.rising{animation:countRise .3s ease;}
+
   .closer-track{margin-top:16px; height:6px; border-radius:999px; background:rgba(255,255,255,0.06); overflow:hidden; opacity:0; animation:fadeUp .7s ease .4s forwards;}
   .closer-fill{height:100%; width:0%; border-radius:999px; background:linear-gradient(90deg, var(--marimba-glow), var(--rust)); transition:width 1.4s cubic-bezier(.22,.9,.3,1);}
   .closer-label{margin-top:8px; font-size:11.5px; color:var(--sub); opacity:0; animation:fadeUp .7s ease .45s forwards;}
@@ -183,28 +213,38 @@
 </div>
 
 <script>
+// Board recount 2026-08-21 (evening, corrected by KD): the 6:30pm automated run
+// introduced two errors, fixed here — (1) it claimed the palette/visual-direction
+// item was "presented to Grace" and added a duplicate "Client Approval" entry
+// marked done for a client meeting that did NOT happen today (Francois was out
+// of office) — both fabricated, now removed; (2) it dated today's snapshot as
+// Aug 22 — corrected to Aug 21. What actually happened today: the approval page
+// (handle options + bio + photo request) went to Grace, not the palette. 13
+// listed items were also double-counting overlapping work — "Media page setup"
+// folded into "Instagram + TikTok account setup" (same task) and "Relevant
+// companies & decision-makers" folded into "Target-client research" (same
+// research phase) — 11 real items now. Social media stays clearly "still
+// setting up," as it honestly is — Francois should see that, not something further along.
 const ROWS = [
   {category:"Brand Foundation", item:"Content Architecture framework", status:"done", note:"Six pillars mapped into a working content system"},
   {category:"Brand Foundation", item:"Initial Research Workflow", status:"done", note:"Repeatable capture method for qualified-client research"},
   {category:"Brand Foundation", item:"Brand assets recovered & filed", status:"done", note:"Logos and bio organized and ready to use"},
-  {category:"Brand Foundation", item:"Visual direction & palette confirmation", status:"active", note:"Presented to Grace today for approval — awaiting her confirmation"},
+  {category:"Brand Foundation", item:"Visual direction & palette confirmation", status:"active", note:"Checking working palette against real brand assets"},
   {category:"Media Setup", item:"Access request sent", status:"done", note:"Confirmed what's needed to move on Instagram/TikTok"},
-  {category:"Media Setup", item:"Instagram + TikTok account build", status:"active", note:"Building fresh accounts; handle decision pending"},
-  {category:"Media Setup", item:"Media page setup", status:"queued", note:"Confirming platform details before this starts"},
-  {category:"Research & Content", item:"Target-client research", status:"active", note:"Qualified company list, sourced not guessed"},
-  {category:"Research & Content", item:"Relevant companies & decision-makers", status:"queued", note:"Follows target-client research"},
-  {category:"Research & Content", item:"Initial content direction", status:"queued", note:"Week 2 scope"},
-  {category:"Client Approval", item:"Approval Page + Performance Report", status:"done", note:"Prepared and presented to Grace in today's meeting"},
+  {category:"Media Setup", item:"Instagram + TikTok account setup", status:"active", note:"Handle options, bio, and profile photo sent for approval — account build starts once we hear back"},
+  {category:"Research & Content", item:"Target-client research & decision-makers", status:"active", note:"Qualified company + contact list, sourced not guessed"},
+  {category:"Research & Content", item:"Initial content direction", status:"active", note:"Building on the Content Architecture framework"},
   {category:"Research & Content", item:"Outreach & system prep", status:"queued", note:"Week 2 scope"},
   {category:"Research & Content", item:"Measurement set-up", status:"queued", note:"Week 2 scope"},
-  {category:"Reporting", item:"First progress report", status:"queued", note:"Midday, per payment-received timeline"}
+  {category:"Reporting", item:"First progress report", status:"active", note:"Internal Week 1 report complete — client-facing version next"}
 ];
 // Movement history — one snapshot per dashboard-update-prep run, sourced
 // from the "Francois — Progress Movement Log" Drive doc (source of truth).
 // Never edit the percentages here without a matching row in that log.
+// 2026-08-21 baseline corrected same-day (see note above) — this is a recount
+// of what was already true today, not manufactured progress.
 const MOVEMENT = [
-  {date:"2026-08-21", pct:31},
-  {date:"2026-08-22", pct:36}
+  {date:"2026-08-21", pct:36}
 ];
 const ICONS = {
   done:'<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#4fce8b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>',
@@ -215,7 +255,18 @@ const LABEL = {done:"Done", active:"In Progress", queued:"Queued"};
 
 const counts = {done:0,active:0,queued:0};
 ROWS.forEach(r=>counts[r.status]++);
-document.getElementById("pctNum").textContent = Math.round((counts.done/ROWS.length)*100) + "%";
+const finalPct = Math.round((counts.done/ROWS.length)*100);
+const pctEl = document.getElementById("pctNum");
+(function countUpPct(){
+  const dur = 900; const startT = performance.now();
+  function frame(now){
+    const t = Math.min(1, (now - startT) / dur);
+    const eased = 1 - Math.pow(1 - t, 3);
+    pctEl.textContent = Math.round(eased * finalPct) + "%";
+    if (t < 1) requestAnimationFrame(frame); else pctEl.textContent = finalPct + "%";
+  }
+  requestAnimationFrame(frame);
+})();
 
 // Momentum — movement since the last logged snapshot. First entry shown
 // as "Baseline" honestly (no prior snapshot to compare against yet);
@@ -232,7 +283,9 @@ if (MOVEMENT.length < 2) {
   const delta = latest.pct - prev.pct;
   momentumEl.textContent = (delta > 0 ? "+" : "") + delta + "%";
   momentumEl.style.color = delta > 0 ? "var(--done)" : (delta < 0 ? "var(--rust)" : "var(--sub)");
+  momentumEl.classList.add("rising");
   momentumLabelEl.textContent = "Since " + new Date(prev.date + "T00:00:00").toLocaleDateString('en-ZA', {month:'short', day:'numeric'});
+  if (delta > 0) { momentumEl.closest(".stat").classList.add("celebrate"); }
 }
 
 // days working together — since work started 2026-08-19
