@@ -144,6 +144,7 @@
 
     <div class="stats-row">
       <div class="stat"><div class="stat-num" id="pctNum">—</div><div class="stat-label">Complete</div></div>
+      <div class="stat"><div class="stat-num" id="momentumNum">—</div><div class="stat-label" id="momentumLabel">Momentum</div></div>
       <div class="stat"><div class="stat-num"><span class="live-dot"></span><span id="liveClock">--:--:--</span></div><div class="stat-label">Live — Right Now</div></div>
       <div class="stat"><div class="stat-num" id="daysNum">—</div><div class="stat-label">Days Working Together</div></div>
       <div class="stat"><div class="stat-num" id="countdownNum">—</div><div class="stat-label">Days to Foundation Complete</div></div>
@@ -197,6 +198,13 @@ const ROWS = [
   {category:"Research & Content", item:"Measurement set-up", status:"queued", note:"Week 2 scope"},
   {category:"Reporting", item:"First progress report", status:"queued", note:"Midday, per payment-received timeline"}
 ];
+// Movement history — one snapshot per dashboard-update-prep run, sourced
+// from the "Francois — Progress Movement Log" Drive doc (source of truth).
+// Never edit the percentages here without a matching row in that log.
+const MOVEMENT = [
+  {date:"2026-08-21", pct:31},
+  {date:"2026-08-21", pct:31}
+];
 const ICONS = {
   done:'<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#4fce8b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>',
   active:'<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#e08a4f" stroke-width="2.5"/><path d="M12 7v5l3.5 2" stroke="#e08a4f" stroke-width="2.5" stroke-linecap="round"/></svg>',
@@ -207,6 +215,24 @@ const LABEL = {done:"Done", active:"In Progress", queued:"Queued"};
 const counts = {done:0,active:0,queued:0};
 ROWS.forEach(r=>counts[r.status]++);
 document.getElementById("pctNum").textContent = Math.round((counts.done/ROWS.length)*100) + "%";
+
+// Momentum — movement since the last logged snapshot. First entry shown
+// as "Baseline" honestly (no prior snapshot to compare against yet);
+// from the second entry onward this shows the real delta.
+const momentumEl = document.getElementById("momentumNum");
+const momentumLabelEl = document.getElementById("momentumLabel");
+if (MOVEMENT.length < 2) {
+  momentumEl.textContent = "New";
+  momentumEl.style.color = "var(--marimba-glow)";
+  momentumLabelEl.textContent = "Momentum — tracking started";
+} else {
+  const latest = MOVEMENT[MOVEMENT.length - 1];
+  const prev = MOVEMENT[MOVEMENT.length - 2];
+  const delta = latest.pct - prev.pct;
+  momentumEl.textContent = (delta > 0 ? "+" : "") + delta + "%";
+  momentumEl.style.color = delta > 0 ? "var(--done)" : (delta < 0 ? "var(--rust)" : "var(--sub)");
+  momentumLabelEl.textContent = "Since " + new Date(prev.date + "T00:00:00").toLocaleDateString('en-ZA', {month:'short', day:'numeric'});
+}
 
 // days working together — since work started 2026-08-19
 const start = new Date("2026-08-19T00:00:00");
