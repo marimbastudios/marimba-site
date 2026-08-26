@@ -213,30 +213,28 @@
 </div>
 
 <script>
-// Board recount 2026-08-21 (evening, corrected by KD): the 6:30pm automated run
-// introduced two errors, fixed here — (1) it claimed the palette/visual-direction
-// item was "presented to Grace" and added a duplicate "Client Approval" entry
-// marked done for a client meeting that did NOT happen today (Francois was out
-// of office) — both fabricated, now removed; (2) it dated today's snapshot as
-// Aug 22 — corrected to Aug 21. What actually happened today: the approval page
-// (handle options + bio + photo request) went to Grace, not the palette. 13
-// listed items were also double-counting overlapping work — "Media page setup"
-// folded into "Instagram + TikTok account setup" (same task) and "Relevant
-// companies & decision-makers" folded into "Target-client research" (same
-// research phase) — 11 real items now. Social media stays clearly "still
-// setting up," as it honestly is — Francois should see that, not something further along.
+// Board update 2026-08-26, from KD directly (met with Francois 2026-08-25):
+// palette confirmed & approved by client -> done. IG/TikTok handles + profile
+// approved, accounts created, credentials in hand -> login is the only step
+// left, so this stays "active" (not done) rather than being marked complete
+// early. Target-client research: targeting decision made, moving into phase
+// two -> stays "active," note updated. Initial content direction: KD now
+// knows what the client wants and is drafting the direction to propose ->
+// stays "active." First progress report: KD confirmed complete (client-facing
+// version included) -> done. Outreach & system prep / Measurement set-up:
+// confirmed still queued, no change.
 const ROWS = [
   {category:"Brand Foundation", item:"Content Architecture framework", status:"done", note:"Six pillars mapped into a working content system"},
   {category:"Brand Foundation", item:"Initial Research Workflow", status:"done", note:"Repeatable capture method for qualified-client research"},
   {category:"Brand Foundation", item:"Brand assets recovered & filed", status:"done", note:"Logos and bio organized and ready to use"},
-  {category:"Brand Foundation", item:"Visual direction & palette confirmation", status:"active", note:"Checking working palette against real brand assets"},
+  {category:"Brand Foundation", item:"Visual direction & palette confirmation", status:"done", note:"Palette confirmed and approved by the client"},
   {category:"Media Setup", item:"Access request sent", status:"done", note:"Confirmed what's needed to move on Instagram/TikTok"},
-  {category:"Media Setup", item:"Instagram + TikTok account setup", status:"active", note:"Handle options, bio, and profile photo sent for approval — account build starts once we hear back"},
-  {category:"Research & Content", item:"Target-client research & decision-makers", status:"active", note:"First sourced batch in — real named companies & contacts via entrepreneur networks; revenue-tier match still being checked"},
-  {category:"Research & Content", item:"Initial content direction", status:"active", note:"Building on the Content Architecture framework"},
+  {category:"Media Setup", item:"Instagram + TikTok account setup", status:"active", note:"Handles and profile approved, accounts created with credentials in hand — logging in today"},
+  {category:"Research & Content", item:"Target-client research & decision-makers", status:"active", note:"Targeting decision made — know which companies to go after, moving into phase two"},
+  {category:"Research & Content", item:"Initial content direction", status:"active", note:"Know what the client wants — drafting the direction to propose back to him"},
   {category:"Research & Content", item:"Outreach & system prep", status:"queued", note:"Week 2 scope"},
   {category:"Research & Content", item:"Measurement set-up", status:"queued", note:"Week 2 scope"},
-  {category:"Reporting", item:"First progress report", status:"active", note:"Internal Week 1 report complete — client-facing version next"}
+  {category:"Reporting", item:"First progress report", status:"done", note:"Week 1 progress report complete"}
 ];
 // Movement history — one snapshot per dashboard-update-prep run, sourced
 // from the "Francois — Progress Movement Log" Drive doc (source of truth).
@@ -245,7 +243,8 @@ const ROWS = [
 // of what was already true today, not manufactured progress.
 const MOVEMENT = [
   {date:"2026-08-21", pct:31},
-  {date:"2026-08-22", pct:36}
+  {date:"2026-08-22", pct:36},
+  {date:"2026-08-26", pct:55}
 ];
 const ICONS = {
   done:'<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#4fce8b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>',
