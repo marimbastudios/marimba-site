@@ -223,19 +223,42 @@
 // stays "active." First progress report: KD confirmed complete (client-facing
 // version included) -> done. Outreach & system prep / Measurement set-up:
 // confirmed still queued, no change.
+//
+// Board update 2026-08-31 (morning), ahead of the 1 Sept approval meeting:
+// all six pillar carousels finished (already reflected below). The
+// Foundation Plan itself — the 8-page approval document (outreach strategy,
+// six-pillar system, proof-of-concept, suggested posting calendar) — built
+// and ready to send -> new row, done. Outreach & system prep bumped from
+// queued to active: real example messaging (three variations) now exists.
+//
+// Board update 2026-08-31 (later same day) — corrected, per the "baseline
+// corrected same-day" precedent above: everything buildable without waiting
+// on Francois or KD is now actually finished, not partial. Instagram +
+// TikTok account setup split into two honest rows (IG/FB/LinkedIn vs.
+// TikTok) so the board matches reality — only TikTok and YouTube remain,
+// and both are correctly queued because they need Francois's/KD's own
+// action, not more Marimba work. Outreach & system prep -> done: the three
+// examples became 13 real, named drafts for every EO Johannesburg board
+// member (FrancoisLubbe_Outreach_Drafts_EO_Board.pdf) — sending them is
+// Execution-phase, but the Foundation-phase drafting work is complete.
+// Measurement set-up -> done: a real Content Performance Tracker (.xlsx,
+// formula-driven, zero live data by design) is built and waiting for
+// Execution to start logging into it.
 const ROWS = [
   {category:"Brand Foundation", item:"Content Architecture framework", status:"done", note:"Six pillars mapped into a working content system"},
   {category:"Brand Foundation", item:"Initial Research Workflow", status:"done", note:"Repeatable capture method for qualified-client research"},
   {category:"Brand Foundation", item:"Brand assets recovered & filed", status:"done", note:"Logos and bio organized and ready to use"},
   {category:"Brand Foundation", item:"Visual direction & palette confirmation", status:"done", note:"Option C (Hybrid — forest/cream base, yellow accent) confirmed and approved by the client"},
   {category:"Media Setup", item:"Access request sent", status:"done", note:"Confirmed what's needed to move on Instagram/TikTok"},
-  {category:"Media Setup", item:"Instagram + TikTok account setup", status:"active", note:"Instagram, Facebook, and LinkedIn logged in and accessible — TikTok pending Francois's verification step"},
-  {category:"Media Setup", item:"YouTube channel creation", status:"queued", note:"New channel to be set up for Francois — not started"},
+  {category:"Media Setup", item:"Instagram, Facebook & LinkedIn account setup", status:"done", note:"Logged in and accessible"},
+  {category:"Media Setup", item:"TikTok account setup", status:"queued", note:"Blocked on Francois's own verification step — nothing left for Marimba to do here"},
+  {category:"Media Setup", item:"YouTube channel creation", status:"queued", note:"Blocked on KD's own account setup — not started"},
   {category:"Research & Content", item:"Target-client research & decision-makers", status:"done", note:"Named decision-makers identified — EO Johannesburg's 13 board members plus matching ActionCOACH client case studies"},
-  {category:"Research & Content", item:"Initial content direction", status:"active", note:"Know what the client wants — drafting the direction to propose back to him"},
-  {category:"Research & Content", item:"Outreach & system prep", status:"queued", note:"Week 2 scope"},
-  {category:"Research & Content", item:"Measurement set-up", status:"queued", note:"Week 2 scope"},
-  {category:"Reporting", item:"First progress report", status:"done", note:"Week 1 progress report complete"}
+  {category:"Research & Content", item:"Six-pillar content system", status:"done", note:"All six pillar carousels built and tested from one reusable template — ready for approval, not yet posted"},
+  {category:"Research & Content", item:"Outreach system", status:"done", note:"13 real, named message drafts written for every EO Johannesburg board member — ready to send once approved, not yet sent"},
+  {category:"Research & Content", item:"Measurement set-up", status:"done", note:"Content Performance Tracker built (formula-driven spreadsheet) — ready to log real numbers once posting starts"},
+  {category:"Reporting", item:"First progress report", status:"done", note:"Week 1 progress report complete"},
+  {category:"Reporting", item:"Foundation Plan — approval document", status:"done", note:"8-page approval document plus a one-page Approval Checklist — built and ready to send ahead of Tuesday's meeting"}
 ];
 // Movement history — one snapshot per dashboard-update-prep run, sourced
 // from the "Francois — Progress Movement Log" Drive doc (source of truth).
@@ -245,7 +268,8 @@ const ROWS = [
 const MOVEMENT = [
   {date:"2026-08-21", pct:31},
   {date:"2026-08-22", pct:36},
-  {date:"2026-08-26", pct:55}
+  {date:"2026-08-26", pct:55},
+  {date:"2026-08-31", pct:86}
 ];
 const ICONS = {
   done:'<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#4fce8b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>',
