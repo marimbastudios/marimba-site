@@ -136,15 +136,15 @@
     border:1px solid var(--panel-line); border-radius:20px; overflow:hidden;
     background:rgba(255,255,255,0.03);
   }
-  .review-head{padding:18px 20px; border-bottom:1px solid var(--panel-line); display:flex; align-items:center; gap:14px;}
+  .review-head{padding:18px 20px; border-bottom:1px solid var(--panel-line);}
   .review-head .t{font-weight:700; font-size:15px;}
   .review-head .s{font-size:12.5px; color:var(--sub); margin-top:2px;}
-  .review-badge{width:32px; height:32px; flex:none;}
-  .review-badge #badge-breathe{transform-origin:100px 100px; animation:badgeBreathe 2.8s ease-in-out infinite;}
-  .review-badge #badge-amb{animation:badgeAmbPulse 2.8s ease-in-out infinite;}
-  .review-badge #badge-glow{transform-origin:110px 113px; animation:badgeGlowPulse 2.8s ease-in-out infinite;}
-  .review-badge #badge-highlight{animation:badgeHighlightFade 2.8s ease-in-out infinite;}
-  .review-badge #badge-flap{transform-origin:100px 106px; animation:badgeFlapFlip 2.8s ease-in-out infinite;}
+  .teaser-badge{width:96px; height:96px; flex:none;}
+  .teaser-badge #badge-breathe{transform-origin:100px 100px; animation:badgeBreathe 2.8s ease-in-out infinite;}
+  .teaser-badge #badge-amb{animation:badgeAmbPulse 2.8s ease-in-out infinite;}
+  .teaser-badge #badge-glow{transform-origin:110px 113px; animation:badgeGlowPulse 2.8s ease-in-out infinite;}
+  .teaser-badge #badge-highlight{animation:badgeHighlightFade 2.8s ease-in-out infinite;}
+  .teaser-badge #badge-flap{transform-origin:100px 106px; animation:badgeFlapFlip 2.8s ease-in-out infinite;}
   @keyframes badgeBreathe{0%{transform:scale(1);}50%{transform:scale(1.014);}100%{transform:scale(1);}}
   @keyframes badgeAmbPulse{0%{opacity:0.14;}50%{opacity:0.19;}100%{opacity:0.14;}}
   @keyframes badgeHighlightFade{0%,16.1%{opacity:0;}21.4%,62.5%{opacity:1;}83.9%,100%{opacity:0;}}
@@ -202,12 +202,36 @@
     animation:teaserGlow 5s ease-in-out infinite;
   }
   @keyframes teaserGlow{0%,100%{opacity:0.6;}50%{opacity:1;}}
-  .teaser-inner{position:relative; z-index:1;}
+  .teaser-inner{position:relative; z-index:1; display:flex; align-items:center; gap:24px;}
+  .teaser-copy{min-width:0;}
   .teaser-eyebrow{font-size:11.5px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--rust); margin-bottom:8px; display:flex; align-items:center; gap:8px;}
   .teaser-eyebrow .dot{width:6px; height:6px; border-radius:50%; background:var(--rust); animation:pulse 1.8s ease infinite;}
   .teaser-head{font-size:22px; font-weight:800; letter-spacing:-0.01em; margin-bottom:6px; line-height:1.25;}
   .teaser-head span{background:linear-gradient(90deg, var(--marimba-glow), var(--rust)); -webkit-background-clip:text; background-clip:text; color:transparent;}
   .teaser-sub{font-size:13.5px; color:var(--sub); max-width:56ch; line-height:1.5;}
+  @media (max-width:520px){
+    .teaser-inner{flex-direction:column; align-items:flex-start;}
+    .teaser-badge{width:80px; height:80px;}
+  }
+
+  /* phase cards — click to expand */
+  .phase-card{
+    border:1px solid var(--panel-line); border-radius:16px; background:rgba(255,255,255,0.03);
+    margin-bottom:14px; overflow:hidden;
+  }
+  .phase-head{
+    list-style:none; cursor:pointer; user-select:none;
+    padding:18px 20px; display:flex; align-items:center; gap:14px;
+  }
+  .phase-head::-webkit-details-marker{display:none;}
+  .phase-head::marker{content:"";}
+  .phase-chevron{width:18px; height:18px; flex:none; color:var(--sub); transition:transform .25s ease;}
+  .phase-card[open] .phase-chevron{transform:rotate(90deg);}
+  .phase-title-wrap{flex:1; min-width:0;}
+  .phase-title{font-weight:700; font-size:16px;}
+  .phase-meta{font-size:12px; color:var(--sub); margin-top:2px;}
+  .phase-body{padding:2px 20px 18px;}
+  .phase-body .category:last-child{margin-bottom:0;}
 </style>
 </head>
 <body>
@@ -239,24 +263,61 @@
     <p class="tag">"Turning pressure into possibility." A private, always-current look at the work being built for you.</p>
 
     <div class="stats-row">
-      <div class="stat"><div class="stat-num" id="pctNum">—</div><div class="stat-label">Complete</div></div>
-      <div class="stat"><div class="stat-num" id="momentumNum">—</div><div class="stat-label" id="momentumLabel">Momentum</div></div>
+      <div class="stat"><div class="stat-num" id="pctNum">—</div><div class="stat-label">Overall Progress</div></div>
       <div class="stat"><div class="stat-num"><span class="live-dot"></span><span id="liveClock">--:--:--</span></div><div class="stat-label">Live — Right Now</div></div>
       <div class="stat"><div class="stat-num" id="daysNum">—</div><div class="stat-label">Days Working Together</div></div>
-      <div class="stat"><div class="stat-num" id="countdownNum">—</div><div class="stat-label">Days to Foundation Complete</div></div>
+      <div class="stat"><div class="stat-num" id="execDaysNum">—</div><div class="stat-label">Days Into Execution</div></div>
     </div>
 
     <div class="closer-track">
       <div class="closer-fill" id="closerFill"></div>
     </div>
-    <div class="closer-label">Getting closer — Foundation phase wraps <span id="closerDate">—</span></div>
+    <div class="closer-label" id="closerLabel">—</div>
   </div>
 
   <div class="teaser">
     <div class="teaser-inner">
-      <div class="teaser-eyebrow"><span class="dot"></span><span id="teaserEyebrow">—</span></div>
-      <div class="teaser-head" id="teaserHead">—</div>
-      <div class="teaser-sub" id="teaserSub">—</div>
+      <svg class="teaser-badge" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <radialGradient id="badge-ambGrad" cx="50%" cy="46%" r="60%">
+            <stop offset="0%" stop-color="#9b8bff" stop-opacity="0.9"/>
+            <stop offset="100%" stop-color="#9b8bff" stop-opacity="0"/>
+          </radialGradient>
+          <radialGradient id="badge-cellGlow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#4fce8b" stop-opacity="0.9"/>
+            <stop offset="60%" stop-color="#9b8bff" stop-opacity="0.35"/>
+            <stop offset="100%" stop-color="#9b8bff" stop-opacity="0"/>
+          </radialGradient>
+          <filter id="badge-soft" x="-60%" y="-60%" width="220%" height="220%">
+            <feGaussianBlur stdDeviation="5"/>
+          </filter>
+        </defs>
+        <g id="badge-breathe">
+          <ellipse id="badge-amb" cx="100" cy="98" rx="72" ry="66" fill="url(#badge-ambGrad)" filter="url(#badge-soft)"/>
+          <rect x="40" y="46" width="120" height="114" rx="16" fill="#7b6ef6" fill-opacity="0.10" stroke="#7b6ef6" stroke-opacity="0.55" stroke-width="3"/>
+          <path d="M40,62 a16,16 0 0 1 16,-16 h88 a16,16 0 0 1 16,16 v18 h-120 z" fill="#9b8bff" fill-opacity="0.85"/>
+          <rect x="66" y="34" width="10" height="24" rx="5" fill="#e08a4f" fill-opacity="0.80"/>
+          <rect x="124" y="34" width="10" height="24" rx="5" fill="#e08a4f" fill-opacity="0.80"/>
+          <rect x="52" y="84" width="20" height="14" rx="4" fill="#7b6ef6" fill-opacity="0.10" stroke="#7b6ef6" stroke-opacity="0.28"/>
+          <rect x="76" y="84" width="20" height="14" rx="4" fill="#7b6ef6" fill-opacity="0.10" stroke="#7b6ef6" stroke-opacity="0.28"/>
+          <rect x="124" y="84" width="20" height="14" rx="4" fill="#7b6ef6" fill-opacity="0.10" stroke="#7b6ef6" stroke-opacity="0.28"/>
+          <rect x="52" y="106" width="20" height="14" rx="4" fill="#7b6ef6" fill-opacity="0.10" stroke="#7b6ef6" stroke-opacity="0.28"/>
+          <rect x="76" y="106" width="20" height="14" rx="4" fill="#7b6ef6" fill-opacity="0.10" stroke="#7b6ef6" stroke-opacity="0.28"/>
+          <rect x="124" y="106" width="20" height="14" rx="4" fill="#7b6ef6" fill-opacity="0.10" stroke="#7b6ef6" stroke-opacity="0.28"/>
+          <rect x="52" y="128" width="20" height="14" rx="4" fill="#7b6ef6" fill-opacity="0.10" stroke="#7b6ef6" stroke-opacity="0.28"/>
+          <rect x="76" y="128" width="20" height="14" rx="4" fill="#7b6ef6" fill-opacity="0.10" stroke="#7b6ef6" stroke-opacity="0.28"/>
+          <rect x="100" y="128" width="20" height="14" rx="4" fill="#7b6ef6" fill-opacity="0.10" stroke="#7b6ef6" stroke-opacity="0.28"/>
+          <rect x="124" y="128" width="20" height="14" rx="4" fill="#7b6ef6" fill-opacity="0.10" stroke="#7b6ef6" stroke-opacity="0.28"/>
+          <circle id="badge-glow" cx="110" cy="113" r="17" fill="url(#badge-cellGlow)" filter="url(#badge-soft)"/>
+          <rect id="badge-highlight" x="100" y="106" width="20" height="14" rx="4" fill="#4fce8b"/>
+          <rect id="badge-flap" x="100" y="106" width="20" height="14" rx="4" fill="#7b6ef6" stroke="#7b6ef6" stroke-width="1"/>
+        </g>
+      </svg>
+      <div class="teaser-copy">
+        <div class="teaser-eyebrow"><span class="dot"></span><span id="teaserEyebrow">—</span></div>
+        <div class="teaser-head" id="teaserHead">—</div>
+        <div class="teaser-sub" id="teaserSub">—</div>
+      </div>
     </div>
   </div>
 
@@ -269,46 +330,8 @@
     <div class="sec-title">For Your Review</div>
     <div class="review-card">
       <div class="review-head">
-        <svg class="review-badge" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <defs>
-            <radialGradient id="badge-ambGrad" cx="50%" cy="46%" r="60%">
-              <stop offset="0%" stop-color="#9b8bff" stop-opacity="0.9"/>
-              <stop offset="100%" stop-color="#9b8bff" stop-opacity="0"/>
-            </radialGradient>
-            <radialGradient id="badge-cellGlow" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stop-color="#4fce8b" stop-opacity="0.9"/>
-              <stop offset="60%" stop-color="#9b8bff" stop-opacity="0.35"/>
-              <stop offset="100%" stop-color="#9b8bff" stop-opacity="0"/>
-            </radialGradient>
-            <filter id="badge-soft" x="-60%" y="-60%" width="220%" height="220%">
-              <feGaussianBlur stdDeviation="5"/>
-            </filter>
-          </defs>
-          <g id="badge-breathe">
-            <ellipse id="badge-amb" cx="100" cy="98" rx="72" ry="66" fill="url(#badge-ambGrad)" filter="url(#badge-soft)"/>
-            <rect x="40" y="46" width="120" height="114" rx="16" fill="#7b6ef6" fill-opacity="0.10" stroke="#7b6ef6" stroke-opacity="0.55" stroke-width="3"/>
-            <path d="M40,62 a16,16 0 0 1 16,-16 h88 a16,16 0 0 1 16,16 v18 h-120 z" fill="#9b8bff" fill-opacity="0.85"/>
-            <rect x="66" y="34" width="10" height="24" rx="5" fill="#e08a4f" fill-opacity="0.80"/>
-            <rect x="124" y="34" width="10" height="24" rx="5" fill="#e08a4f" fill-opacity="0.80"/>
-            <rect x="52" y="84" width="20" height="14" rx="4" fill="#7b6ef6" fill-opacity="0.10" stroke="#7b6ef6" stroke-opacity="0.28"/>
-            <rect x="76" y="84" width="20" height="14" rx="4" fill="#7b6ef6" fill-opacity="0.10" stroke="#7b6ef6" stroke-opacity="0.28"/>
-            <rect x="124" y="84" width="20" height="14" rx="4" fill="#7b6ef6" fill-opacity="0.10" stroke="#7b6ef6" stroke-opacity="0.28"/>
-            <rect x="52" y="106" width="20" height="14" rx="4" fill="#7b6ef6" fill-opacity="0.10" stroke="#7b6ef6" stroke-opacity="0.28"/>
-            <rect x="76" y="106" width="20" height="14" rx="4" fill="#7b6ef6" fill-opacity="0.10" stroke="#7b6ef6" stroke-opacity="0.28"/>
-            <rect x="124" y="106" width="20" height="14" rx="4" fill="#7b6ef6" fill-opacity="0.10" stroke="#7b6ef6" stroke-opacity="0.28"/>
-            <rect x="52" y="128" width="20" height="14" rx="4" fill="#7b6ef6" fill-opacity="0.10" stroke="#7b6ef6" stroke-opacity="0.28"/>
-            <rect x="76" y="128" width="20" height="14" rx="4" fill="#7b6ef6" fill-opacity="0.10" stroke="#7b6ef6" stroke-opacity="0.28"/>
-            <rect x="100" y="128" width="20" height="14" rx="4" fill="#7b6ef6" fill-opacity="0.10" stroke="#7b6ef6" stroke-opacity="0.28"/>
-            <rect x="124" y="128" width="20" height="14" rx="4" fill="#7b6ef6" fill-opacity="0.10" stroke="#7b6ef6" stroke-opacity="0.28"/>
-            <circle id="badge-glow" cx="110" cy="113" r="17" fill="url(#badge-cellGlow)" filter="url(#badge-soft)"/>
-            <rect id="badge-highlight" x="100" y="106" width="20" height="14" rx="4" fill="#4fce8b"/>
-            <rect id="badge-flap" x="100" y="106" width="20" height="14" rx="4" fill="#7b6ef6" stroke="#7b6ef6" stroke-width="1"/>
-          </g>
-        </svg>
-        <div>
-          <div class="t">Latest Deliverable</div>
-          <div class="s">We'll drop the newest cut here the moment it's ready to watch.</div>
-        </div>
+        <div class="t">Latest Deliverable</div>
+        <div class="s">We'll drop the newest cut here the moment it's ready to watch.</div>
       </div>
       <!-- VIDEO_EMBED_HERE: replace the div below with the iframe when a deliverable is ready
       <div class="video-frame">
@@ -373,27 +396,64 @@ const TEASER = {
   sub: "Once the plan's approved: the six-pillar system starts posting, all 13 outreach drafts go out to the EO Johannesburg board, and TikTok/YouTube come online."
 };
 
-const ROWS = [
-  {category:"Brand Foundation", item:"Content Architecture framework", status:"done", note:"Six pillars mapped into a working content system"},
-  {category:"Brand Foundation", item:"Initial Research Workflow", status:"done", note:"Repeatable capture method for qualified-client research"},
-  {category:"Brand Foundation", item:"Brand assets recovered & filed", status:"done", note:"Logos and bio organized and ready to use"},
-  {category:"Brand Foundation", item:"Visual direction & palette confirmation", status:"done", note:"Option C (Hybrid — forest/cream base, yellow accent) confirmed and approved by the client"},
-  {category:"Media Setup", item:"Access request sent", status:"done", note:"Confirmed what's needed to move on Instagram/TikTok"},
-  {category:"Media Setup", item:"Instagram, Facebook & LinkedIn account setup", status:"done", note:"Logged in and accessible"},
-  {category:"Media Setup", item:"TikTok account setup", status:"queued", note:"Blocked on Francois's own verification step — nothing left for Marimba to do here"},
-  {category:"Media Setup", item:"YouTube channel creation", status:"queued", note:"Blocked on KD's own account setup — not started"},
-  {category:"Research & Content", item:"Target-client research & decision-makers", status:"done", note:"Named decision-makers identified — EO Johannesburg's 13 board members plus matching ActionCOACH client case studies"},
-  {category:"Research & Content", item:"Six-pillar content system", status:"done", note:"All six pillar carousels built and tested from one reusable template — ready for approval, not yet posted"},
-  {category:"Research & Content", item:"Outreach system", status:"done", note:"13 real, named message drafts written for every EO Johannesburg board member — ready to send once approved, not yet sent"},
-  {category:"Research & Content", item:"Measurement set-up", status:"done", note:"Content Performance Tracker built (formula-driven spreadsheet) — ready to log real numbers once posting starts"},
-  {category:"Reporting", item:"First progress report", status:"done", note:"Week 1 progress report complete"},
-  {category:"Reporting", item:"Foundation Plan — approval document", status:"done", note:"8-page approval document plus a one-page Approval Checklist — built and ready to send ahead of Tuesday's meeting"}
+// Phase restructure, 2026-09-14: Francois has paid for and we're starting
+// Execution phase, but the dashboard was still showing Foundation-phase-only
+// completion (86%) as the headline number, which read as "basically done."
+// Reframed as two phases: Foundation (fully delivered by Marimba — the 2
+// items below that used to sit "queued" inside it, TikTok/YouTube setup, are
+// blocked on Francois's/KD's own account actions, not on Marimba work, so
+// they've moved into Execution where the blocking actually matters) and
+// Execution (just starting, 0 done). The overall "bigger picture" progress
+// bar now weights Foundation at 5% of the full engagement — KD's own rough
+// estimate as of 2026-09-14, not a finalized figure. Update PHASES[0].weightPct
+// once the full phase roadmap / contract scope is locked in, and give
+// PHASES[1] (Execution) a real weightPct at the same time so the overall bar
+// accounts for it too.
+const PHASES = [
+  {
+    id: "foundation",
+    name: "Foundation Phase",
+    status: "done",
+    weightPct: 5, // placeholder — KD's rough estimate of Foundation's share of the full engagement, confirm/replace
+    defaultOpen: false,
+    rows: [
+      {category:"Brand Foundation", item:"Content Architecture framework", status:"done", note:"Six pillars mapped into a working content system"},
+      {category:"Brand Foundation", item:"Initial Research Workflow", status:"done", note:"Repeatable capture method for qualified-client research"},
+      {category:"Brand Foundation", item:"Brand assets recovered & filed", status:"done", note:"Logos and bio organized and ready to use"},
+      {category:"Brand Foundation", item:"Visual direction & palette confirmation", status:"done", note:"Option C (Hybrid — forest/cream base, yellow accent) confirmed and approved by the client"},
+      {category:"Media Setup", item:"Access request sent", status:"done", note:"Confirmed what's needed to move on Instagram/TikTok"},
+      {category:"Media Setup", item:"Instagram, Facebook & LinkedIn account setup", status:"done", note:"Logged in and accessible"},
+      {category:"Research & Content", item:"Target-client research & decision-makers", status:"done", note:"Named decision-makers identified — EO Johannesburg's 13 board members plus matching ActionCOACH client case studies"},
+      {category:"Research & Content", item:"Six-pillar content system", status:"done", note:"All six pillar carousels built and tested from one reusable template — ready for approval, not yet posted"},
+      {category:"Research & Content", item:"Outreach system", status:"done", note:"13 real, named message drafts written for every EO Johannesburg board member — ready to send once approved, not yet sent"},
+      {category:"Research & Content", item:"Measurement set-up", status:"done", note:"Content Performance Tracker built (formula-driven spreadsheet) — ready to log real numbers once posting starts"},
+      {category:"Reporting", item:"First progress report", status:"done", note:"Week 1 progress report complete"},
+      {category:"Reporting", item:"Foundation Plan — approval document", status:"done", note:"8-page approval document plus a one-page Approval Checklist — built and ready to send ahead of Tuesday's meeting"}
+    ]
+  },
+  {
+    id: "execution",
+    name: "Execution Phase",
+    status: "active",
+    weightPct: null, // TBD — needs a real figure once the full roadmap is scoped; excluded from the overall bar until then
+    defaultOpen: true,
+    startDate: "2026-09-14", // placeholder — set to the date this reflected phase turnover; confirm the real Execution kickoff date
+    rows: [
+      {category:"Go Live", item:"Send EO Johannesburg outreach", status:"queued", note:"13 named drafts, ready since Foundation — sending is the first Execution move"},
+      {category:"Go Live", item:"Post the six-pillar content system", status:"queued", note:"All six pillar carousels built and tested — posting starts now"},
+      {category:"Go Live", item:"TikTok account setup", status:"queued", note:"Blocked on Francois's own verification step — nothing left for Marimba to do here"},
+      {category:"Go Live", item:"YouTube channel creation", status:"queued", note:"Blocked on KD's own account setup"},
+      {category:"Measurement", item:"Start logging real performance data", status:"queued", note:"Content Performance Tracker built and waiting for posting to begin"}
+    ]
+  }
 ];
 // Movement history — one snapshot per dashboard-update-prep run, sourced
 // from the "Francois — Progress Movement Log" Drive doc (source of truth).
 // Never edit the percentages here without a matching row in that log.
-// 2026-08-21 baseline corrected same-day (see note above) — this is a recount
-// of what was already true today, not manufactured progress.
+// This tracked Foundation-phase-only completion under the old single-phase
+// model; kept for record but no longer surfaced as a hero stat now that the
+// headline number is the overall (multi-phase) figure above. Retire or
+// re-baseline this log against the new phase model before reusing it.
 const MOVEMENT = [
   {date:"2026-08-21", pct:31},
   {date:"2026-08-22", pct:36},
@@ -408,9 +468,17 @@ const ICONS = {
 };
 const LABEL = {done:"Done", active:"In Progress", queued:"Queued"};
 
-const counts = {done:0,active:0,queued:0};
-ROWS.forEach(r=>counts[r.status]++);
-const finalPct = Math.round((counts.done/ROWS.length)*100);
+// Per-phase completion + the overall "bigger picture" figure. Only phases
+// with a weightPct count toward the overall bar (see PHASES comment above —
+// Execution has no confirmed weight yet).
+PHASES.forEach(p => {
+  p.doneCount = p.rows.filter(r => r.status === "done").length;
+  p.total = p.rows.length;
+});
+const weightedPhases = PHASES.filter(p => typeof p.weightPct === "number");
+const finalPct = Math.round(
+  weightedPhases.reduce((sum, p) => sum + p.weightPct * (p.doneCount / p.total), 0)
+);
 const pctEl = document.getElementById("pctNum");
 (function countUpPct(){
   const dur = 900; const startT = performance.now();
@@ -423,42 +491,22 @@ const pctEl = document.getElementById("pctNum");
   requestAnimationFrame(frame);
 })();
 
-// Momentum — movement since the last logged snapshot. First entry shown
-// as "Baseline" honestly (no prior snapshot to compare against yet);
-// from the second entry onward this shows the real delta.
-const momentumEl = document.getElementById("momentumNum");
-const momentumLabelEl = document.getElementById("momentumLabel");
-if (MOVEMENT.length < 2) {
-  momentumEl.textContent = "New";
-  momentumEl.style.color = "var(--marimba-glow)";
-  momentumLabelEl.textContent = "Momentum — tracking started";
-} else {
-  const latest = MOVEMENT[MOVEMENT.length - 1];
-  const prev = MOVEMENT[MOVEMENT.length - 2];
-  const delta = latest.pct - prev.pct;
-  momentumEl.textContent = (delta > 0 ? "+" : "") + delta + "%";
-  momentumEl.style.color = delta > 0 ? "var(--done)" : (delta < 0 ? "var(--rust)" : "var(--sub)");
-  momentumEl.classList.add("rising");
-  momentumLabelEl.textContent = "Since " + new Date(prev.date + "T00:00:00").toLocaleDateString('en-ZA', {month:'short', day:'numeric'});
-  if (delta > 0) { momentumEl.closest(".stat").classList.add("celebrate"); }
-}
-
 // days working together — since work started 2026-08-19
 const start = new Date("2026-08-19T00:00:00");
 const daysDiff = Math.max(1, Math.ceil((new Date() - start) / 86400000));
 document.getElementById("daysNum").textContent = daysDiff;
 
-// Foundation countdown — two weeks from the day this page first went out (2026-08-20)
-const foundationStart = new Date("2026-08-20T00:00:00");
-const foundationEnd = new Date("2026-09-03T00:00:00");
-const now0 = new Date();
-const daysLeft = Math.max(0, Math.ceil((foundationEnd - now0) / 86400000));
-document.getElementById("countdownNum").textContent = daysLeft;
-const totalSpan = (foundationEnd - foundationStart) / 86400000;
-const elapsed = Math.min(totalSpan, Math.max(0, (now0 - foundationStart) / 86400000));
-const pctCloser = Math.round((elapsed / totalSpan) * 100);
-document.getElementById("closerFill").style.width = pctCloser + "%";
-document.getElementById("closerDate").textContent = foundationEnd.toLocaleDateString('en-ZA', {month:'long', day:'numeric'});
+// days into Execution — see PHASES[1].startDate note on the placeholder date
+const execPhase = PHASES.find(p => p.id === "execution");
+const execStart = new Date(execPhase.startDate + "T00:00:00");
+const execDays = Math.max(0, Math.ceil((new Date() - execStart) / 86400000));
+document.getElementById("execDaysNum").textContent = execDays;
+
+// overall bar — reflects the bigger picture across all weighted phases, not
+// just the phase currently being worked
+document.getElementById("closerFill").style.width = Math.max(2, finalPct) + "%";
+document.getElementById("closerLabel").innerHTML =
+  'Foundation phase <span>complete</span> — Execution now underway. This is the start of a bigger build.';
 
 // live ticking clock
 function tick(){
@@ -472,22 +520,38 @@ document.getElementById("teaserEyebrow").textContent = TEASER.eyebrow;
 document.getElementById("teaserHead").innerHTML = TEASER.headline;
 document.getElementById("teaserSub").textContent = TEASER.sub;
 
-// render board with staggered entrance
-const byCat = {};
-ROWS.forEach(r => (byCat[r.category] = byCat[r.category] || []).push(r));
-let html = ""; let i = 0;
-Object.keys(byCat).forEach(cat => {
-  html += `<div class="category"><div class="cat-label">${cat}</div>`;
-  byCat[cat].forEach(r => {
-    html += `<div class="item" style="animation-delay:${(i++ * 0.05).toFixed(2)}s">
-      <div class="icon ${r.status}">${ICONS[r.status]}</div>
-      <div class="body"><div class="title">${r.item}</div><div class="note">${r.note}</div></div>
-      <span class="pill ${r.status}">${LABEL[r.status]}</span>
-    </div>`;
+// render board as click-to-expand phase cards, each grouped into categories
+// with the same staggered item entrance as before
+const CHEVRON = '<svg class="phase-chevron" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+let boardHtml = ""; let i = 0;
+PHASES.forEach(phase => {
+  const byCat = {};
+  phase.rows.forEach(r => (byCat[r.category] = byCat[r.category] || []).push(r));
+  let bodyHtml = "";
+  Object.keys(byCat).forEach(cat => {
+    bodyHtml += `<div class="category"><div class="cat-label">${cat}</div>`;
+    byCat[cat].forEach(r => {
+      bodyHtml += `<div class="item" style="animation-delay:${(i++ * 0.05).toFixed(2)}s">
+        <div class="icon ${r.status}">${ICONS[r.status]}</div>
+        <div class="body"><div class="title">${r.item}</div><div class="note">${r.note}</div></div>
+        <span class="pill ${r.status}">${LABEL[r.status]}</span>
+      </div>`;
+    });
+    bodyHtml += `</div>`;
   });
-  html += `</div>`;
+  boardHtml += `<details class="phase-card"${phase.defaultOpen ? " open" : ""}>
+    <summary class="phase-head">
+      ${CHEVRON}
+      <div class="phase-title-wrap">
+        <div class="phase-title">${phase.name}</div>
+        <div class="phase-meta">${phase.doneCount} of ${phase.total} complete</div>
+      </div>
+      <span class="pill ${phase.status}">${LABEL[phase.status]}</span>
+    </summary>
+    <div class="phase-body">${bodyHtml}</div>
+  </details>`;
 });
-document.getElementById("board").innerHTML = html;
+document.getElementById("board").innerHTML = boardHtml;
 </script>
 </body>
 </html>
