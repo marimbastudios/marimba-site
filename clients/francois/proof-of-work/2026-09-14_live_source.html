@@ -136,78 +136,15 @@
     border:1px solid var(--panel-line); border-radius:20px; overflow:hidden;
     background:rgba(255,255,255,0.03);
   }
-  .review-head{padding:18px 20px; border-bottom:1px solid var(--panel-line); display:flex; align-items:center; gap:14px;}
+  .review-head{padding:18px 20px; border-bottom:1px solid var(--panel-line);}
   .review-head .t{font-weight:700; font-size:15px;}
   .review-head .s{font-size:12.5px; color:var(--sub); margin-top:2px;}
-  .review-badge{width:32px; height:32px; flex:none;}
-  .review-badge #badge-breathe{transform-origin:100px 100px; animation:badgeBreathe 2.8s ease-in-out infinite;}
-  .review-badge #badge-amb{animation:badgeAmbPulse 2.8s ease-in-out infinite;}
-  .review-badge #badge-glow{transform-origin:110px 113px; animation:badgeGlowPulse 2.8s ease-in-out infinite;}
-  .review-badge #badge-highlight{animation:badgeHighlightFade 2.8s ease-in-out infinite;}
-  .review-badge #badge-flap{transform-origin:100px 106px; animation:badgeFlapFlip 2.8s ease-in-out infinite;}
-  @keyframes badgeBreathe{0%{transform:scale(1);}50%{transform:scale(1.014);}100%{transform:scale(1);}}
-  @keyframes badgeAmbPulse{0%{opacity:0.14;}50%{opacity:0.19;}100%{opacity:0.14;}}
-  @keyframes badgeHighlightFade{0%,16.1%{opacity:0;}21.4%,62.5%{opacity:1;}83.9%,100%{opacity:0;}}
-  @keyframes badgeFlapFlip{
-    0%,16.1%{transform:scaleY(1); opacity:1;}
-    21.4%{transform:scaleY(0); opacity:1;}
-    62.5%{transform:scaleY(0); opacity:0;}
-    62.6%{transform:scaleY(1); opacity:0;}
-    83.9%,100%{transform:scaleY(1); opacity:1;}
-  }
-  @keyframes badgeGlowPulse{
-    0%,16.1%{opacity:0; transform:scale(0.8);}
-    26.8%{opacity:0.55; transform:scale(1.1);}
-    50%{opacity:0.4; transform:scale(1.3);}
-    80.4%,100%{opacity:0; transform:scale(1.3);}
-  }
   .video-frame{position:relative; width:100%; padding-top:56.25%; background:#000;}
   .video-frame iframe{position:absolute; inset:0; width:100%; height:100%; border:0;}
   .video-empty{padding:50px 20px; text-align:center; color:var(--sub); font-size:13.5px;}
 
   .footer-note{padding:40px 0 60px; text-align:center; font-size:12px; color:var(--sub); border-top:1px solid var(--panel-line); margin-top:20px;}
   .footer-note b{color:var(--ink);}
-
-  /* premium depth pass: mixed-hue glow, grain, vignette */
-  .b4{
-    width:620px; height:620px; top:20%; left:20%;
-    background:conic-gradient(from 120deg, #6a5cf0, #e08a4f 35%, #4f7a5a 62%, #6a5cf0 100%);
-    filter:blur(140px); opacity:0.16; animation:drift4 34s ease-in-out infinite;
-  }
-  @keyframes drift4{0%,100%{transform:translate(0,0) rotate(0deg);}50%{transform:translate(-30px,40px) rotate(8deg);}}
-  .vignette{position:fixed; inset:0; z-index:0; pointer-events:none; background:radial-gradient(ellipse at 50% 30%, transparent 40%, rgba(6,5,12,0.55) 100%);}
-  .grain{position:fixed; inset:0; z-index:0; pointer-events:none; opacity:0.05; mix-blend-mode:overlay;
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  }
-
-  .stat{position:relative;}
-  .stat::before{
-    content:''; position:absolute; inset:0; border-radius:16px; padding:1px;
-    background:linear-gradient(160deg, rgba(155,139,255,0.35), transparent 40%);
-    -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-    -webkit-mask-composite:xor; mask-composite:exclude;
-    pointer-events:none;
-  }
-
-  /* "what's next" teaser */
-  .teaser{
-    position:relative; border-radius:20px; padding:26px 28px; overflow:hidden;
-    background:linear-gradient(155deg, rgba(123,110,246,0.14), rgba(224,138,79,0.08) 70%);
-    border:1px solid rgba(155,139,255,0.28);
-    opacity:0; animation:fadeUp .7s ease .5s forwards;
-  }
-  .teaser::after{
-    content:''; position:absolute; inset:-40% -10%; z-index:0;
-    background:radial-gradient(ellipse at 30% 20%, rgba(155,139,255,0.25), transparent 60%);
-    animation:teaserGlow 5s ease-in-out infinite;
-  }
-  @keyframes teaserGlow{0%,100%{opacity:0.6;}50%{opacity:1;}}
-  .teaser-inner{position:relative; z-index:1;}
-  .teaser-eyebrow{font-size:11.5px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--rust); margin-bottom:8px; display:flex; align-items:center; gap:8px;}
-  .teaser-eyebrow .dot{width:6px; height:6px; border-radius:50%; background:var(--rust); animation:pulse 1.8s ease infinite;}
-  .teaser-head{font-size:22px; font-weight:800; letter-spacing:-0.01em; margin-bottom:6px; line-height:1.25;}
-  .teaser-head span{background:linear-gradient(90deg, var(--marimba-glow), var(--rust)); -webkit-background-clip:text; background-clip:text; color:transparent;}
-  .teaser-sub{font-size:13.5px; color:var(--sub); max-width:56ch; line-height:1.5;}
 </style>
 </head>
 <body>
@@ -216,10 +153,7 @@
   <div class="blob b1"></div>
   <div class="blob b2"></div>
   <div class="blob b3"></div>
-  <div class="blob b4"></div>
 </div>
-<div class="vignette"></div>
-<div class="grain"></div>
 
 <div class="content">
 <div class="wrap">
@@ -252,14 +186,6 @@
     <div class="closer-label">Getting closer — Foundation phase wraps <span id="closerDate">—</span></div>
   </div>
 
-  <div class="teaser">
-    <div class="teaser-inner">
-      <div class="teaser-eyebrow"><span class="dot"></span><span id="teaserEyebrow">—</span></div>
-      <div class="teaser-head" id="teaserHead">—</div>
-      <div class="teaser-sub" id="teaserSub">—</div>
-    </div>
-  </div>
-
   <div class="section">
     <div class="sec-title">Progress Board</div>
     <div id="board"></div>
@@ -269,46 +195,8 @@
     <div class="sec-title">For Your Review</div>
     <div class="review-card">
       <div class="review-head">
-        <svg class="review-badge" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <defs>
-            <radialGradient id="badge-ambGrad" cx="50%" cy="46%" r="60%">
-              <stop offset="0%" stop-color="#9b8bff" stop-opacity="0.9"/>
-              <stop offset="100%" stop-color="#9b8bff" stop-opacity="0"/>
-            </radialGradient>
-            <radialGradient id="badge-cellGlow" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stop-color="#4fce8b" stop-opacity="0.9"/>
-              <stop offset="60%" stop-color="#9b8bff" stop-opacity="0.35"/>
-              <stop offset="100%" stop-color="#9b8bff" stop-opacity="0"/>
-            </radialGradient>
-            <filter id="badge-soft" x="-60%" y="-60%" width="220%" height="220%">
-              <feGaussianBlur stdDeviation="5"/>
-            </filter>
-          </defs>
-          <g id="badge-breathe">
-            <ellipse id="badge-amb" cx="100" cy="98" rx="72" ry="66" fill="url(#badge-ambGrad)" filter="url(#badge-soft)"/>
-            <rect x="40" y="46" width="120" height="114" rx="16" fill="#7b6ef6" fill-opacity="0.10" stroke="#7b6ef6" stroke-opacity="0.55" stroke-width="3"/>
-            <path d="M40,62 a16,16 0 0 1 16,-16 h88 a16,16 0 0 1 16,16 v18 h-120 z" fill="#9b8bff" fill-opacity="0.85"/>
-            <rect x="66" y="34" width="10" height="24" rx="5" fill="#e08a4f" fill-opacity="0.80"/>
-            <rect x="124" y="34" width="10" height="24" rx="5" fill="#e08a4f" fill-opacity="0.80"/>
-            <rect x="52" y="84" width="20" height="14" rx="4" fill="#7b6ef6" fill-opacity="0.10" stroke="#7b6ef6" stroke-opacity="0.28"/>
-            <rect x="76" y="84" width="20" height="14" rx="4" fill="#7b6ef6" fill-opacity="0.10" stroke="#7b6ef6" stroke-opacity="0.28"/>
-            <rect x="124" y="84" width="20" height="14" rx="4" fill="#7b6ef6" fill-opacity="0.10" stroke="#7b6ef6" stroke-opacity="0.28"/>
-            <rect x="52" y="106" width="20" height="14" rx="4" fill="#7b6ef6" fill-opacity="0.10" stroke="#7b6ef6" stroke-opacity="0.28"/>
-            <rect x="76" y="106" width="20" height="14" rx="4" fill="#7b6ef6" fill-opacity="0.10" stroke="#7b6ef6" stroke-opacity="0.28"/>
-            <rect x="124" y="106" width="20" height="14" rx="4" fill="#7b6ef6" fill-opacity="0.10" stroke="#7b6ef6" stroke-opacity="0.28"/>
-            <rect x="52" y="128" width="20" height="14" rx="4" fill="#7b6ef6" fill-opacity="0.10" stroke="#7b6ef6" stroke-opacity="0.28"/>
-            <rect x="76" y="128" width="20" height="14" rx="4" fill="#7b6ef6" fill-opacity="0.10" stroke="#7b6ef6" stroke-opacity="0.28"/>
-            <rect x="100" y="128" width="20" height="14" rx="4" fill="#7b6ef6" fill-opacity="0.10" stroke="#7b6ef6" stroke-opacity="0.28"/>
-            <rect x="124" y="128" width="20" height="14" rx="4" fill="#7b6ef6" fill-opacity="0.10" stroke="#7b6ef6" stroke-opacity="0.28"/>
-            <circle id="badge-glow" cx="110" cy="113" r="17" fill="url(#badge-cellGlow)" filter="url(#badge-soft)"/>
-            <rect id="badge-highlight" x="100" y="106" width="20" height="14" rx="4" fill="#4fce8b"/>
-            <rect id="badge-flap" x="100" y="106" width="20" height="14" rx="4" fill="#7b6ef6" stroke="#7b6ef6" stroke-width="1"/>
-          </g>
-        </svg>
-        <div>
-          <div class="t">Latest Deliverable</div>
-          <div class="s">We'll drop the newest cut here the moment it's ready to watch.</div>
-        </div>
+        <div class="t">Latest Deliverable</div>
+        <div class="s">We'll drop the newest cut here the moment it's ready to watch.</div>
       </div>
       <!-- VIDEO_EMBED_HERE: replace the div below with the iframe when a deliverable is ready
       <div class="video-frame">
@@ -364,15 +252,6 @@
 // anything -- so no row is marked done/changed on the strength of that
 // alone. Board stays exactly as it was on 2026-08-31 (12 done / 2 queued,
 // 86%). Flagged for KD in today's log.
-// "What's next" teaser — edit freely, this is the one forward-looking line
-// on the page. Keep it true to what's actually planned; don't name a specific
-// campaign/date here unless it's real and confirmed.
-const TEASER = {
-  eyebrow: "What's cooking",
-  headline: 'Foundation\'s done. <span>Execution is next.</span>',
-  sub: "Once the plan's approved: the six-pillar system starts posting, all 13 outreach drafts go out to the EO Johannesburg board, and TikTok/YouTube come online."
-};
-
 const ROWS = [
   {category:"Brand Foundation", item:"Content Architecture framework", status:"done", note:"Six pillars mapped into a working content system"},
   {category:"Brand Foundation", item:"Initial Research Workflow", status:"done", note:"Repeatable capture method for qualified-client research"},
@@ -466,11 +345,6 @@ function tick(){
   document.getElementById("liveClock").textContent = now.toLocaleTimeString('en-ZA', {hour12:false});
 }
 tick(); setInterval(tick, 1000);
-
-// render the "what's next" teaser
-document.getElementById("teaserEyebrow").textContent = TEASER.eyebrow;
-document.getElementById("teaserHead").innerHTML = TEASER.headline;
-document.getElementById("teaserSub").textContent = TEASER.sub;
 
 // render board with staggered entrance
 const byCat = {};
