@@ -139,17 +139,41 @@
   .review-head{padding:18px 20px; border-bottom:1px solid var(--panel-line);}
   .review-head .t{font-weight:700; font-size:15px;}
   .review-head .s{font-size:12.5px; color:var(--sub); margin-top:2px;}
-  .teaser-badge{width:100%; max-width:440px; height:auto; display:block;}
-  .teaser-badge #badge-breathe{transform-origin:170px 100px; animation:badgeBreathe 2.8s ease-in-out infinite;}
-  .teaser-badge #badge-amb{animation:badgeAmbPulse 2.8s ease-in-out infinite;}
-  .teaser-badge #badge-glow{transform-origin:51.7px 114px; animation:badgeGlowPulse 2.8s ease-in-out infinite;}
-  .teaser-badge #badge-highlight{animation:badgeHighlightFade 2.8s ease-in-out infinite;}
-  .teaser-badge #badge-flap{transform-origin:51.7px 88px; animation:badgeFlapFlip 2.8s ease-in-out infinite;}
-  .teaser-focus{list-style:none; margin:14px 0 0; padding:0; display:flex; flex-direction:column; gap:6px;}
-  .teaser-focus li{font-size:12.5px; color:var(--sub); display:flex; align-items:center; gap:8px;}
-  .teaser-focus li::before{content:''; width:5px; height:5px; border-radius:50%; background:var(--marimba-glow); flex:none;}
-  @keyframes badgeBreathe{0%{transform:scale(1);}50%{transform:scale(1.014);}100%{transform:scale(1);}}
-  @keyframes badgeAmbPulse{0%{opacity:0.14;}50%{opacity:0.19;}100%{opacity:0.14;}}
+  /* full calendar — real 4-week grid */
+  .cal-card{
+    position:relative; border-radius:18px; padding:22px 20px 18px;
+    background:linear-gradient(180deg, rgba(123,110,246,0.10), rgba(20,18,32,0.35));
+    border:1px solid rgba(123,110,246,0.30);
+  }
+  .cal-rings{position:absolute; top:-1px; left:50%; transform:translateX(-50%); display:flex; gap:56px;}
+  .cal-rings span{width:9px; height:20px; border-radius:5px; background:var(--rust); opacity:0.85; margin-top:-9px;}
+  .cal-head{display:grid; grid-template-columns:repeat(7,1fr); gap:6px; margin-bottom:8px;}
+  .cal-head div{text-align:center; font-size:10px; font-weight:700; letter-spacing:0.06em; color:var(--sub);}
+  .cal-grid{display:grid; grid-template-columns:repeat(7,1fr); gap:6px;}
+  .cal-day{
+    position:relative; aspect-ratio:1; border-radius:8px; overflow:hidden;
+    background:rgba(123,110,246,0.08); border:1px solid rgba(123,110,246,0.20);
+    display:flex; align-items:center; justify-content:center;
+    font-weight:700; font-size:13.5px; color:var(--ink); opacity:0.7;
+  }
+  .cal-day.post{background:var(--done-bg); border-color:rgba(79,206,139,0.45); color:var(--done); opacity:1;}
+  .cal-day.prep{background:var(--active-bg); border-color:rgba(224,138,79,0.4); color:var(--active); opacity:1;}
+  .cal-day.today{background:transparent; border-color:transparent; opacity:1;}
+  .cal-today-glow{
+    position:absolute; inset:-55%; border-radius:50%;
+    background:radial-gradient(circle, rgba(79,206,139,0.6), rgba(155,139,255,0.3) 55%, transparent 75%);
+    filter:blur(5px);
+    animation:badgeGlowPulse 2.8s ease-in-out infinite;
+  }
+  .cal-today-highlight{position:absolute; inset:0; border-radius:8px; background:var(--done); animation:badgeHighlightFade 2.8s ease-in-out infinite;}
+  .cal-today-flap{position:absolute; inset:0; border-radius:8px; background:var(--marimba); border:1px solid var(--marimba); transform-origin:50% 0%; animation:badgeFlapFlip 2.8s ease-in-out infinite;}
+  .cal-today-num{position:relative; z-index:1; font-weight:800; font-size:15px; color:var(--ink);}
+  .cal-legend{display:flex; gap:18px; flex-wrap:wrap; margin-top:16px; padding-top:14px; border-top:1px solid var(--panel-line);}
+  .cal-legend-item{display:flex; align-items:center; gap:7px; font-size:12px; color:var(--sub);}
+  .cal-legend .dot{width:8px; height:8px; border-radius:50%; flex:none;}
+  .cal-legend .dot.today{background:var(--marimba-glow); box-shadow:0 0 6px var(--marimba-glow);}
+  .cal-legend .dot.post{background:var(--done);}
+  .cal-legend .dot.prep{background:var(--active);}
   @keyframes badgeHighlightFade{0%,16.1%{opacity:0;}21.4%,62.5%{opacity:1;}83.9%,100%{opacity:0;}}
   @keyframes badgeFlapFlip{
     0%,16.1%{transform:scaleY(1); opacity:1;}
@@ -276,70 +300,20 @@
 
   <div class="teaser">
     <div class="teaser-inner">
-      <svg class="teaser-badge" viewBox="0 0 340 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <defs>
-          <radialGradient id="badge-ambGrad" cx="50%" cy="46%" r="60%">
-            <stop offset="0%" stop-color="#9b8bff" stop-opacity="0.9"/>
-            <stop offset="100%" stop-color="#9b8bff" stop-opacity="0"/>
-          </radialGradient>
-          <radialGradient id="badge-cellGlow" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stop-color="#4fce8b" stop-opacity="0.9"/>
-            <stop offset="60%" stop-color="#9b8bff" stop-opacity="0.35"/>
-            <stop offset="100%" stop-color="#9b8bff" stop-opacity="0"/>
-          </radialGradient>
-          <filter id="badge-soft" x="-60%" y="-60%" width="220%" height="220%">
-            <feGaussianBlur stdDeviation="6"/>
-          </filter>
-        </defs>
-        <g id="badge-breathe">
-          <ellipse id="badge-amb" cx="170" cy="98" rx="140" ry="66" fill="url(#badge-ambGrad)" filter="url(#badge-soft)"/>
-          <rect x="20" y="46" width="300" height="114" rx="16" fill="#7b6ef6" fill-opacity="0.10" stroke="#7b6ef6" stroke-opacity="0.55" stroke-width="3"/>
-          <path d="M20,62 a16,16 0 0 1 16,-16 h268 a16,16 0 0 1 16,16 v18 h-300 z" fill="#9b8bff" fill-opacity="0.85"/>
-          <rect x="145" y="34" width="10" height="24" rx="5" fill="#e08a4f" fill-opacity="0.80"/>
-          <rect x="185" y="34" width="10" height="24" rx="5" fill="#e08a4f" fill-opacity="0.80"/>
-
-          <!-- six upcoming days, static -->
-          <g font-family="-apple-system,Segoe UI,Helvetica,Arial,sans-serif">
-            <rect x="73.4" y="88" width="35.4" height="52" rx="8" fill="#7b6ef6" fill-opacity="0.10" stroke="#7b6ef6" stroke-opacity="0.28"/>
-            <text id="cal-dow-1" x="91.1" y="104" text-anchor="middle" font-size="10" font-weight="700" letter-spacing="0.5" fill="var(--sub)">—</text>
-            <text id="cal-num-1" x="91.1" y="127" text-anchor="middle" font-size="21" font-weight="800" fill="var(--ink)" opacity="0.75">—</text>
-
-            <rect x="112.8" y="88" width="35.4" height="52" rx="8" fill="#7b6ef6" fill-opacity="0.10" stroke="#7b6ef6" stroke-opacity="0.28"/>
-            <text id="cal-dow-2" x="130.5" y="104" text-anchor="middle" font-size="10" font-weight="700" letter-spacing="0.5" fill="var(--sub)">—</text>
-            <text id="cal-num-2" x="130.5" y="127" text-anchor="middle" font-size="21" font-weight="800" fill="var(--ink)" opacity="0.75">—</text>
-
-            <rect x="152.2" y="88" width="35.4" height="52" rx="8" fill="#7b6ef6" fill-opacity="0.10" stroke="#7b6ef6" stroke-opacity="0.28"/>
-            <text id="cal-dow-3" x="169.9" y="104" text-anchor="middle" font-size="10" font-weight="700" letter-spacing="0.5" fill="var(--sub)">—</text>
-            <text id="cal-num-3" x="169.9" y="127" text-anchor="middle" font-size="21" font-weight="800" fill="var(--ink)" opacity="0.75">—</text>
-
-            <rect x="191.6" y="88" width="35.4" height="52" rx="8" fill="#7b6ef6" fill-opacity="0.10" stroke="#7b6ef6" stroke-opacity="0.28"/>
-            <text id="cal-dow-4" x="209.3" y="104" text-anchor="middle" font-size="10" font-weight="700" letter-spacing="0.5" fill="var(--sub)">—</text>
-            <text id="cal-num-4" x="209.3" y="127" text-anchor="middle" font-size="21" font-weight="800" fill="var(--ink)" opacity="0.75">—</text>
-
-            <rect x="231.0" y="88" width="35.4" height="52" rx="8" fill="#7b6ef6" fill-opacity="0.10" stroke="#7b6ef6" stroke-opacity="0.28"/>
-            <text id="cal-dow-5" x="248.7" y="104" text-anchor="middle" font-size="10" font-weight="700" letter-spacing="0.5" fill="var(--sub)">—</text>
-            <text id="cal-num-5" x="248.7" y="127" text-anchor="middle" font-size="21" font-weight="800" fill="var(--ink)" opacity="0.75">—</text>
-
-            <rect x="270.4" y="88" width="35.4" height="52" rx="8" fill="#7b6ef6" fill-opacity="0.10" stroke="#7b6ef6" stroke-opacity="0.28"/>
-            <text id="cal-dow-6" x="288.1" y="104" text-anchor="middle" font-size="10" font-weight="700" letter-spacing="0.5" fill="var(--sub)">—</text>
-            <text id="cal-num-6" x="288.1" y="127" text-anchor="middle" font-size="21" font-weight="800" fill="var(--ink)" opacity="0.75">—</text>
-          </g>
-
-          <!-- today: the calm "new content" cue, on the real date -->
-          <circle id="badge-glow" cx="51.7" cy="114" r="30" fill="url(#badge-cellGlow)" filter="url(#badge-soft)"/>
-          <rect id="badge-highlight" x="34" y="88" width="35.4" height="52" rx="8" fill="#4fce8b"/>
-          <rect id="badge-flap" x="34" y="88" width="35.4" height="52" rx="8" fill="#7b6ef6" stroke="#7b6ef6" stroke-width="1"/>
-          <g font-family="-apple-system,Segoe UI,Helvetica,Arial,sans-serif">
-            <text id="cal-dow-0" x="51.7" y="104" text-anchor="middle" font-size="10" font-weight="700" letter-spacing="0.5" fill="var(--ink)">—</text>
-            <text id="cal-num-0" x="51.7" y="128" text-anchor="middle" font-size="23" font-weight="800" fill="var(--ink)">—</text>
-          </g>
-        </g>
-      </svg>
       <div class="teaser-copy">
         <div class="teaser-eyebrow"><span class="dot"></span><span id="teaserEyebrow">—</span></div>
         <div class="teaser-head" id="teaserHead">—</div>
         <div class="teaser-sub" id="teaserSub">—</div>
-        <ul class="teaser-focus" id="teaserFocus"></ul>
+      </div>
+      <div class="cal-card">
+        <div class="cal-rings"><span></span><span></span></div>
+        <div class="cal-head" id="calHead"></div>
+        <div class="cal-grid" id="calGrid"></div>
+        <div class="cal-legend">
+          <div class="cal-legend-item"><span class="dot today"></span>Today</div>
+          <div class="cal-legend-item"><span class="dot post"></span>Posting</div>
+          <div class="cal-legend-item"><span class="dot prep"></span>Prep &amp; shoot</div>
+        </div>
       </div>
     </div>
   </div>
@@ -549,27 +523,47 @@ document.getElementById("teaserEyebrow").textContent = TEASER.eyebrow;
 document.getElementById("teaserHead").innerHTML = TEASER.headline;
 document.getElementById("teaserSub").textContent = TEASER.sub;
 
-// calendar strip — 7 real days starting today, today highlighted. No
-// fabricated per-day events: only "today" is marked, since that's the one
-// date we actually know something about. If there's ever a real day-by-day
-// posting schedule, plot it onto these cells by date instead of guessing.
+// Full 4-week calendar, rolling from today (not calendar-month aligned).
+// Cadence per KD, 2026-09-15: posting starts tomorrow, every 2 days, for the
+// next 2 weeks; the following 2 weeks are prep & shoot. Edit CAL_PLAN below
+// if the real cadence changes — the grid recomputes from it automatically.
+const CAL_PLAN = {
+  postStartOffset: 1,   // tomorrow
+  postCadenceDays: 2,   // every 2 days
+  postSpanDays: 14,     // across the next 2 weeks
+  prepSpanDays: 14      // the following 2 weeks
+};
 const DOW = ['SUN','MON','TUE','WED','THU','FRI','SAT'];
-for (let i = 0; i < 7; i++) {
-  const d = new Date();
-  d.setDate(d.getDate() + i);
-  const dowEl = document.getElementById('cal-dow-' + i);
-  const numEl = document.getElementById('cal-num-' + i);
-  if (dowEl) dowEl.textContent = DOW[d.getDay()];
-  if (numEl) numEl.textContent = d.getDate();
-}
+const today0 = new Date(); today0.setHours(0,0,0,0);
+const todayDow = today0.getDay();
 
-// "this week's focus" — pulled straight from Execution phase's real,
-// not-yet-done rows. Nothing here is invented.
-const execPhaseForFocus = PHASES.find(p => p.id === "execution");
-document.getElementById("teaserFocus").innerHTML = execPhaseForFocus.rows
-  .filter(r => r.status !== "done")
-  .map(r => `<li>${r.item}</li>`)
-  .join("");
+const postOffsets = new Set();
+for (let o = CAL_PLAN.postStartOffset; o < CAL_PLAN.postStartOffset + CAL_PLAN.postSpanDays; o += CAL_PLAN.postCadenceDays) {
+  postOffsets.add(o);
+}
+const prepStart = CAL_PLAN.postStartOffset + CAL_PLAN.postSpanDays;
+const prepEnd = prepStart + CAL_PLAN.prepSpanDays - 1;
+
+document.getElementById("calHead").innerHTML =
+  Array.from({length:7}, (_, c) => `<div>${DOW[(todayDow + c) % 7]}</div>`).join("");
+
+let calHtml = "";
+for (let i = 0; i < 28; i++) {
+  const d = new Date(today0);
+  d.setDate(today0.getDate() + i);
+  if (i === 0) {
+    calHtml += `<div class="cal-day today">
+      <span class="cal-today-glow"></span>
+      <span class="cal-today-highlight"></span>
+      <span class="cal-today-flap"></span>
+      <b class="cal-today-num">${d.getDate()}</b>
+    </div>`;
+  } else {
+    const cls = postOffsets.has(i) ? "post" : (i >= prepStart && i <= prepEnd ? "prep" : "");
+    calHtml += `<div class="cal-day ${cls}">${d.getDate()}</div>`;
+  }
+}
+document.getElementById("calGrid").innerHTML = calHtml;
 
 // render board as click-to-expand phase cards, each grouped into categories
 // with the same staggered item entrance as before
