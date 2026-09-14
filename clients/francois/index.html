@@ -139,12 +139,15 @@
   .review-head{padding:18px 20px; border-bottom:1px solid var(--panel-line);}
   .review-head .t{font-weight:700; font-size:15px;}
   .review-head .s{font-size:12.5px; color:var(--sub); margin-top:2px;}
-  .teaser-badge{width:96px; height:96px; flex:none;}
-  .teaser-badge #badge-breathe{transform-origin:100px 100px; animation:badgeBreathe 2.8s ease-in-out infinite;}
+  .teaser-badge{width:100%; max-width:440px; height:auto; display:block;}
+  .teaser-badge #badge-breathe{transform-origin:170px 100px; animation:badgeBreathe 2.8s ease-in-out infinite;}
   .teaser-badge #badge-amb{animation:badgeAmbPulse 2.8s ease-in-out infinite;}
-  .teaser-badge #badge-glow{transform-origin:110px 113px; animation:badgeGlowPulse 2.8s ease-in-out infinite;}
+  .teaser-badge #badge-glow{transform-origin:51.7px 114px; animation:badgeGlowPulse 2.8s ease-in-out infinite;}
   .teaser-badge #badge-highlight{animation:badgeHighlightFade 2.8s ease-in-out infinite;}
-  .teaser-badge #badge-flap{transform-origin:100px 106px; animation:badgeFlapFlip 2.8s ease-in-out infinite;}
+  .teaser-badge #badge-flap{transform-origin:51.7px 88px; animation:badgeFlapFlip 2.8s ease-in-out infinite;}
+  .teaser-focus{list-style:none; margin:14px 0 0; padding:0; display:flex; flex-direction:column; gap:6px;}
+  .teaser-focus li{font-size:12.5px; color:var(--sub); display:flex; align-items:center; gap:8px;}
+  .teaser-focus li::before{content:''; width:5px; height:5px; border-radius:50%; background:var(--marimba-glow); flex:none;}
   @keyframes badgeBreathe{0%{transform:scale(1);}50%{transform:scale(1.014);}100%{transform:scale(1);}}
   @keyframes badgeAmbPulse{0%{opacity:0.14;}50%{opacity:0.19;}100%{opacity:0.14;}}
   @keyframes badgeHighlightFade{0%,16.1%{opacity:0;}21.4%,62.5%{opacity:1;}83.9%,100%{opacity:0;}}
@@ -202,17 +205,13 @@
     animation:teaserGlow 5s ease-in-out infinite;
   }
   @keyframes teaserGlow{0%,100%{opacity:0.6;}50%{opacity:1;}}
-  .teaser-inner{position:relative; z-index:1; display:flex; align-items:center; gap:24px;}
+  .teaser-inner{position:relative; z-index:1; display:flex; flex-direction:column; gap:20px;}
   .teaser-copy{min-width:0;}
   .teaser-eyebrow{font-size:11.5px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--rust); margin-bottom:8px; display:flex; align-items:center; gap:8px;}
   .teaser-eyebrow .dot{width:6px; height:6px; border-radius:50%; background:var(--rust); animation:pulse 1.8s ease infinite;}
   .teaser-head{font-size:22px; font-weight:800; letter-spacing:-0.01em; margin-bottom:6px; line-height:1.25;}
   .teaser-head span{background:linear-gradient(90deg, var(--marimba-glow), var(--rust)); -webkit-background-clip:text; background-clip:text; color:transparent;}
   .teaser-sub{font-size:13.5px; color:var(--sub); max-width:56ch; line-height:1.5;}
-  @media (max-width:520px){
-    .teaser-inner{flex-direction:column; align-items:flex-start;}
-    .teaser-badge{width:80px; height:80px;}
-  }
 
   /* phase cards — click to expand */
   .phase-card{
@@ -277,7 +276,7 @@
 
   <div class="teaser">
     <div class="teaser-inner">
-      <svg class="teaser-badge" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <svg class="teaser-badge" viewBox="0 0 340 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <defs>
           <radialGradient id="badge-ambGrad" cx="50%" cy="46%" r="60%">
             <stop offset="0%" stop-color="#9b8bff" stop-opacity="0.9"/>
@@ -289,34 +288,58 @@
             <stop offset="100%" stop-color="#9b8bff" stop-opacity="0"/>
           </radialGradient>
           <filter id="badge-soft" x="-60%" y="-60%" width="220%" height="220%">
-            <feGaussianBlur stdDeviation="5"/>
+            <feGaussianBlur stdDeviation="6"/>
           </filter>
         </defs>
         <g id="badge-breathe">
-          <ellipse id="badge-amb" cx="100" cy="98" rx="72" ry="66" fill="url(#badge-ambGrad)" filter="url(#badge-soft)"/>
-          <rect x="40" y="46" width="120" height="114" rx="16" fill="#7b6ef6" fill-opacity="0.10" stroke="#7b6ef6" stroke-opacity="0.55" stroke-width="3"/>
-          <path d="M40,62 a16,16 0 0 1 16,-16 h88 a16,16 0 0 1 16,16 v18 h-120 z" fill="#9b8bff" fill-opacity="0.85"/>
-          <rect x="66" y="34" width="10" height="24" rx="5" fill="#e08a4f" fill-opacity="0.80"/>
-          <rect x="124" y="34" width="10" height="24" rx="5" fill="#e08a4f" fill-opacity="0.80"/>
-          <rect x="52" y="84" width="20" height="14" rx="4" fill="#7b6ef6" fill-opacity="0.10" stroke="#7b6ef6" stroke-opacity="0.28"/>
-          <rect x="76" y="84" width="20" height="14" rx="4" fill="#7b6ef6" fill-opacity="0.10" stroke="#7b6ef6" stroke-opacity="0.28"/>
-          <rect x="124" y="84" width="20" height="14" rx="4" fill="#7b6ef6" fill-opacity="0.10" stroke="#7b6ef6" stroke-opacity="0.28"/>
-          <rect x="52" y="106" width="20" height="14" rx="4" fill="#7b6ef6" fill-opacity="0.10" stroke="#7b6ef6" stroke-opacity="0.28"/>
-          <rect x="76" y="106" width="20" height="14" rx="4" fill="#7b6ef6" fill-opacity="0.10" stroke="#7b6ef6" stroke-opacity="0.28"/>
-          <rect x="124" y="106" width="20" height="14" rx="4" fill="#7b6ef6" fill-opacity="0.10" stroke="#7b6ef6" stroke-opacity="0.28"/>
-          <rect x="52" y="128" width="20" height="14" rx="4" fill="#7b6ef6" fill-opacity="0.10" stroke="#7b6ef6" stroke-opacity="0.28"/>
-          <rect x="76" y="128" width="20" height="14" rx="4" fill="#7b6ef6" fill-opacity="0.10" stroke="#7b6ef6" stroke-opacity="0.28"/>
-          <rect x="100" y="128" width="20" height="14" rx="4" fill="#7b6ef6" fill-opacity="0.10" stroke="#7b6ef6" stroke-opacity="0.28"/>
-          <rect x="124" y="128" width="20" height="14" rx="4" fill="#7b6ef6" fill-opacity="0.10" stroke="#7b6ef6" stroke-opacity="0.28"/>
-          <circle id="badge-glow" cx="110" cy="113" r="17" fill="url(#badge-cellGlow)" filter="url(#badge-soft)"/>
-          <rect id="badge-highlight" x="100" y="106" width="20" height="14" rx="4" fill="#4fce8b"/>
-          <rect id="badge-flap" x="100" y="106" width="20" height="14" rx="4" fill="#7b6ef6" stroke="#7b6ef6" stroke-width="1"/>
+          <ellipse id="badge-amb" cx="170" cy="98" rx="140" ry="66" fill="url(#badge-ambGrad)" filter="url(#badge-soft)"/>
+          <rect x="20" y="46" width="300" height="114" rx="16" fill="#7b6ef6" fill-opacity="0.10" stroke="#7b6ef6" stroke-opacity="0.55" stroke-width="3"/>
+          <path d="M20,62 a16,16 0 0 1 16,-16 h268 a16,16 0 0 1 16,16 v18 h-300 z" fill="#9b8bff" fill-opacity="0.85"/>
+          <rect x="145" y="34" width="10" height="24" rx="5" fill="#e08a4f" fill-opacity="0.80"/>
+          <rect x="185" y="34" width="10" height="24" rx="5" fill="#e08a4f" fill-opacity="0.80"/>
+
+          <!-- six upcoming days, static -->
+          <g font-family="-apple-system,Segoe UI,Helvetica,Arial,sans-serif">
+            <rect x="73.4" y="88" width="35.4" height="52" rx="8" fill="#7b6ef6" fill-opacity="0.10" stroke="#7b6ef6" stroke-opacity="0.28"/>
+            <text id="cal-dow-1" x="91.1" y="104" text-anchor="middle" font-size="10" font-weight="700" letter-spacing="0.5" fill="var(--sub)">—</text>
+            <text id="cal-num-1" x="91.1" y="127" text-anchor="middle" font-size="21" font-weight="800" fill="var(--ink)" opacity="0.75">—</text>
+
+            <rect x="112.8" y="88" width="35.4" height="52" rx="8" fill="#7b6ef6" fill-opacity="0.10" stroke="#7b6ef6" stroke-opacity="0.28"/>
+            <text id="cal-dow-2" x="130.5" y="104" text-anchor="middle" font-size="10" font-weight="700" letter-spacing="0.5" fill="var(--sub)">—</text>
+            <text id="cal-num-2" x="130.5" y="127" text-anchor="middle" font-size="21" font-weight="800" fill="var(--ink)" opacity="0.75">—</text>
+
+            <rect x="152.2" y="88" width="35.4" height="52" rx="8" fill="#7b6ef6" fill-opacity="0.10" stroke="#7b6ef6" stroke-opacity="0.28"/>
+            <text id="cal-dow-3" x="169.9" y="104" text-anchor="middle" font-size="10" font-weight="700" letter-spacing="0.5" fill="var(--sub)">—</text>
+            <text id="cal-num-3" x="169.9" y="127" text-anchor="middle" font-size="21" font-weight="800" fill="var(--ink)" opacity="0.75">—</text>
+
+            <rect x="191.6" y="88" width="35.4" height="52" rx="8" fill="#7b6ef6" fill-opacity="0.10" stroke="#7b6ef6" stroke-opacity="0.28"/>
+            <text id="cal-dow-4" x="209.3" y="104" text-anchor="middle" font-size="10" font-weight="700" letter-spacing="0.5" fill="var(--sub)">—</text>
+            <text id="cal-num-4" x="209.3" y="127" text-anchor="middle" font-size="21" font-weight="800" fill="var(--ink)" opacity="0.75">—</text>
+
+            <rect x="231.0" y="88" width="35.4" height="52" rx="8" fill="#7b6ef6" fill-opacity="0.10" stroke="#7b6ef6" stroke-opacity="0.28"/>
+            <text id="cal-dow-5" x="248.7" y="104" text-anchor="middle" font-size="10" font-weight="700" letter-spacing="0.5" fill="var(--sub)">—</text>
+            <text id="cal-num-5" x="248.7" y="127" text-anchor="middle" font-size="21" font-weight="800" fill="var(--ink)" opacity="0.75">—</text>
+
+            <rect x="270.4" y="88" width="35.4" height="52" rx="8" fill="#7b6ef6" fill-opacity="0.10" stroke="#7b6ef6" stroke-opacity="0.28"/>
+            <text id="cal-dow-6" x="288.1" y="104" text-anchor="middle" font-size="10" font-weight="700" letter-spacing="0.5" fill="var(--sub)">—</text>
+            <text id="cal-num-6" x="288.1" y="127" text-anchor="middle" font-size="21" font-weight="800" fill="var(--ink)" opacity="0.75">—</text>
+          </g>
+
+          <!-- today: the calm "new content" cue, on the real date -->
+          <circle id="badge-glow" cx="51.7" cy="114" r="30" fill="url(#badge-cellGlow)" filter="url(#badge-soft)"/>
+          <rect id="badge-highlight" x="34" y="88" width="35.4" height="52" rx="8" fill="#4fce8b"/>
+          <rect id="badge-flap" x="34" y="88" width="35.4" height="52" rx="8" fill="#7b6ef6" stroke="#7b6ef6" stroke-width="1"/>
+          <g font-family="-apple-system,Segoe UI,Helvetica,Arial,sans-serif">
+            <text id="cal-dow-0" x="51.7" y="104" text-anchor="middle" font-size="10" font-weight="700" letter-spacing="0.5" fill="var(--ink)">—</text>
+            <text id="cal-num-0" x="51.7" y="128" text-anchor="middle" font-size="23" font-weight="800" fill="var(--ink)">—</text>
+          </g>
         </g>
       </svg>
       <div class="teaser-copy">
         <div class="teaser-eyebrow"><span class="dot"></span><span id="teaserEyebrow">—</span></div>
         <div class="teaser-head" id="teaserHead">—</div>
         <div class="teaser-sub" id="teaserSub">—</div>
+        <ul class="teaser-focus" id="teaserFocus"></ul>
       </div>
     </div>
   </div>
@@ -393,9 +416,18 @@
 const TEASER = {
   eyebrow: "What's cooking",
   headline: 'Foundation\'s done. <span>Execution is next.</span>',
-  sub: "Once the plan's approved: the six-pillar system starts posting, all 13 outreach drafts go out to the EO Johannesburg board, and TikTok/YouTube come online."
+  sub: "Once the plan's approved: the six-pillar system starts posting, and TikTok/YouTube come online."
 };
 
+// Scope correction, 2026-09-14 (same day as the phase restructure below): KD
+// clarified outreach/decision-maker-targeting is not Marimba's job — someone
+// else handles that specifically. Marimba's job is making the content
+// calendar visible and posting to it. Removed "Target-client research &
+// decision-makers", "Outreach system" (Foundation) and "Send EO Johannesburg
+// outreach" (Execution) from the client-facing board and teaser copy. The
+// work itself was genuinely completed — see the 2026-08-31 log entries above
+// for that record — it's just out of scope for what this dashboard reports.
+//
 // Phase restructure, 2026-09-14: Francois has paid for and we're starting
 // Execution phase, but the dashboard was still showing Foundation-phase-only
 // completion (86%) as the headline number, which read as "basically done."
@@ -423,9 +455,7 @@ const PHASES = [
       {category:"Brand Foundation", item:"Visual direction & palette confirmation", status:"done", note:"Option C (Hybrid — forest/cream base, yellow accent) confirmed and approved by the client"},
       {category:"Media Setup", item:"Access request sent", status:"done", note:"Confirmed what's needed to move on Instagram/TikTok"},
       {category:"Media Setup", item:"Instagram, Facebook & LinkedIn account setup", status:"done", note:"Logged in and accessible"},
-      {category:"Research & Content", item:"Target-client research & decision-makers", status:"done", note:"Named decision-makers identified — EO Johannesburg's 13 board members plus matching ActionCOACH client case studies"},
       {category:"Research & Content", item:"Six-pillar content system", status:"done", note:"All six pillar carousels built and tested from one reusable template — ready for approval, not yet posted"},
-      {category:"Research & Content", item:"Outreach system", status:"done", note:"13 real, named message drafts written for every EO Johannesburg board member — ready to send once approved, not yet sent"},
       {category:"Research & Content", item:"Measurement set-up", status:"done", note:"Content Performance Tracker built (formula-driven spreadsheet) — ready to log real numbers once posting starts"},
       {category:"Reporting", item:"First progress report", status:"done", note:"Week 1 progress report complete"},
       {category:"Reporting", item:"Foundation Plan — approval document", status:"done", note:"8-page approval document plus a one-page Approval Checklist — built and ready to send ahead of Tuesday's meeting"}
@@ -439,7 +469,6 @@ const PHASES = [
     defaultOpen: true,
     startDate: "2026-09-14", // placeholder — set to the date this reflected phase turnover; confirm the real Execution kickoff date
     rows: [
-      {category:"Go Live", item:"Send EO Johannesburg outreach", status:"queued", note:"13 named drafts, ready since Foundation — sending is the first Execution move"},
       {category:"Go Live", item:"Post the six-pillar content system", status:"queued", note:"All six pillar carousels built and tested — posting starts now"},
       {category:"Go Live", item:"TikTok account setup", status:"queued", note:"Blocked on Francois's own verification step — nothing left for Marimba to do here"},
       {category:"Go Live", item:"YouTube channel creation", status:"queued", note:"Blocked on KD's own account setup"},
@@ -519,6 +548,28 @@ tick(); setInterval(tick, 1000);
 document.getElementById("teaserEyebrow").textContent = TEASER.eyebrow;
 document.getElementById("teaserHead").innerHTML = TEASER.headline;
 document.getElementById("teaserSub").textContent = TEASER.sub;
+
+// calendar strip — 7 real days starting today, today highlighted. No
+// fabricated per-day events: only "today" is marked, since that's the one
+// date we actually know something about. If there's ever a real day-by-day
+// posting schedule, plot it onto these cells by date instead of guessing.
+const DOW = ['SUN','MON','TUE','WED','THU','FRI','SAT'];
+for (let i = 0; i < 7; i++) {
+  const d = new Date();
+  d.setDate(d.getDate() + i);
+  const dowEl = document.getElementById('cal-dow-' + i);
+  const numEl = document.getElementById('cal-num-' + i);
+  if (dowEl) dowEl.textContent = DOW[d.getDay()];
+  if (numEl) numEl.textContent = d.getDate();
+}
+
+// "this week's focus" — pulled straight from Execution phase's real,
+// not-yet-done rows. Nothing here is invented.
+const execPhaseForFocus = PHASES.find(p => p.id === "execution");
+document.getElementById("teaserFocus").innerHTML = execPhaseForFocus.rows
+  .filter(r => r.status !== "done")
+  .map(r => `<li>${r.item}</li>`)
+  .join("");
 
 // render board as click-to-expand phase cards, each grouped into categories
 // with the same staggered item entrance as before
