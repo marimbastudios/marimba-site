@@ -158,6 +158,8 @@
   }
   .cal-day.post{background:var(--done-bg); border-color:rgba(79,206,139,0.45); color:var(--done); opacity:1;}
   .cal-day.prep{background:var(--active-bg); border-color:rgba(224,138,79,0.4); color:var(--active); opacity:1;}
+  .cal-day.shoot{background:rgba(79,122,90,0.28); border-color:rgba(79,122,90,0.7); color:#9fd4ac; opacity:1;}
+  .cal-day.hold{background:rgba(124,122,143,0.10); border:1px dashed rgba(124,122,143,0.5); color:var(--queued); opacity:1;}
   .cal-day.today{background:transparent; border-color:transparent; opacity:1;}
   .cal-today-glow{
     position:absolute; inset:-55%; border-radius:50%;
@@ -174,6 +176,8 @@
   .cal-legend .dot.today{background:var(--marimba-glow); box-shadow:0 0 6px var(--marimba-glow);}
   .cal-legend .dot.post{background:var(--done);}
   .cal-legend .dot.prep{background:var(--active);}
+  .cal-legend .dot.shoot{background:#9fd4ac;}
+  .cal-legend .dot.hold{background:transparent; border:1.5px dashed var(--queued);}
   @keyframes badgeHighlightFade{0%,16.1%{opacity:0;}21.4%,62.5%{opacity:1;}83.9%,100%{opacity:0;}}
   @keyframes badgeFlapFlip{
     0%,16.1%{transform:scaleY(1); opacity:1;}
@@ -312,7 +316,9 @@
         <div class="cal-legend">
           <div class="cal-legend-item"><span class="dot today"></span>Today</div>
           <div class="cal-legend-item"><span class="dot post"></span>Posting</div>
-          <div class="cal-legend-item"><span class="dot prep"></span>Prep &amp; shoot</div>
+          <div class="cal-legend-item"><span class="dot prep"></span>Prep</div>
+          <div class="cal-legend-item"><span class="dot shoot"></span>Shoot day</div>
+          <div class="cal-legend-item"><span class="dot hold"></span>Tentative</div>
         </div>
       </div>
     </div>
@@ -524,25 +530,34 @@ document.getElementById("teaserHead").innerHTML = TEASER.headline;
 document.getElementById("teaserSub").textContent = TEASER.sub;
 
 // Full 4-week calendar, rolling from today (not calendar-month aligned).
-// Cadence per KD, 2026-09-15: posting starts tomorrow, every 2 days, for the
-// next 2 weeks; the following 2 weeks are prep & shoot. Edit CAL_PLAN below
-// if the real cadence changes — the grid recomputes from it automatically.
-const CAL_PLAN = {
-  postStartOffset: 1,   // tomorrow
-  postCadenceDays: 2,   // every 2 days
-  postSpanDays: 14,     // across the next 2 weeks
-  prepSpanDays: 14      // the following 2 weeks
+// This week (through 2026-09-20) keeps the every-2-days posting cadence
+// already live. From 2026-09-21 on, KD walked through the real week-by-week
+// plan on 2026-09-15, encoded explicitly below by date rather than as a
+// formula, since it's no longer a simple repeating rule:
+//  - Sept 21-25: post Mon/Wed/Fri, prep Tue/Thu
+//  - Sept 26-27: KD flagged as tentative (may be unavailable that weekend)
+//  - Sept 28: post (carousel)
+//  - Sept 29 - Oct 1, Oct 3-4: prep ("sit-downs", can slot carousels in)
+//  - Oct 2: the shoot — target day, per KD ("Friday the 2nd, or the 3rd")
+//  - Oct 5: post (pushing for a video to be ready)
+// Oct 6 ("new idea agenda") left unmarked — not a concrete production event.
+// Edit CAL_EVENTS below as the real plan firms up or shifts.
+const CAL_EVENTS = {
+  "2026-09-15": "post", "2026-09-17": "post", "2026-09-19": "post",
+  "2026-09-21": "post", "2026-09-22": "prep", "2026-09-23": "post",
+  "2026-09-24": "prep", "2026-09-25": "post",
+  "2026-09-26": "hold", "2026-09-27": "hold",
+  "2026-09-28": "post", "2026-09-29": "prep", "2026-09-30": "prep",
+  "2026-10-01": "prep", "2026-10-02": "shoot", "2026-10-03": "prep",
+  "2026-10-04": "prep", "2026-10-05": "post"
 };
 const DOW = ['SUN','MON','TUE','WED','THU','FRI','SAT'];
 const today0 = new Date(); today0.setHours(0,0,0,0);
 const todayDow = today0.getDay();
 
-const postOffsets = new Set();
-for (let o = CAL_PLAN.postStartOffset; o < CAL_PLAN.postStartOffset + CAL_PLAN.postSpanDays; o += CAL_PLAN.postCadenceDays) {
-  postOffsets.add(o);
+function isoDate(d) {
+  return d.getFullYear() + "-" + String(d.getMonth()+1).padStart(2,"0") + "-" + String(d.getDate()).padStart(2,"0");
 }
-const prepStart = CAL_PLAN.postStartOffset + CAL_PLAN.postSpanDays;
-const prepEnd = prepStart + CAL_PLAN.prepSpanDays - 1;
 
 document.getElementById("calHead").innerHTML =
   Array.from({length:7}, (_, c) => `<div>${DOW[(todayDow + c) % 7]}</div>`).join("");
@@ -559,7 +574,7 @@ for (let i = 0; i < 28; i++) {
       <b class="cal-today-num">${d.getDate()}</b>
     </div>`;
   } else {
-    const cls = postOffsets.has(i) ? "post" : (i >= prepStart && i <= prepEnd ? "prep" : "");
+    const cls = CAL_EVENTS[isoDate(d)] || "";
     calHtml += `<div class="cal-day ${cls}">${d.getDate()}</div>`;
   }
 }
