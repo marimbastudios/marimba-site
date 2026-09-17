@@ -289,8 +289,8 @@
           </svg>
         </div>
         <div class="body">
-          <div class="title">Week 2 content goes live tomorrow</div>
-          <div class="note">Pillar 03 — Executive Leadership posts Tue 15 Sept, first of the new posting cadence.</div>
+          <div class="title">Week 2 content is live</div>
+          <div class="note">Pillar 03 — Executive Leadership posted Tue 15 Sept, first of the new posting cadence.</div>
         </div>
       </div>
       <div class="new-card">
@@ -425,8 +425,8 @@ async function loadData(){
   let calendar, log;
   try {
     const [calRes, logRes] = await Promise.all([
-      fetch("content-calendar.json"),
-      fetch("work-log.json")
+      fetch("/clients/francois/content-calendar.json"),
+      fetch("/clients/francois/work-log.json")
     ]);
     if (!calRes.ok || !logRes.ok) throw new Error("fetch not ok");
     calendar = await calRes.json();
@@ -574,7 +574,9 @@ const elapsed = Math.min(totalSpan, Math.max(0, (now0 - launchStart) / 86400000)
 const pctCloser = Math.round((elapsed / totalSpan) * 100);
 document.getElementById("closerFill").style.width = pctCloser + "%";
 document.getElementById("closerDate").textContent = launchEnd.toLocaleDateString('en-ZA', {month:'long', day:'numeric'});
-document.getElementById("closerLabel").innerHTML = 'Foundation phase complete — Week 2 content launches <span id="closerDate2">' + launchEnd.toLocaleDateString('en-ZA', {month:'long', day:'numeric'}) + '</span>';
+document.getElementById("closerLabel").innerHTML = daysLeft <= 0
+  ? 'Foundation phase complete — Week 2 content is live, posted <span id="closerDate2">' + launchEnd.toLocaleDateString('en-ZA', {month:'long', day:'numeric'}) + '</span>'
+  : 'Foundation phase complete — Week 2 content launches <span id="closerDate2">' + launchEnd.toLocaleDateString('en-ZA', {month:'long', day:'numeric'}) + '</span>';
 
 // live ticking clock
 function tick(){
