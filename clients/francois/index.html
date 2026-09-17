@@ -560,8 +560,12 @@ if (MOVEMENT.length < 2) {
   if (delta > 0) { momentumEl.closest(".stat").classList.add("celebrate"); }
 }
 
-// days working together — since work started 2026-08-19
-const start = new Date("2026-08-19T00:00:00");
+// days working together — since Execution actually started (Monday
+// 2026-09-14, first day back on paid work, posting for Tuesday 15 Sept).
+// Corrected 2026-09-17 by KD: this used to count from the 2026-08-19
+// Foundation-phase kickoff, which overstated it (30 days) — KD wants this
+// counting the current paid work stretch, not the whole engagement.
+const start = new Date("2026-09-14T00:00:00");
 const daysDiff = Math.max(1, Math.ceil((new Date() - start) / 86400000));
 document.getElementById("daysNum").textContent = daysDiff;
 
