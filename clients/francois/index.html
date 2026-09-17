@@ -244,6 +244,7 @@
 
     <div class="stats-row">
       <div class="stat"><div class="stat-num" id="pctNum">—</div><div class="stat-label">Complete</div></div>
+      <div class="stat"><div class="stat-num" id="execPctNum">—</div><div class="stat-label">Execution Progress</div></div>
       <div class="stat"><div class="stat-num" id="momentumNum">—</div><div class="stat-label" id="momentumLabel">Momentum</div></div>
       <div class="stat"><div class="stat-num"><span class="live-dot"></span><span id="liveClock">--:--:--</span></div><div class="stat-label">Live — Right Now</div></div>
       <div class="stat"><div class="stat-num" id="daysNum">—</div><div class="stat-label">Days Working Together</div></div>
@@ -384,7 +385,16 @@ const ROWS = [
   {category:"Research & Content", item:"Outreach system", note:"13 real, named message drafts written for every EO Johannesburg board member — ready to send once approved, not yet sent"},
   {category:"Research & Content", item:"Measurement set-up", note:"Content Performance Tracker built (formula-driven spreadsheet) — ready to log real numbers once posting starts"},
   {category:"Reporting", item:"First progress report", note:"Week 1 progress report complete"},
-  {category:"Reporting", item:"Foundation Plan — approval document", note:"8-page approval document plus a one-page Approval Checklist — built and ready to send ahead of Tuesday's meeting"}
+  {category:"Reporting", item:"Foundation Plan — approval document", note:"8-page approval document plus a one-page Approval Checklist — built and ready to send ahead of Tuesday's meeting"},
+  // Execution-phase rows (phase:"execution") track the current posting
+  // sprint separately from the Foundation checklist above — they show up
+  // on the board like any other row, but feed their own "Execution
+  // Progress" percentage instead of the main "Complete" stat, so adding
+  // them can't silently move the already-verified Foundation number.
+  {category:"Execution — Posting Sprint", item:"Week 1 content posting", note:"First week of the new posting cadence — carousels live.", phase:"execution"},
+  {category:"Execution — Posting Sprint", item:"Week 2 content posting (Pillar 03 & 04)", note:"Second week of carousels posted — this run's carousel segment is complete.", phase:"execution"},
+  {category:"Execution — Posting Sprint", item:"Bonus animated video produced", note:"Pillar 03 follow-up video built ahead of its 22 Sept posting date.", phase:"execution"},
+  {category:"Execution — Posting Sprint", item:"Pre-production & shooting — next batch", note:"Producing Pillars 05–06 for the next posting run (29 Sept – 6 Oct).", phase:"execution"}
 ];
 // Movement history — one snapshot per dashboard-update-prep run, sourced
 // from the "Francois — Progress Movement Log" Drive doc (source of truth).
@@ -430,6 +440,7 @@ async function loadData(){
     log = await logRes.json();
   } catch (e) {
     document.getElementById("pctNum").textContent = "—";
+    document.getElementById("execPctNum").textContent = "—";
     document.getElementById("board").innerHTML = '<div class="data-unavailable">Progress data unavailable in this preview (needs to be served over http, not opened as a local file) — view the live page for current status.</div>';
     document.getElementById("keynoteBody").innerHTML = '<div class="keynote-title" style="font-size:14px;">Unavailable in this preview</div>';
     document.getElementById("calendarList").innerHTML = '<div class="data-unavailable">Content calendar unavailable in this preview — view the live page.</div>';
@@ -446,20 +457,25 @@ async function loadData(){
 
   // ---- Progress Board + percentage (derived from the log, not hand-set) ----
   ROWS.forEach(r => { r.status = r.externallyBlocked ? "queued" : (completedTasks.has(r.item) ? "done" : "active"); });
+  const foundationRows = ROWS.filter(r => r.phase !== "execution");
+  const execRows = ROWS.filter(r => r.phase === "execution");
   const counts = {done:0,active:0,queued:0};
-  ROWS.forEach(r=>counts[r.status]++);
-  const finalPct = Math.round((counts.done/ROWS.length)*100);
-  const pctEl = document.getElementById("pctNum");
-  (function countUpPct(){
+  foundationRows.forEach(r=>counts[r.status]++);
+  const finalPct = Math.round((counts.done/foundationRows.length)*100);
+  const execDone = execRows.filter(r=>r.status==="done").length;
+  const execPct = execRows.length ? Math.round((execDone/execRows.length)*100) : 0;
+  function countUp(el, final){
     const dur = 900; const startT = performance.now();
     function frame(now){
       const t = Math.min(1, (now - startT) / dur);
       const eased = 1 - Math.pow(1 - t, 3);
-      pctEl.textContent = Math.round(eased * finalPct) + "%";
-      if (t < 1) requestAnimationFrame(frame); else pctEl.textContent = finalPct + "%";
+      el.textContent = Math.round(eased * final) + "%";
+      if (t < 1) requestAnimationFrame(frame); else el.textContent = final + "%";
     }
     requestAnimationFrame(frame);
-  })();
+  }
+  countUp(document.getElementById("pctNum"), finalPct);
+  countUp(document.getElementById("execPctNum"), execPct);
 
   const byCat = {};
   ROWS.forEach(r => (byCat[r.category] = byCat[r.category] || []).push(r));
