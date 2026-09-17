@@ -244,11 +244,9 @@
 
     <div class="stats-row">
       <div class="stat"><div class="stat-num" id="pctNum">—</div><div class="stat-label">Complete</div></div>
-      <div class="stat"><div class="stat-num" id="execPctNum">—</div><div class="stat-label">Execution Progress</div></div>
-      <div class="stat"><div class="stat-num" id="momentumNum">—</div><div class="stat-label" id="momentumLabel">Momentum</div></div>
+      <div class="stat"><div class="stat-num" id="momentumNum">—</div><div class="stat-label" id="momentumLabel">Since September</div></div>
       <div class="stat"><div class="stat-num"><span class="live-dot"></span><span id="liveClock">--:--:--</span></div><div class="stat-label">Live — Right Now</div></div>
       <div class="stat"><div class="stat-num" id="daysNum">—</div><div class="stat-label">Days Working Together</div></div>
-      <div class="stat"><div class="stat-num" id="countdownNum">—</div><div class="stat-label" id="countdownLabel">Days to Foundation Complete</div></div>
     </div>
 
     <div class="closer-track">
@@ -409,6 +407,16 @@ const MOVEMENT = [
   {date:"2026-09-04", pct:86},
   {date:"2026-09-14", pct:86}
 ];
+// The two headline stats below are KD's own holistic read of the whole
+// engagement (Foundation + the ongoing multi-week Execution arc, including
+// shooting/editing still ahead) — the same kind of judgment call MOVEMENT
+// above already represents, just not derivable from the ROWS checklist,
+// which only models Foundation plus the current posting sprint. Update
+// these two numbers directly when KD's assessment changes; the Progress
+// Board underneath still shows the real, checklist-derived done/queued
+// status per item regardless of what these two say.
+const OVERALL_PCT = 80;      // "Complete" — set 2026-09-17 by KD
+const SINCE_SEPT_PCT = 41;   // "Since September" — set 2026-09-17 by KD
 const ICONS = {
   done:'<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#4fce8b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>',
   active:'<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#e08a4f" stroke-width="2.5"/><path d="M12 7v5l3.5 2" stroke="#e08a4f" stroke-width="2.5" stroke-linecap="round"/></svg>',
@@ -439,8 +447,6 @@ async function loadData(){
     calendar = await calRes.json();
     log = await logRes.json();
   } catch (e) {
-    document.getElementById("pctNum").textContent = "—";
-    document.getElementById("execPctNum").textContent = "—";
     document.getElementById("board").innerHTML = '<div class="data-unavailable">Progress data unavailable in this preview (needs to be served over http, not opened as a local file) — view the live page for current status.</div>';
     document.getElementById("keynoteBody").innerHTML = '<div class="keynote-title" style="font-size:14px;">Unavailable in this preview</div>';
     document.getElementById("calendarList").innerHTML = '<div class="data-unavailable">Content calendar unavailable in this preview — view the live page.</div>';
@@ -455,27 +461,8 @@ async function loadData(){
     (entry.completedPosts || []).forEach(p => completedPosts.add(p));
   });
 
-  // ---- Progress Board + percentage (derived from the log, not hand-set) ----
+  // ---- Progress Board: each row's done/active/queued badge, derived from the log ----
   ROWS.forEach(r => { r.status = r.externallyBlocked ? "queued" : (completedTasks.has(r.item) ? "done" : "active"); });
-  const foundationRows = ROWS.filter(r => r.phase !== "execution");
-  const execRows = ROWS.filter(r => r.phase === "execution");
-  const counts = {done:0,active:0,queued:0};
-  foundationRows.forEach(r=>counts[r.status]++);
-  const finalPct = Math.round((counts.done/foundationRows.length)*100);
-  const execDone = execRows.filter(r=>r.status==="done").length;
-  const execPct = execRows.length ? Math.round((execDone/execRows.length)*100) : 0;
-  function countUp(el, final){
-    const dur = 900; const startT = performance.now();
-    function frame(now){
-      const t = Math.min(1, (now - startT) / dur);
-      const eased = 1 - Math.pow(1 - t, 3);
-      el.textContent = Math.round(eased * final) + "%";
-      if (t < 1) requestAnimationFrame(frame); else el.textContent = final + "%";
-    }
-    requestAnimationFrame(frame);
-  }
-  countUp(document.getElementById("pctNum"), finalPct);
-  countUp(document.getElementById("execPctNum"), execPct);
 
   const byCat = {};
   ROWS.forEach(r => (byCat[r.category] = byCat[r.category] || []).push(r));
@@ -556,44 +543,30 @@ async function loadData(){
 }
 loadData();
 
-// Momentum — movement since the last logged snapshot. First entry shown
-// as "Baseline" honestly (no prior snapshot to compare against yet);
-// from the second entry onward this shows the real delta.
-const momentumEl = document.getElementById("momentumNum");
-const momentumLabelEl = document.getElementById("momentumLabel");
-if (MOVEMENT.length < 2) {
-  momentumEl.textContent = "New";
-  momentumEl.style.color = "var(--marimba-glow)";
-  momentumLabelEl.textContent = "Momentum — tracking started";
-} else {
-  const latest = MOVEMENT[MOVEMENT.length - 1];
-  const prev = MOVEMENT[MOVEMENT.length - 2];
-  const delta = latest.pct - prev.pct;
-  momentumEl.textContent = (delta > 0 ? "+" : "") + delta + "%";
-  momentumEl.style.color = delta > 0 ? "var(--done)" : (delta < 0 ? "var(--rust)" : "var(--sub)");
-  momentumEl.classList.add("rising");
-  momentumLabelEl.textContent = "Since " + new Date(prev.date + "T00:00:00").toLocaleDateString('en-ZA', {month:'short', day:'numeric'});
-  if (delta > 0) { momentumEl.closest(".stat").classList.add("celebrate"); }
-}
+// "Complete" and "Since September" are KD's direct holistic figures (see
+// OVERALL_PCT / SINCE_SEPT_PCT above) — not derived from MOVEMENT, which
+// stays intact below purely as the historical Foundation-phase snapshot
+// log it always was.
+document.getElementById("pctNum").textContent = OVERALL_PCT + "%";
+document.getElementById("momentumNum").textContent = SINCE_SEPT_PCT + "%";
+document.getElementById("momentumLabel").textContent = "Since September";
 
-// days working together — since Execution actually started (Monday
-// 2026-09-14, first day back on paid work, posting for Tuesday 15 Sept).
-// Corrected 2026-09-17 by KD: this used to count from the 2026-08-19
-// Foundation-phase kickoff, which overstated it (30 days) — KD wants this
-// counting the current paid work stretch, not the whole engagement.
-const start = new Date("2026-09-14T00:00:00");
+// days working together — total since Foundation-phase kickoff (2026-08-19).
+// Reverted 2026-09-17 by KD: this briefly counted from the 14 Sept
+// Execution restart instead, but KD wants the total relationship length
+// here, not just the current sprint.
+const start = new Date("2026-08-19T00:00:00");
 const daysDiff = Math.max(1, Math.ceil((new Date() - start) / 86400000));
 document.getElementById("daysNum").textContent = daysDiff;
 
 // Foundation phase is complete (deadline 3 Sept has passed, Execution
-// Proposal V2 approved). Retiring the Foundation countdown and pointing
-// this widget at the next real milestone instead: Week 2 content launch.
+// Proposal V2 approved). This bar/label just narrates the Week 2 launch
+// milestone — the "Days to Week 2 Launch" stat card itself was removed
+// 2026-09-17 (KD found it confusing once Week 2 had already happened).
 const launchStart = new Date("2026-09-08T00:00:00"); // Week 1 execution start
 const launchEnd = new Date("2026-09-15T00:00:00"); // Pillar 03 goes live
 const now0 = new Date();
 const daysLeft = Math.max(0, Math.ceil((launchEnd - now0) / 86400000));
-document.getElementById("countdownNum").textContent = daysLeft;
-document.getElementById("countdownLabel").textContent = daysLeft <= 0 ? "Live Today" : "Days to Week 2 Launch";
 const totalSpan = (launchEnd - launchStart) / 86400000;
 const elapsed = Math.min(totalSpan, Math.max(0, (now0 - launchStart) / 86400000));
 const pctCloser = Math.round((elapsed / totalSpan) * 100);
