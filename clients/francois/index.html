@@ -211,16 +211,10 @@
   .data-unavailable{font-size:12.5px; color:var(--sub); padding:14px 4px; font-style:italic;}
 
   /* daily activity */
-  .activity-row{display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:14px; margin-bottom:14px;}
-  .heatmap{display:grid; grid-template-columns:repeat(15, 1fr); gap:5px; max-width:420px;}
-  .heat-cell{aspect-ratio:1; border-radius:4px; background:rgba(255,255,255,0.05); border:1px solid var(--panel-line);}
-  .heat-cell.worked{background:var(--done); border-color:var(--done); box-shadow:0 0 6px rgba(79,206,139,0.4);}
-  .active-days{text-align:right;}
-  .active-days-num{font-size:22px; font-weight:800; color:var(--done);}
-  .active-days-label{font-size:10.5px; color:var(--sub); text-transform:uppercase; letter-spacing:0.06em;}
+  .activity-row{display:flex; align-items:center; margin-bottom:14px;}
+  .approved-badge{display:inline-flex; align-items:center; gap:8px; font-size:13px; font-weight:700; color:var(--done); background:var(--done-bg); border:1px solid rgba(79,206,139,0.35); padding:8px 16px; border-radius:999px;}
   .activity-highlight{font-size:13px; color:var(--sub); border-top:1px solid var(--panel-line); padding-top:12px;}
   .activity-highlight b{color:var(--ink); font-weight:600;}
-  @media (max-width:560px){ .heatmap{grid-template-columns:repeat(10,1fr);} }
 </style>
 </head>
 <body>
@@ -324,10 +318,9 @@
   <div class="section">
     <div class="sec-title">Daily Activity</div>
     <div class="activity-row">
-      <div class="heatmap" id="heatmap"></div>
-      <div class="active-days">
-        <div class="active-days-num" id="activeDaysNum">—</div>
-        <div class="active-days-label">Active Days / 30</div>
+      <div class="approved-badge" id="approvedBadge">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#4fce8b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Approved
       </div>
     </div>
     <div class="activity-highlight" id="activityHighlight">Loading…</div>
@@ -440,8 +433,6 @@ async function loadData(){
     document.getElementById("board").innerHTML = '<div class="data-unavailable">Progress data unavailable in this preview (needs to be served over http, not opened as a local file) — view the live page for current status.</div>';
     document.getElementById("keynoteBody").innerHTML = '<div class="keynote-title" style="font-size:14px;">Unavailable in this preview</div>';
     document.getElementById("calendarList").innerHTML = '<div class="data-unavailable">Content calendar unavailable in this preview — view the live page.</div>';
-    document.getElementById("heatmap").innerHTML = "";
-    document.getElementById("activeDaysNum").textContent = "—";
     document.getElementById("activityHighlight").textContent = "Daily activity unavailable in this preview — view the live page.";
     return;
   }
@@ -541,21 +532,7 @@ async function loadData(){
   });
   document.getElementById("calendarList").innerHTML = calHtml || '<div class="data-unavailable">No posts scheduled yet.</div>';
 
-  // ---- Daily Activity: heatmap + highlight, both from log dates ----
-  const workedDates = new Set(log.map(e => e.date));
-  const todayMid = new Date(); todayMid.setHours(0,0,0,0);
-  let heatHtml = "";
-  const WINDOW = 30;
-  for (let d = WINDOW - 1; d >= 0; d--) {
-    const dt = new Date(todayMid); dt.setDate(dt.getDate() - d);
-    const key = dt.toISOString().slice(0,10);
-    const worked = workedDates.has(key);
-    heatHtml += `<div class="heat-cell ${worked ? 'worked' : ''}" title="${key}${worked ? ' — worked' : ''}"></div>`;
-  }
-  document.getElementById("heatmap").innerHTML = heatHtml;
-  let activeDays = 0;
-  workedDates.forEach(d => { if ((todayMid - new Date(d + "T00:00:00")) <= (WINDOW-1)*86400000) activeDays++; });
-  document.getElementById("activeDaysNum").textContent = activeDays;
+  // ---- Daily Activity: a simple "Approved" status + most-recent highlight ----
   const latest = log.slice().sort((a,b) => a.date.localeCompare(b.date)).pop();
   document.getElementById("activityHighlight").innerHTML = latest
     ? `<b>${formatCalDate(latest.date)}</b> — ${latest.summary}`
