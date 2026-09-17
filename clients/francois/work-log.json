@@ -42,7 +42,8 @@
   },
   {
     "date": "2026-09-17",
-    "summary": "Dashboard rebuilt: live Content Calendar, Keynotes, and this Daily Activity log added — the Progress Board and calendar now compute themselves from this file instead of hand-edited status flags.",
-    "completed": []
+    "summary": "Pillar 04 — Bush Lessons, Applied approved by Francois and posted, closing out this two-week posting run. Dashboard's Content Calendar, Keynotes, and this Daily Activity log also shipped today.",
+    "completed": [],
+    "completedPosts": ["pillar-04"]
   }
 ]

@@ -7,26 +7,23 @@
   },
   {
     "id": "pillar-04",
-    "date": "2026-09-22",
+    "date": "2026-09-17",
     "pillar": "Pillar 04",
-    "title": "Bush Lessons, Applied",
-    "confirmed": false,
-    "note": "Estimated from the weekly Tuesday cadence — pending final creative approval. Update this date once confirmed."
+    "title": "Bush Lessons, Applied"
   },
   {
-    "id": "pillar-05",
-    "date": "2026-09-29",
-    "pillar": "Pillar 05",
-    "title": "Business Diagnostics",
-    "confirmed": false,
-    "note": "Estimated — continuing the weekly cadence."
+    "id": "pillar-03-video",
+    "date": "2026-09-22",
+    "pillar": "Pillar 03",
+    "title": "Executive Leadership — Animated Video",
+    "note": "Short follow-up animated video, closes out this two-week posting run."
   },
   {
-    "id": "pillar-06",
-    "date": "2026-10-06",
-    "pillar": "Pillar 06",
-    "title": "Growth Through Perspective",
-    "confirmed": false,
-    "note": "Estimated — continuing the weekly cadence."
+    "type": "phase",
+    "id": "preprod-shoot-batch2",
+    "startDate": "2026-09-29",
+    "endDate": "2026-10-06",
+    "label": "Pre-Production & Shooting",
+    "note": "Next batch (Pillars 05–06) gets produced during this window before the next posting run starts — no post dates yet, on purpose."
   }
 ]

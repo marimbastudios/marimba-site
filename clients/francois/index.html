@@ -202,8 +202,12 @@
   .cal-body{flex:1; min-width:0;}
   .cal-pillar{font-size:11px; color:var(--sub); text-transform:uppercase; letter-spacing:0.04em; font-weight:600;}
   .cal-title{font-size:14.5px; font-weight:600; margin-top:1px;}
+  .cal-note{font-size:11.5px; color:var(--sub); margin-top:3px;}
   .cal-check{width:24px; height:24px; flex:none; border-radius:50%; background:var(--done-bg); display:flex; align-items:center; justify-content:center;}
   .cal-badge{font-size:10px; font-weight:800; letter-spacing:0.06em; color:#0a0913; background:var(--marimba-glow); padding:5px 10px; border-radius:999px; flex:none;}
+  .cal-phase{border-style:dashed; background:rgba(224,138,79,0.06); border-color:rgba(224,138,79,0.3);}
+  .cal-phase .cal-date{color:var(--rust); min-width:auto;}
+  .cal-phase .cal-pillar{color:var(--rust);}
   .data-unavailable{font-size:12.5px; color:var(--sub); padding:14px 4px; font-style:italic;}
 
   /* daily activity */
@@ -483,9 +487,16 @@ async function loadData(){
   document.getElementById("board").innerHTML = boardHtml;
 
   // ---- Content Calendar + Keynote (same computed "next" for both) ----
-  const withStatus = calendar.map(c => ({...c, done: completedPosts.has(c.id)}))
-                              .sort((a,b) => a.date.localeCompare(b.date));
-  const undone = withStatus.filter(c => !c.done);
+  // Posts (type "post" or unset) carry a done/next/upcoming status computed
+  // from the log. Phases (type "phase", e.g. a pre-production/shooting
+  // window) are informational only — no post to tick off yet, on purpose —
+  // and never compete for the "next" slot.
+  const posts = calendar.filter(c => c.type !== "phase")
+                         .map(c => ({...c, done: completedPosts.has(c.id)}))
+                         .sort((a,b) => a.date.localeCompare(b.date));
+  const phases = calendar.filter(c => c.type === "phase")
+                          .sort((a,b) => a.startDate.localeCompare(b.startDate));
+  const undone = posts.filter(c => !c.done);
   const next = undone.length ? undone.reduce((a,b) => a.date <= b.date ? a : b) : null;
 
   const keynoteBody = document.getElementById("keynoteBody");
@@ -499,14 +510,31 @@ async function loadData(){
     keynoteBody.innerHTML = '<div class="keynote-title" style="font-size:15px;">Nothing scheduled yet</div>';
   }
 
+  const timeline = [
+    ...posts.map(c => ({...c, sortKey: c.date})),
+    ...phases.map(c => ({...c, sortKey: c.startDate}))
+  ].sort((a,b) => a.sortKey.localeCompare(b.sortKey));
+
   let calHtml = "";
-  withStatus.forEach((c, idx) => {
+  timeline.forEach((c, idx) => {
+    if (c.type === "phase") {
+      calHtml += `<div class="cal-item cal-phase" style="animation-delay:${(idx*0.05).toFixed(2)}s">
+        <div class="cal-date">${formatCalDate(c.startDate)}–${formatCalDate(c.endDate)}</div>
+        <div class="cal-body">
+          <div class="cal-pillar">Production</div>
+          <div class="cal-title">${c.label}</div>
+          ${c.note ? `<div class="cal-note">${c.note}</div>` : ''}
+        </div>
+      </div>`;
+      return;
+    }
     const isNext = next && c.id === next.id;
     calHtml += `<div class="cal-item ${c.done ? 'done' : ''} ${isNext ? 'next' : ''}" style="animation-delay:${(idx*0.05).toFixed(2)}s">
       <div class="cal-date">${formatCalDate(c.date)}</div>
       <div class="cal-body">
         <div class="cal-pillar">${c.pillar}${c.confirmed === false ? ' <span class="tentative">Est.</span>' : ''}</div>
         <div class="cal-title">${c.title}</div>
+        ${c.note ? `<div class="cal-note">${c.note}</div>` : ''}
       </div>
       ${c.done ? `<div class="cal-check">${ICONS.done}</div>` : (isNext ? '<div class="cal-badge">Next</div>' : '')}
     </div>`;
