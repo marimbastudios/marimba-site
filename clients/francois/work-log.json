@@ -38,16 +38,24 @@
     "date": "2026-09-15",
     "summary": "Pillar 03 — Executive Leadership posted, kicking off Week 2's posting cadence.",
     "completed": [],
-    "completedPosts": ["pillar-03"]
+    "completedPosts": [
+      "pillar-03"
+    ]
   },
   {
     "date": "2026-09-17",
-    "summary": "Pillar 04 — Bush Lessons, Applied approved by Francois and posted, closing out this two-week posting run. Week 1 and Week 2 posting confirmed complete, plus the bonus animated video already produced ahead of schedule. Dashboard's Content Calendar, Keynotes, and this Daily Activity log also shipped today.",
+    "summary": "Pillar 04 — Bush Lessons, Applied approved by Francois and posted, closing out this two-week posting run. Week 1 and Week 2 posting confirmed complete,. Dashboard's Content Calendar, Keynotes, and this Daily Activity log also shipped today.",
     "completed": [
       "Week 1 content posting",
-      "Week 2 content posting (Pillar 03 & 04)",
-      "Bonus animated video produced"
+      "Week 2 content posting (Pillar 03 & 04)"
     ],
-    "completedPosts": ["pillar-04"]
+    "completedPosts": [
+      "pillar-04"
+    ]
+  },
+  {
+    "date": "2026-09-21",
+    "summary": "Content plan locked for the two-month arc: September (Trust Leads) carries Pillars 03 & 04; October (Authority Follows) carries Pillars 01, 02, 05 & 06, plus the animated video.",
+    "completed": []
   }
 ]

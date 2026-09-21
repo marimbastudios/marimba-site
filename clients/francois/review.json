@@ -1,0 +1,4 @@
+{
+  "_how": "Add an item to 'items' to show it under 'For Your Review'. Fields: id, title, subtitle, due (YYYY-MM-DD), status ('pending' or 'approved'), images [{src:'/clients/francois/review/<file>', caption}], video (embed URL), ask (one line). Empty list = all-caught-up state.",
+  "items": []
+}

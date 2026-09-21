@@ -12,18 +12,35 @@
     "title": "Bush Lessons, Applied"
   },
   {
-    "id": "pillar-03-video",
-    "date": "2026-09-22",
-    "pillar": "Pillar 03",
-    "title": "Executive Leadership — Animated Video",
-    "note": "Short follow-up animated video, closes out this two-week posting run."
-  },
-  {
     "type": "phase",
     "id": "preprod-shoot-batch2",
     "startDate": "2026-09-29",
     "endDate": "2026-10-06",
     "label": "Pre-Production & Shooting",
     "note": "Next batch (Pillars 05–06) gets produced during this window before the next posting run starts — no post dates yet, on purpose."
+  },
+  {
+    "type": "arc",
+    "id": "arc-sept",
+    "key": "2026-09",
+    "month": "September",
+    "label": "Trust Leads",
+    "items": [
+      "Pillar 03 — Executive Leadership",
+      "Pillar 04 — Bush Lessons, Applied"
+    ],
+    "note": "Establishing who Francois is before the method."
+  },
+  {
+    "type": "arc",
+    "id": "arc-oct",
+    "key": "2026-10",
+    "month": "October",
+    "label": "Authority Follows",
+    "items": [
+      "Pillars 01, 02, 05 & 06",
+      "Animated video"
+    ],
+    "note": "Practical coaching content, once trust from September has landed."
   }
 ]
