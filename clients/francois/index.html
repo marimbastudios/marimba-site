@@ -163,6 +163,11 @@
   .review-empty .t{font-weight:700; font-size:16px;}
   .review-empty .s{font-size:12.5px; color:var(--sub); margin:6px auto 0; line-height:1.55; max-width:460px;}
   .review-eyebrow{font-size:10.5px; font-weight:800; letter-spacing:0.1em; text-transform:uppercase; color:var(--active); margin-bottom:4px;}
+  .banked{padding:14px 20px 16px; border-top:1px solid var(--panel-line); background:rgba(79,206,139,0.04);}
+  .banked-label{font-size:10.5px; font-weight:800; letter-spacing:0.1em; text-transform:uppercase; color:var(--done); margin-bottom:8px;}
+  .banked-list{display:flex; flex-wrap:wrap; gap:8px;}
+  .banked-chip{font-size:12px; color:var(--sub); border:1px solid rgba(79,206,139,0.3); border-radius:999px; padding:5px 12px;}
+  .banked-chip b{color:var(--ink); font-weight:600;}
   .review-ask{padding:14px 20px 18px; font-size:13px; color:var(--ink); border-top:1px solid var(--panel-line);}
 
   .footer-note{padding:40px 0 60px; text-align:center; font-size:12px; color:var(--sub); border-top:1px solid var(--panel-line); margin-top:20px;}
@@ -542,6 +547,19 @@ async function loadData(){
     reviewEl.innerHTML = `<div class="review-empty"><div class="review-tick">✓</div>
       <div class="t">You're all caught up</div>
       <div class="s">Nothing is waiting on your approval right now.${lastDone ? ` Last approved &amp; posted: <b>${lastDone.pillar} — ${lastDone.title}</b> (${formatCalDate(lastDone.date)}).` : ''} New items appear here automatically the moment they're ready.</div></div>`;
+  }
+
+  // ---- Banked: everything already approved & posted, newest first. Derived
+  // from the calendar + work log (posts marked done) plus any review item with
+  // status "approved" — so a piece is on record here and is never re-proposed. ----
+  const banked = [
+    ...posts.filter(c => c.done).map(c => ({label: `${c.pillar} — ${c.title}`, date: c.date})),
+    ...(review.items || []).filter(i => i.status === "approved").map(i => ({label: i.title, date: i.bankedDate || ""}))
+  ].sort((a,b) => b.date.localeCompare(a.date));
+  if (banked.length) {
+    reviewEl.insertAdjacentHTML('beforeend', `<div class="banked">
+      <div class="banked-label">Banked — approved &amp; posted, never reposted</div>
+      <div class="banked-list">${banked.map(b => `<span class="banked-chip"><b>${b.label}</b>${b.date ? ' · ' + formatCalDate(b.date) : ''}</span>`).join('')}</div></div>`);
   }
 
   const timeline = [
