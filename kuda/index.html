@@ -195,6 +195,7 @@ nav a:hover { color: var(--ivory); }
   position: relative; overflow: hidden;
   background: var(--surface); cursor: pointer;
   display: block; text-decoration: none;
+  min-height: 240px; /* prevents tiles collapsing to 0 in grid rows */
 }
 .port-tile-trailer {
   grid-column: span 3;
@@ -202,7 +203,7 @@ nav a:hover { color: var(--ivory); }
 }
 .port-tile-bts {
   grid-column: span 2;
-  aspect-ratio: 16/8;
+  aspect-ratio: 16/9;
 }
 /* all other tiles default 16/9 */
 
