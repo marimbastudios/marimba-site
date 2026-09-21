@@ -181,13 +181,15 @@ nav a:hover { color: var(--ivory); }
   background: var(--surface); cursor: pointer;
   display: block; text-decoration: none;
 }
+.port-tile-trailer {
+  grid-column: span 3;
+  aspect-ratio: 21/9;
+}
 .port-tile-bts {
   grid-column: span 2;
   aspect-ratio: 16/8;
 }
-.port-tile-events { aspect-ratio: 4/3; }
-.port-tile-th { aspect-ratio: 4/3; }
-.port-tile-t1, .port-tile-t2, .port-tile-t3 { aspect-ratio: 16/9; }
+/* all other tiles default 16/9 */
 
 .port-tile video, .port-tile img {
   width: 100%; height: 100%; object-fit: cover;
@@ -199,18 +201,20 @@ nav a:hover { color: var(--ivory); }
   opacity: 1; transform: scale(1.04);
 }
 
-/* BTS special — iframe + overlay */
-.port-tile-bts .bts-thumb {
+/* YouTube click-to-play tiles — shared pattern */
+.yt-thumb {
   width: 100%; height: 100%; background: var(--surface);
   display: flex; align-items: center; justify-content: center;
-  position: relative; pointer-events: none; /* parent div handles click */
+  position: relative; pointer-events: none;
 }
-.port-tile-bts .bts-thumb img {
-  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.55; pointer-events: none;
+.yt-thumb img {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.6; pointer-events: none;
+  transition: opacity 0.35s, transform 0.45s;
 }
-.port-tile-bts iframe {
+.port-tile:hover .yt-thumb img { opacity: 0.85; transform: scale(1.04); }
+.port-tile iframe {
   position: absolute; inset: 0; width: 100%; height: 100%; border: none; display: none;
-  pointer-events: auto; /* iframe needs its own clicks once active */
+  pointer-events: auto;
 }
 .play-btn {
   position: relative; z-index: 2;
@@ -241,6 +245,37 @@ nav a:hover { color: var(--ivory); }
   font-size: 0.75rem; color: var(--purple-soft);
 }
 .port-tile:hover .port-link-hint { opacity: 1; }
+
+/* ── SHORTS / VERTICAL SECTION ── */
+.shorts-grid {
+  margin-top: 2.5rem;
+}
+.shorts-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.75rem;
+}
+.short-tile {
+  position: relative; overflow: hidden; cursor: pointer;
+  aspect-ratio: 9/16;
+  background: var(--surface);
+  border-radius: 6px;
+}
+.short-tile .yt-thumb img { opacity: 0.65; }
+.short-tile:hover .yt-thumb img { opacity: 0.9; transform: scale(1.04); }
+.play-btn-sm {
+  width: 44px; height: 44px; border-radius: 50%; background: var(--purple);
+  display: flex; align-items: center; justify-content: center;
+  position: relative; z-index: 2;
+  transition: transform 0.2s, background 0.2s;
+}
+.play-btn-sm svg { margin-left: 3px; }
+.short-tile:hover .play-btn-sm { background: var(--purple-vivid); transform: scale(1.1); }
+.short-tile iframe {
+  position: absolute; inset: 0; width: 100%; height: 100%; border: none; display: none;
+  pointer-events: auto;
+}
+.short-tile .port-label { z-index: 3; }
 
 /* ── SERVICES LIST ── */
 .services-section {
@@ -360,6 +395,8 @@ footer { padding: 1.8rem 3rem; border-top: 1px solid var(--border); display: fle
   .stats { grid-template-columns: repeat(2, 1fr); }
   .port-grid { grid-template-columns: 1fr; }
   .port-tile-bts { grid-column: span 1; aspect-ratio: 16/9; }
+  .port-tile-trailer { grid-column: span 1; aspect-ratio: 16/9; }
+  .shorts-row { grid-template-columns: 1fr 1fr; }
   .service-row-desc { display: none; }
   .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
   .audio-grid, .gear-grid { grid-template-columns: 1fr 1fr; }
@@ -436,23 +473,40 @@ footer { padding: 1.8rem 3rem; border-top: 1px solid var(--border); display: fle
 
   <div class="port-grid fade-up">
 
-    <!-- BTS — YouTube, click to play -->
-    <div class="port-tile port-tile-bts" id="btsTile" onclick="playBts(this)">
-      <div class="bts-thumb">
-        <img src="https://img.youtube.com/vi/WY6jY8eKypw/maxresdefault.jpg" alt="On-Set BTS thumbnail">
+    <!-- FEATURE — Film Trailer, full width -->
+    <div class="port-tile port-tile-trailer" onclick="playYT(this,'v-k4VrWNn4I')">
+      <div class="yt-thumb">
+        <img src="https://img.youtube.com/vi/v-k4VrWNn4I/maxresdefault.jpg" alt="Film Trailer">
+        <div class="play-btn">
+          <svg width="20" height="20" viewBox="0 0 18 18" fill="white"><polygon points="4,2 16,9 4,16"/></svg>
+        </div>
+      </div>
+      <iframe allow="autoplay; fullscreen" allowfullscreen></iframe>
+      <div class="port-label">
+        <span class="port-label-type">Original Film</span>
+        <span class="port-label-name">Official Film Trailer</span>
+      </div>
+    </div>
+
+    <!-- ROW 1 -->
+
+    <!-- The Eye On Set — BTS YouTube, spans 2 cols -->
+    <div class="port-tile port-tile-bts" id="btsTile" onclick="playYT(this,'WY6jY8eKypw')">
+      <div class="yt-thumb">
+        <img src="https://img.youtube.com/vi/WY6jY8eKypw/maxresdefault.jpg" alt="The Eye On Set">
         <div class="play-btn">
           <svg width="18" height="18" viewBox="0 0 18 18" fill="white"><polygon points="4,2 16,9 4,16"/></svg>
         </div>
       </div>
-      <iframe id="btsIframe" allow="autoplay; fullscreen" allowfullscreen></iframe>
+      <iframe allow="autoplay; fullscreen" allowfullscreen></iframe>
       <div class="port-label">
         <span class="port-label-type">Behind the Lens</span>
-        <span class="port-label-name">On-Set BTS</span>
+        <span class="port-label-name">The Eye On Set</span>
       </div>
     </div>
 
     <!-- Events — links to /events/ -->
-    <a class="port-tile port-tile-events" href="/events/" target="_blank">
+    <a class="port-tile" href="/events/" target="_blank">
       <video autoplay muted loop playsinline>
         <source src="../banner-events.mp4" type="video/mp4">
       </video>
@@ -463,53 +517,172 @@ footer { padding: 1.8rem 3rem; border-top: 1px solid var(--border); display: fle
       <div class="port-link-hint">↗</div>
     </a>
 
+    <!-- ROW 2 -->
+
     <!-- Talking Heads — links to /talking-heads/ -->
-    <a class="port-tile port-tile-th" href="/talking-heads/" target="_blank">
+    <a class="port-tile" href="/talking-heads/" target="_blank">
       <video autoplay muted loop playsinline>
         <source src="../banner-talking-heads.mp4" type="video/mp4">
       </video>
       <div class="port-label">
-        <span class="port-label-type">Corporate</span>
+        <span class="port-label-type">Corporate Video</span>
         <span class="port-label-name">Talking Heads →</span>
       </div>
       <div class="port-link-hint">↗</div>
     </a>
 
-    <!-- Individual TH clips — open in lightbox -->
-    <div class="port-tile port-tile-t1" onclick="openLightbox('../talking-heads/th-01.mp4')">
-      <video autoplay muted loop playsinline>
-        <source src="../talking-heads/th-01.mp4" type="video/mp4">
-      </video>
-      <div class="port-label">
-        <span class="port-label-type">Interview</span>
-        <span class="port-label-name">Interview Cut 01</span>
+    <!-- Miss Teen Universe SA 2024 -->
+    <div class="port-tile" onclick="playYT(this,'L3py8Fisp4o')">
+      <div class="yt-thumb">
+        <img src="https://img.youtube.com/vi/L3py8Fisp4o/maxresdefault.jpg" alt="Miss Teen Universe SA 2024">
+        <div class="play-btn"><svg width="16" height="16" viewBox="0 0 18 18" fill="white"><polygon points="4,2 16,9 4,16"/></svg></div>
       </div>
-      <div class="port-link-hint">▶</div>
+      <iframe allow="autoplay; fullscreen" allowfullscreen></iframe>
+      <div class="port-label">
+        <span class="port-label-type">Event Film</span>
+        <span class="port-label-name">Miss Teen Universe SA 2024</span>
+      </div>
     </div>
 
-    <div class="port-tile port-tile-t2" onclick="openLightbox('../talking-heads/th-02.mp4')">
-      <video autoplay muted loop playsinline>
-        <source src="../talking-heads/th-02.mp4" type="video/mp4">
-      </video>
-      <div class="port-label">
-        <span class="port-label-type">Interview</span>
-        <span class="port-label-name">Interview Cut 02</span>
+    <!-- Customer Testimonial -->
+    <div class="port-tile" onclick="playYT(this,'axQxalJN0A0')">
+      <div class="yt-thumb">
+        <img src="https://img.youtube.com/vi/axQxalJN0A0/maxresdefault.jpg" alt="Customer Testimonial">
+        <div class="play-btn"><svg width="16" height="16" viewBox="0 0 18 18" fill="white"><polygon points="4,2 16,9 4,16"/></svg></div>
       </div>
-      <div class="port-link-hint">▶</div>
+      <iframe allow="autoplay; fullscreen" allowfullscreen></iframe>
+      <div class="port-label">
+        <span class="port-label-type">Testimonial</span>
+        <span class="port-label-name">Client Testimonial</span>
+      </div>
     </div>
 
-    <div class="port-tile port-tile-t3" onclick="openLightbox('../talking-heads/th-03.mp4')">
-      <video autoplay muted loop playsinline>
-        <source src="../talking-heads/th-03.mp4" type="video/mp4">
-      </video>
-      <div class="port-label">
-        <span class="port-label-type">Interview</span>
-        <span class="port-label-name">Interview Cut 03</span>
+    <!-- ROW 3 -->
+
+    <!-- Conference Coverage 01 -->
+    <div class="port-tile" onclick="playYT(this,'Nwpww9bqdxM')">
+      <div class="yt-thumb">
+        <img src="https://img.youtube.com/vi/Nwpww9bqdxM/maxresdefault.jpg" alt="Conference Coverage 01">
+        <div class="play-btn"><svg width="16" height="16" viewBox="0 0 18 18" fill="white"><polygon points="4,2 16,9 4,16"/></svg></div>
       </div>
-      <div class="port-link-hint">▶</div>
+      <iframe allow="autoplay; fullscreen" allowfullscreen></iframe>
+      <div class="port-label">
+        <span class="port-label-type">Conference</span>
+        <span class="port-label-name">Conference Coverage 01</span>
+      </div>
+    </div>
+
+    <!-- Conference Coverage 02 -->
+    <div class="port-tile" onclick="playYT(this,'0Mop_gPo1m4')">
+      <div class="yt-thumb">
+        <img src="https://img.youtube.com/vi/0Mop_gPo1m4/maxresdefault.jpg" alt="Conference Coverage 02">
+        <div class="play-btn"><svg width="16" height="16" viewBox="0 0 18 18" fill="white"><polygon points="4,2 16,9 4,16"/></svg></div>
+      </div>
+      <iframe allow="autoplay; fullscreen" allowfullscreen></iframe>
+      <div class="port-label">
+        <span class="port-label-type">Conference</span>
+        <span class="port-label-name">Conference Coverage 02</span>
+      </div>
+    </div>
+
+    <!-- Corporate Training Film -->
+    <div class="port-tile" onclick="playYT(this,'f7upXILovAw')">
+      <div class="yt-thumb">
+        <img src="https://img.youtube.com/vi/f7upXILovAw/maxresdefault.jpg" alt="Corporate Training Film">
+        <div class="play-btn"><svg width="16" height="16" viewBox="0 0 18 18" fill="white"><polygon points="4,2 16,9 4,16"/></svg></div>
+      </div>
+      <iframe allow="autoplay; fullscreen" allowfullscreen></iframe>
+      <div class="port-label">
+        <span class="port-label-type">Corporate</span>
+        <span class="port-label-name">Corporate Training Film</span>
+      </div>
     </div>
 
   </div>
+
+  <!-- SHORTS / VERTICAL GRID -->
+  <div class="shorts-grid fade-up">
+    <p class="section-eyebrow" style="margin-bottom:1.2rem;">Shorts &amp; Social</p>
+    <div class="shorts-row">
+
+      <!-- Talent Reel -->
+      <div class="short-tile" onclick="playYT(this,'3w51-e_iwl0')">
+        <div class="yt-thumb">
+          <img src="https://img.youtube.com/vi/3w51-e_iwl0/maxresdefault.jpg" alt="Talent Reel">
+          <div class="play-btn play-btn-sm">
+            <svg width="14" height="14" viewBox="0 0 18 18" fill="white"><polygon points="4,2 16,9 4,16"/></svg>
+          </div>
+        </div>
+        <iframe allow="autoplay; fullscreen" allowfullscreen></iframe>
+        <div class="port-label">
+          <span class="port-label-type">Talent</span>
+          <span class="port-label-name">Talent Reel</span>
+        </div>
+      </div>
+
+      <!-- Model Showcase -->
+      <div class="short-tile" onclick="playYT(this,'fevdvb97C-w')">
+        <div class="yt-thumb">
+          <img src="https://img.youtube.com/vi/fevdvb97C-w/maxresdefault.jpg" alt="Model Showcase">
+          <div class="play-btn play-btn-sm">
+            <svg width="14" height="14" viewBox="0 0 18 18" fill="white"><polygon points="4,2 16,9 4,16"/></svg>
+          </div>
+        </div>
+        <iframe allow="autoplay; fullscreen" allowfullscreen></iframe>
+        <div class="port-label">
+          <span class="port-label-type">Fashion</span>
+          <span class="port-label-name">Model Showcase</span>
+        </div>
+      </div>
+
+      <!-- Spotlight | Miss Olympia -->
+      <div class="short-tile" onclick="playYT(this,'a8zJn9FI2G8')">
+        <div class="yt-thumb">
+          <img src="https://img.youtube.com/vi/a8zJn9FI2G8/maxresdefault.jpg" alt="Spotlight | Miss Olympia">
+          <div class="play-btn play-btn-sm">
+            <svg width="14" height="14" viewBox="0 0 18 18" fill="white"><polygon points="4,2 16,9 4,16"/></svg>
+          </div>
+        </div>
+        <iframe allow="autoplay; fullscreen" allowfullscreen></iframe>
+        <div class="port-label">
+          <span class="port-label-type">Talent Feature</span>
+          <span class="port-label-name">Spotlight | Miss Olympia</span>
+        </div>
+      </div>
+
+      <!-- On the Circuit -->
+      <div class="short-tile" onclick="playYT(this,'QBaH-yjEL1U')">
+        <div class="yt-thumb">
+          <img src="https://img.youtube.com/vi/QBaH-yjEL1U/maxresdefault.jpg" alt="On the Circuit">
+          <div class="play-btn play-btn-sm">
+            <svg width="14" height="14" viewBox="0 0 18 18" fill="white"><polygon points="4,2 16,9 4,16"/></svg>
+          </div>
+        </div>
+        <iframe allow="autoplay; fullscreen" allowfullscreen></iframe>
+        <div class="port-label">
+          <span class="port-label-type">Corporate</span>
+          <span class="port-label-name">On the Circuit</span>
+        </div>
+      </div>
+
+      <!-- Behind the Frame -->
+      <div class="short-tile" onclick="playYT(this,'BR5sCiS-deU')">
+        <div class="yt-thumb">
+          <img src="https://img.youtube.com/vi/BR5sCiS-deU/maxresdefault.jpg" alt="Behind the Frame">
+          <div class="play-btn play-btn-sm">
+            <svg width="14" height="14" viewBox="0 0 18 18" fill="white"><polygon points="4,2 16,9 4,16"/></svg>
+          </div>
+        </div>
+        <iframe allow="autoplay; fullscreen" allowfullscreen></iframe>
+        <div class="port-label">
+          <span class="port-label-type">Behind the Lens</span>
+          <span class="port-label-name">Behind the Frame</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
 </section>
 
 <!-- VIDEO LIGHTBOX -->
@@ -760,14 +933,14 @@ footer { padding: 1.8rem 3rem; border-top: 1px solid var(--border); display: fle
 </footer>
 
 <script>
-  // BTS — click to play YouTube
-  function playBts(tile) {
-    const thumb = tile.querySelector('.bts-thumb');
+  // Generic YouTube click-to-play for any tile
+  function playYT(tile, videoId) {
+    const thumb = tile.querySelector('.yt-thumb');
     const iframe = tile.querySelector('iframe');
-    if (iframe.src) return;
-    iframe.src = 'https://www.youtube.com/embed/WY6jY8eKypw?autoplay=1&rel=0&modestbranding=1';
+    if (iframe.src && iframe.src !== 'about:blank') return;
+    iframe.src = 'https://www.youtube.com/embed/' + videoId + '?autoplay=1&rel=0&modestbranding=1';
     iframe.style.display = 'block';
-    thumb.style.display = 'none';
+    if (thumb) thumb.style.display = 'none';
   }
 
   // Lightbox for individual videos
