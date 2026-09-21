@@ -1,4 +1,41 @@
 {
   "_how": "Add an item to 'items' to show it under 'For Your Review'. Fields: id, title, subtitle, due (YYYY-MM-DD), status ('pending' or 'approved'), images [{src:'/clients/francois/review/<file>', caption}], video (embed URL), ask (one line). Empty list = all-caught-up state.",
-  "items": []
+  "items": [
+    {
+      "id": "pillar03-new-ways-of-seeing",
+      "title": "Pillar 03 — \"New Ways of Seeing\" carousel",
+      "subtitle": "3 slides + caption",
+      "status": "pending",
+      "due": "2026-09-22",
+      "images": [
+        {
+          "src": "/clients/francois/review/pillar03_newwaysofseeing_1_cover.jpg",
+          "caption": "1. Cover"
+        },
+        {
+          "src": "/clients/francois/review/pillar03_newwaysofseeing_2_theline.jpg",
+          "caption": "2. The Line"
+        },
+        {
+          "src": "/clients/francois/review/pillar03_newwaysofseeing_3_thepoint.jpg",
+          "caption": "3. The Point"
+        }
+      ],
+      "ask": "Reply APPROVED (or flag a tweak) and this posts Tuesday."
+    },
+    {
+      "id": "pillar04-story-bank-request",
+      "title": "Pillar 04 — Story Bank Request",
+      "subtitle": "A request for more bush stories — not a post",
+      "status": "pending",
+      "ask": "Send a voice note describing a bush encounter — four prompts are in the request doc."
+    },
+    {
+      "id": "pre-production-pack",
+      "title": "Pre-Production Pack",
+      "subtitle": "Klipspringer script + 3 bonus interview questions",
+      "status": "pending",
+      "ask": "Confirm the script is good to shoot, and pick a day next week — 3 to 4 hours, either 10am–2pm or 12pm–4pm."
+    }
+  ]
 }
