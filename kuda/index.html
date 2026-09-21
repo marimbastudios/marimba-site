@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kudakwashe Francis Jnr — Camera Operator & Filmmaker</title>
+<meta name="description" content="Johannesburg-based camera operator and filmmaker. Sony kit. On-set experience across brand content, corporate video, events, and film. Available for your next production.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --black:        #0b0b0b;
+  --surface:      #111019;
+  --deep:         #0E0D14;
+  --purple:       #6248CC;
+  --purple-vivid: #7C5CE8;
+  --purple-soft:  #A78BF0;
+  --purple-deep:  #2E1E6E;
+  --gold:         #C4A86A;
+  --gold-dim:     rgba(196,168,106,0.08);
+  --border-gold:  rgba(196,168,106,0.15);
+  --ivory:        #EDE9E3;
+  --muted:        #908A83;
+  --border:       #1A1820;
+  --border-mid:   #252030;
+  --serif: 'Cormorant Garamond', serif;
+  --sans:  'Inter', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  background: var(--black);
+  color: var(--ivory);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.1rem 3rem;
+  background: rgba(11,11,11,0.92);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo { display: flex; align-items: center; gap: 0.65rem; text-decoration: none; }
+.nav-name { font-size: 0.78rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ivory); }
+nav ul { display: flex; gap: 2rem; list-style: none; }
+nav a { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+nav a:hover { color: var(--ivory); }
+.nav-cta { padding: 0.5rem 1.1rem !important; background: var(--purple) !important; color: var(--ivory) !important; letter-spacing: 0.1em; transition: background 0.2s !important; }
+.nav-cta:hover { background: var(--purple-vivid) !important; color: var(--ivory) !important; }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 0;
+  padding-top: 4rem;
+  position: relative;
+  overflow: hidden;
+}
+.hero-glow {
+  position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(ellipse 40% 60% at 15% 60%, rgba(98,72,204,0.07) 0%, transparent 60%);
+}
+.hero-left {
+  position: relative; z-index: 1;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 0 3rem 3rem;
+}
+.available-pill {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ivory);
+  background: rgba(255,255,255,0.04); border: 1px solid var(--border-mid);
+  padding: 0.3rem 0.85rem; margin-bottom: 2.5rem; width: fit-content;
+}
+.available-pill::before {
+  content: ''; width: 6px; height: 6px; border-radius: 50%;
+  background: #4ADE80; box-shadow: 0 0 6px #4ADE80; flex-shrink: 0;
+}
+.hero-name {
+  font-family: var(--serif);
+  font-size: clamp(3rem, 7vw, 6rem);
+  font-weight: 600; line-height: 0.93; letter-spacing: -0.01em;
+  color: var(--ivory); margin-bottom: 0.2em;
+}
+.hero-name em { font-style: italic; color: var(--purple-soft); display: block; }
+.hero-role {
+  font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--muted); margin: 1.4rem 0 2rem;
+}
+.hero-bio {
+  max-width: 460px; font-size: 0.95rem; color: var(--muted); line-height: 1.8; margin-bottom: 2.8rem;
+}
+.hero-bio strong { color: var(--ivory); font-weight: 500; }
+.hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.8rem 1.8rem; background: var(--purple); color: var(--ivory);
+  font-size: 0.73rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase;
+  text-decoration: none; transition: background 0.2s;
+}
+.btn-primary:hover { background: var(--purple-vivid); }
+.btn-ghost {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.8rem 1.8rem; border: 1px solid var(--border-mid); color: var(--muted);
+  font-size: 0.73rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase;
+  text-decoration: none; transition: border-color 0.2s, color 0.2s;
+}
+.btn-ghost:hover { border-color: var(--purple-soft); color: var(--ivory); }
+
+/* Hero loop video — small, right panel */
+.hero-right {
+  position: relative; overflow: hidden;
+  border-left: 1px solid var(--border);
+}
+.hero-right video {
+  width: 100%; height: 100%;
+  object-fit: cover; opacity: 0.7;
+}
+.hero-right::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(11,11,11,0.4) 0%, transparent 30%, transparent 70%, rgba(11,11,11,0.6) 100%);
+}
+.hero-right-label {
+  position: absolute; bottom: 1.5rem; left: 1.2rem; z-index: 2;
+  font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(237,233,227,0.5);
+}
+
+@media (max-width: 900px) {
+  .hero { grid-template-columns: 1fr; }
+  .hero-right { display: none; }
+  .hero-left { padding: 5rem 1.5rem 3rem; }
+}
+
+/* ── STATS BAR ── */
+.stats {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+  background: var(--deep);
+}
+.stat { padding: 2rem 2rem; border-right: 1px solid var(--border); text-align: center; }
+.stat:last-child { border-right: none; }
+.stat-number { font-family: var(--serif); font-size: 2.6rem; font-weight: 600; color: var(--purple-soft); line-height: 1; display: block; margin-bottom: 0.3rem; }
+.stat-label { font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
+
+/* ── PORTFOLIO (main section) ── */
+.portfolio {
+  padding: 4rem 3rem;
+}
+.section-eyebrow {
+  display: flex; align-items: center; gap: 0.8rem;
+  font-size: 0.62rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--purple-soft); margin-bottom: 2rem;
+}
+.section-eyebrow::before { content: ''; display: block; width: 24px; height: 1px; background: var(--purple); }
+.section-heading { font-family: var(--serif); font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 600; line-height: 1.1; color: var(--ivory); margin-bottom: 0.8rem; }
+.section-heading em { font-style: italic; color: var(--purple-soft); }
+.section-sub { font-size: 0.875rem; color: var(--muted); max-width: 500px; line-height: 1.75; margin-bottom: 2.5rem; }
+
+/* Portfolio grid */
+.port-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto auto;
+  gap: 2px;
+  background: var(--border);
+}
+
+/* BTS tile — spans 2 cols, tall */
+.port-tile {
+  position: relative; overflow: hidden;
+  background: var(--surface); cursor: pointer;
+  display: block; text-decoration: none;
+}
+.port-tile-bts {
+  grid-column: span 2;
+  aspect-ratio: 16/8;
+}
+.port-tile-events { aspect-ratio: 4/3; }
+.port-tile-th { aspect-ratio: 4/3; }
+.port-tile-t1, .port-tile-t2, .port-tile-t3 { aspect-ratio: 16/9; }
+
+.port-tile video, .port-tile img {
+  width: 100%; height: 100%; object-fit: cover;
+  opacity: 0.72; transition: opacity 0.35s, transform 0.45s;
+  display: block;
+  pointer-events: none; /* clicks pass through to the parent tile/link */
+}
+.port-tile:hover video, .port-tile:hover img {
+  opacity: 1; transform: scale(1.04);
+}
+
+/* BTS special — iframe + overlay */
+.port-tile-bts .bts-thumb {
+  width: 100%; height: 100%; background: var(--surface);
+  display: flex; align-items: center; justify-content: center;
+  position: relative; pointer-events: none; /* parent div handles click */
+}
+.port-tile-bts .bts-thumb img {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.55; pointer-events: none;
+}
+.port-tile-bts iframe {
+  position: absolute; inset: 0; width: 100%; height: 100%; border: none; display: none;
+  pointer-events: auto; /* iframe needs its own clicks once active */
+}
+.play-btn {
+  position: relative; z-index: 2;
+  width: 60px; height: 60px; border-radius: 50%; background: var(--purple);
+  display: flex; align-items: center; justify-content: center;
+  transition: transform 0.2s, background 0.2s;
+}
+.play-btn:hover { background: var(--purple-vivid); transform: scale(1.1); }
+.play-btn svg { margin-left: 4px; }
+
+/* Tile overlay label — pointer-events none so clicks reach parent */
+.port-label {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 2.5rem 1.2rem 1rem;
+  background: linear-gradient(transparent, rgba(11,11,11,0.88));
+  z-index: 3; pointer-events: none;
+}
+.port-label-type, .port-label-name { pointer-events: none; }
+.port-label-type { font-size: 0.58rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--purple-soft); display: block; margin-bottom: 0.2rem; }
+.port-label-name { font-family: var(--serif); font-size: 1.05rem; font-weight: 600; color: var(--ivory); }
+
+/* Arrow link overlay */
+.port-link-hint {
+  position: absolute; top: 1rem; right: 1rem; z-index: 4;
+  width: 32px; height: 32px; border: 1px solid rgba(167,139,240,0.3);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; transition: opacity 0.25s;
+  font-size: 0.75rem; color: var(--purple-soft);
+}
+.port-tile:hover .port-link-hint { opacity: 1; }
+
+/* ── SERVICES LIST ── */
+.services-section {
+  background: var(--deep); border-top: 1px solid var(--border);
+  padding: 4rem 3rem;
+}
+.services-list { border-top: 1px solid var(--border); }
+.service-row {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.5rem 0; border-bottom: 1px solid var(--border);
+  text-decoration: none; color: inherit;
+  transition: padding-left 0.25s;
+  cursor: pointer;
+}
+.service-row:hover { padding-left: 0.5rem; }
+.service-row-left { display: flex; align-items: baseline; gap: 1.5rem; }
+.service-num { font-family: var(--serif); font-size: 0.85rem; color: var(--purple); min-width: 1.8rem; }
+.service-row-name { font-family: var(--serif); font-size: 1.35rem; font-weight: 600; color: var(--ivory); }
+.service-row-desc { font-size: 0.8rem; color: var(--muted); max-width: 380px; }
+.service-row-arrow {
+  font-size: 1rem; color: var(--purple-soft);
+  opacity: 0; transition: opacity 0.25s, transform 0.25s;
+  transform: translateX(-8px);
+}
+.service-row:hover .service-row-arrow { opacity: 1; transform: translateX(0); }
+
+/* ── FILM CALLOUT ── */
+.film-callout {
+  border: 1px solid var(--border-mid); border-left: 3px solid var(--purple);
+  padding: 2.5rem; max-width: 720px;
+}
+.film-label { font-size: 0.62rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--purple-soft); margin-bottom: 0.8rem; display: block; }
+.film-title { font-family: var(--serif); font-size: 1.5rem; font-weight: 600; color: var(--ivory); margin-bottom: 0.6rem; line-height: 1.3; }
+.film-title em { color: var(--purple-soft); font-style: italic; }
+.film-text { font-size: 0.875rem; color: var(--muted); line-height: 1.75; }
+
+/* ── EXPERIENCE ── */
+.exp-list { border-top: 1px solid var(--border); }
+.exp-item { display: grid; grid-template-columns: 170px 1fr; gap: 2.5rem; padding: 2.5rem 0; border-bottom: 1px solid var(--border); }
+.exp-co { font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--purple-soft); margin-bottom: 0.3rem; }
+.exp-period { font-size: 0.72rem; color: var(--muted); }
+.exp-role { font-family: var(--serif); font-size: 1.3rem; font-weight: 600; color: var(--ivory); margin-bottom: 0.65rem; }
+.exp-desc { font-size: 0.86rem; color: var(--muted); line-height: 1.75; margin-bottom: 0.8rem; }
+.exp-desc a { color: var(--purple-soft); text-decoration: none; border-bottom: 1px solid rgba(167,139,240,0.2); transition: border-color 0.2s; }
+.exp-desc a:hover { border-color: var(--purple-soft); }
+.nda-badge { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.7rem; letter-spacing: 0.08em; color: var(--gold); background: rgba(196,168,106,0.07); border: 1px solid var(--border-gold); padding: 0.35rem 0.7rem; margin-bottom: 0.8rem; }
+.tags { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+.tag { font-size: 0.62rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--purple-soft); background: var(--purple-deep); border: 1px solid rgba(98,72,204,0.25); padding: 0.22rem 0.6rem; }
+
+/* ── AUDIO ── */
+.audio-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); margin-top: 2rem; }
+.audio-item { background: var(--deep); padding: 1.6rem; }
+.audio-type { font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--purple-soft); display: block; margin-bottom: 0.4rem; }
+.audio-label { font-family: var(--serif); font-size: 1.1rem; font-weight: 600; color: var(--ivory); }
+
+/* ── GEAR ── */
+.gear-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); }
+.gear-item { background: var(--black); padding: 1.8rem 1.6rem; }
+.gear-role { font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--purple-soft); display: block; margin-bottom: 0.3rem; }
+.gear-name { font-family: var(--serif); font-size: 1.15rem; font-weight: 600; color: var(--ivory); margin-bottom: 0.3rem; }
+.gear-note { font-size: 0.78rem; color: var(--muted); line-height: 1.5; }
+
+/* ── CAPABILITIES ── */
+.caps-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+.cap-item { display: flex; flex-direction: column; gap: 0.5rem; }
+.cap-header { display: flex; justify-content: space-between; align-items: baseline; }
+.cap-name { font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ivory); font-weight: 500; }
+.cap-pct { font-family: var(--serif); font-size: 1.1rem; color: var(--purple-soft); }
+.cap-bar { height: 1px; background: var(--border-mid); position: relative; }
+.cap-fill { position: absolute; top: 0; left: 0; bottom: 0; background: linear-gradient(90deg, var(--purple), var(--purple-soft)); animation: fillbar 1.4s cubic-bezier(.4,0,.2,1) forwards; animation-play-state: paused; }
+@keyframes fillbar { from { width: 0; } }
+.cap-note { font-size: 0.72rem; color: var(--muted); }
+
+/* ── FOUNDER ── */
+.founder-section { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--border); min-height: 400px; }
+.founder-img { position: relative; overflow: hidden; }
+.founder-img img { width: 100%; height: 100%; object-fit: cover; object-position: top center; filter: grayscale(15%); }
+.founder-text { background: var(--deep); padding: 4rem 3rem; display: flex; flex-direction: column; justify-content: center; }
+.founder-quote { font-family: var(--serif); font-size: 1.6rem; font-weight: 600; line-height: 1.3; color: var(--ivory); margin-bottom: 1.2rem; }
+.founder-quote em { color: var(--purple-soft); font-style: italic; }
+.founder-attr { font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
+
+/* ── CONTACT ── */
+.contact-section { background: var(--deep); border-top: 1px solid var(--border); padding: 5rem 3rem; }
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+.contact-h { font-family: var(--serif); font-size: clamp(2rem, 4.5vw, 3.5rem); font-weight: 600; line-height: 1; color: var(--ivory); margin-bottom: 1.2rem; }
+.contact-h em { font-style: italic; color: var(--purple-soft); }
+.contact-para { font-size: 0.875rem; color: var(--muted); line-height: 1.75; margin-bottom: 2.2rem; }
+.contact-detail { display: flex; flex-direction: column; gap: 1.1rem; }
+.contact-row { display: flex; gap: 1.5rem; align-items: baseline; }
+.contact-lbl { font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); min-width: 80px; flex-shrink: 0; }
+.contact-val { font-size: 0.875rem; color: var(--ivory); text-decoration: none; transition: color 0.2s; }
+.contact-val:hover { color: var(--purple-soft); }
+
+/* ── FOOTER ── */
+footer { padding: 1.8rem 3rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+.footer-copy { font-size: 0.72rem; color: var(--muted); }
+.footer-right { font-size: 0.68rem; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; }
+
+/* ── FADE UP ── */
+.fade-up { opacity: 0; transform: translateY(18px); transition: opacity 0.65s ease, transform 0.65s ease; }
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+
+/* ── LIGHTBOX ── */
+.lightbox { display: none; position: fixed; inset: 0; z-index: 500; background: rgba(11,11,11,0.96); align-items: center; justify-content: center; }
+.lightbox.open { display: flex; }
+.lightbox-inner { position: relative; width: 90vw; max-width: 1000px; }
+.lightbox-inner video { width: 100%; display: block; max-height: 80vh; }
+.lightbox-close { position: absolute; top: -2.5rem; right: 0; background: none; border: none; color: var(--muted); font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; cursor: pointer; transition: color 0.2s; }
+.lightbox-close:hover { color: var(--ivory); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  nav { padding: 1rem 1.5rem; }
+  nav ul { gap: 1rem; }
+  .portfolio, .services-section, section { padding: 3.5rem 1.5rem; }
+  .stats { grid-template-columns: repeat(2, 1fr); }
+  .port-grid { grid-template-columns: 1fr; }
+  .port-tile-bts { grid-column: span 1; aspect-ratio: 16/9; }
+  .service-row-desc { display: none; }
+  .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
+  .audio-grid, .gear-grid { grid-template-columns: 1fr 1fr; }
+  .caps-grid { grid-template-columns: 1fr; }
+  .founder-section { grid-template-columns: 1fr; }
+  .founder-img { min-height: 280px; }
+  .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  footer { padding: 1.5rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <svg width="26" height="26" viewBox="0 0 28 28" fill="none">
+      <polygon points="14,2 25,8 25,20 14,26 3,20 3,8" fill="none" stroke="#6248CC" stroke-width="1.5"/>
+      <polygon points="14,7 21,11 21,19 14,23 7,19 7,11" fill="none" stroke="#6248CC" stroke-width="0.8" opacity="0.4"/>
+    </svg>
+    <span class="nav-name">Marimba Studios</span>
+  </a>
+  <ul>
+    <li><a href="#portfolio">Work</a></li>
+    <li><a href="#experience">Background</a></li>
+    <li><a href="#gear">Gear</a></li>
+    <li><a href="#contact" class="nav-cta">Book KD</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glow"></div>
+
+  <div class="hero-left">
+    <div class="available-pill">Available for your next shoot</div>
+    <h1 class="hero-name">
+      Kudakwashe
+      <em>Francis Jnr</em>
+    </h1>
+    <p class="hero-role">Camera Operator &nbsp;·&nbsp; Filmmaker &nbsp;·&nbsp; Johannesburg</p>
+    <p class="hero-bio">
+      On-set experience across <strong>brand content, corporate video, live events,</strong> and independent film.
+      Sony-trained, production-disciplined. I integrate into your crew without friction.
+    </p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Book a Shoot</a>
+      <a href="#portfolio" class="btn-ghost">See the Work ↓</a>
+    </div>
+  </div>
+
+  <!-- Smaller loop video panel -->
+  <div class="hero-right">
+    <video autoplay muted loop playsinline>
+      <source src="../kuda.mp4" type="video/mp4">
+    </video>
+    <span class="hero-right-label">On Set · Johannesburg</span>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat"><span class="stat-number">3+</span><span class="stat-label">Years On-Set</span></div>
+  <div class="stat"><span class="stat-number">8</span><span class="stat-label">Weddings Shot</span></div>
+  <div class="stat"><span class="stat-number">Sony</span><span class="stat-label">Full Kit</span></div>
+  <div class="stat"><span class="stat-number">JHB</span><span class="stat-label">SA-Wide Available</span></div>
+</div>
+
+<!-- PORTFOLIO — VISUALS FIRST -->
+<section class="portfolio" id="portfolio">
+  <p class="section-eyebrow">Portfolio</p>
+  <h2 class="section-heading fade-up">The work.</h2>
+  <p class="section-sub fade-up">Click any tile to go deeper — full pages, individual videos, or BTS. More added as we shoot.</p>
+
+  <div class="port-grid fade-up">
+
+    <!-- BTS — YouTube, click to play -->
+    <div class="port-tile port-tile-bts" id="btsTile" onclick="playBts(this)">
+      <div class="bts-thumb">
+        <img src="https://img.youtube.com/vi/WY6jY8eKypw/maxresdefault.jpg" alt="On-Set BTS thumbnail">
+        <div class="play-btn">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="white"><polygon points="4,2 16,9 4,16"/></svg>
+        </div>
+      </div>
+      <iframe id="btsIframe" allow="autoplay; fullscreen" allowfullscreen></iframe>
+      <div class="port-label">
+        <span class="port-label-type">Behind the Lens</span>
+        <span class="port-label-name">On-Set BTS</span>
+      </div>
+    </div>
+
+    <!-- Events — links to /events/ -->
+    <a class="port-tile port-tile-events" href="/events/" target="_blank">
+      <video autoplay muted loop playsinline>
+        <source src="../banner-events.mp4" type="video/mp4">
+      </video>
+      <div class="port-label">
+        <span class="port-label-type">Live Events</span>
+        <span class="port-label-name">Events Coverage →</span>
+      </div>
+      <div class="port-link-hint">↗</div>
+    </a>
+
+    <!-- Talking Heads — links to /talking-heads/ -->
+    <a class="port-tile port-tile-th" href="/talking-heads/" target="_blank">
+      <video autoplay muted loop playsinline>
+        <source src="../banner-talking-heads.mp4" type="video/mp4">
+      </video>
+      <div class="port-label">
+        <span class="port-label-type">Corporate</span>
+        <span class="port-label-name">Talking Heads →</span>
+      </div>
+      <div class="port-link-hint">↗</div>
+    </a>
+
+    <!-- Individual TH clips — open in lightbox -->
+    <div class="port-tile port-tile-t1" onclick="openLightbox('../talking-heads/th-01.mp4')">
+      <video autoplay muted loop playsinline>
+        <source src="../talking-heads/th-01.mp4" type="video/mp4">
+      </video>
+      <div class="port-label">
+        <span class="port-label-type">Interview</span>
+        <span class="port-label-name">Interview Cut 01</span>
+      </div>
+      <div class="port-link-hint">▶</div>
+    </div>
+
+    <div class="port-tile port-tile-t2" onclick="openLightbox('../talking-heads/th-02.mp4')">
+      <video autoplay muted loop playsinline>
+        <source src="../talking-heads/th-02.mp4" type="video/mp4">
+      </video>
+      <div class="port-label">
+        <span class="port-label-type">Interview</span>
+        <span class="port-label-name">Interview Cut 02</span>
+      </div>
+      <div class="port-link-hint">▶</div>
+    </div>
+
+    <div class="port-tile port-tile-t3" onclick="openLightbox('../talking-heads/th-03.mp4')">
+      <video autoplay muted loop playsinline>
+        <source src="../talking-heads/th-03.mp4" type="video/mp4">
+      </video>
+      <div class="port-label">
+        <span class="port-label-type">Interview</span>
+        <span class="port-label-name">Interview Cut 03</span>
+      </div>
+      <div class="port-link-hint">▶</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- VIDEO LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+  <div class="lightbox-inner">
+    <button class="lightbox-close" onclick="closeLightbox()">✕ Close</button>
+    <video id="lightboxVideo" controls playsinline></video>
+  </div>
+</div>
+
+<!-- SERVICES LIST -->
+<section class="services-section" id="services">
+  <p class="section-eyebrow">What I Do</p>
+  <h2 class="section-heading fade-up">Available for.</h2>
+
+  <div class="services-list fade-up">
+    <a href="/events/" class="service-row" target="_blank">
+      <div class="service-row-left">
+        <span class="service-num">01</span>
+        <div>
+          <span class="service-row-name">Live Events</span>
+          <p class="service-row-desc">Corporate events, conferences, private parties, celebrations — first camera, real-time.</p>
+        </div>
+      </div>
+      <span class="service-row-arrow">→</span>
+    </a>
+    <a href="/talking-heads/" class="service-row" target="_blank">
+      <div class="service-row-left">
+        <span class="service-num">02</span>
+        <div>
+          <span class="service-row-name">Talking Heads</span>
+          <p class="service-row-desc">Interview-style corporate video. One subject, clean footage, briefed delivery.</p>
+        </div>
+      </div>
+      <span class="service-row-arrow">→</span>
+    </a>
+    <a href="/cinematographer/" class="service-row" target="_blank">
+      <div class="service-row-left">
+        <span class="service-num">03</span>
+        <div>
+          <span class="service-row-name">Brand Content & Cinematography</span>
+          <p class="service-row-desc">On-set as cinematographer for production companies, ad agencies, and brand shoots.</p>
+        </div>
+      </div>
+      <span class="service-row-arrow">→</span>
+    </a>
+    <div class="service-row">
+      <div class="service-row-left">
+        <span class="service-num">04</span>
+        <div>
+          <span class="service-row-name">Weddings & Celebrations</span>
+          <p class="service-row-desc">8 shoots. Weddings, engagements, birthdays, private events. Video and multi-source audio.</p>
+        </div>
+      </div>
+      <span class="service-row-arrow" style="opacity:0">→</span>
+    </div>
+    <div class="service-row">
+      <div class="service-row-left">
+        <span class="service-num">05</span>
+        <div>
+          <span class="service-row-name">Studio Shoots</span>
+          <p class="service-row-desc">Controlled-light studio environments. Commercial, editorial, performance.</p>
+        </div>
+      </div>
+    </div>
+    <div class="service-row" style="border-bottom: none;">
+      <div class="service-row-left">
+        <span class="service-num">06</span>
+        <div>
+          <span class="service-row-name">Editing</span>
+          <p class="service-row-desc">Post-production trained at CineOne. Shoot-and-edit package available.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FILM CALLOUT -->
+<section style="padding: 4rem 3rem; border-top: 1px solid var(--border);">
+  <div class="film-callout fade-up">
+    <span class="film-label">Passion Project</span>
+    <h3 class="film-title">Independent film, <em>featured in print.</em></h3>
+    <p class="film-text">Produced and shot an independent feature film — a fully realised passion project that got featured in a magazine. Available to discuss on request.</p>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" style="background: var(--deep); border-top: 1px solid var(--border); padding: 4rem 3rem;">
+  <p class="section-eyebrow">Background</p>
+  <h2 class="section-heading fade-up">Professional History</h2>
+
+  <div class="exp-list">
+    <div class="exp-item fade-up">
+      <div>
+        <p class="exp-co">CineOne</p>
+        <p class="exp-period">3 Years</p>
+      </div>
+      <div>
+        <h3 class="exp-role">Production Assistant & Camera Operator</h3>
+        <p class="exp-desc">Three years across major national brand productions. Full credits at <a href="https://cineone.co.za/about" target="_blank">cineone.co.za/about</a>.</p>
+        <p class="nda-badge">⬡ Major brand credits — NDA applies · available per request</p>
+        <div class="tags"><span class="tag">Commercial Shoots</span><span class="tag">Major Brands</span><span class="tag">On-Set Production</span><span class="tag">Editing</span></div>
+      </div>
+    </div>
+
+    <div class="exp-item fade-up">
+      <div>
+        <p class="exp-co">Optics Media</p>
+        <p class="exp-period">Selected Projects</p>
+      </div>
+      <div>
+        <h3 class="exp-role">Camera Operator</h3>
+        <p class="exp-desc">Studio shoots, dance camp BTS, and a 10-day on-location production for SA Champions.</p>
+        <div class="tags"><span class="tag">Studio</span><span class="tag">BTS</span><span class="tag">On-Location (10 days)</span><span class="tag">SA Champions</span></div>
+      </div>
+    </div>
+
+    <div class="exp-item fade-up">
+      <div>
+        <p class="exp-co">Weddings & Celebrations</p>
+        <p class="exp-period">8 Shoots</p>
+      </div>
+      <div>
+        <h3 class="exp-role">Second Shooter — Video & Audio</h3>
+        <p class="exp-desc">8 shoots across weddings, engagements, birthday parties, and milestone events. Video and full-day multi-source audio throughout.</p>
+        <div class="tags"><span class="tag">Weddings</span><span class="tag">Engagements</span><span class="tag">Birthday Parties</span><span class="tag">Multi-Source Audio</span></div>
+      </div>
+    </div>
+
+    <div class="exp-item fade-up">
+      <div>
+        <p class="exp-co">Marimba Studios</p>
+        <p class="exp-period">Ongoing</p>
+      </div>
+      <div>
+        <h3 class="exp-role">Founder & Lead Camera Operator</h3>
+        <p class="exp-desc">First camera on conferences, corporate events, and private productions. Full package: shoot, audio, and edit.</p>
+        <div class="tags"><span class="tag">First Camera</span><span class="tag">Corporate Events</span><span class="tag">Conferences</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AUDIO -->
+<section style="border-top: 1px solid var(--border); padding: 4rem 3rem;">
+  <p class="section-eyebrow">Audio</p>
+  <h2 class="section-heading fade-up">Sound across <em>every format.</em></h2>
+  <div class="audio-grid fade-up">
+    <div class="audio-item"><span class="audio-type">Format</span><p class="audio-label">Commercial Sets</p></div>
+    <div class="audio-item"><span class="audio-type">Format</span><p class="audio-label">Film Productions</p></div>
+    <div class="audio-item"><span class="audio-type">Format</span><p class="audio-label">Weddings</p></div>
+    <div class="audio-item"><span class="audio-type">Format</span><p class="audio-label">Testimonials</p></div>
+    <div class="audio-item"><span class="audio-type">Format</span><p class="audio-label">Documentaries</p></div>
+    <div class="audio-item"><span class="audio-type">Format</span><p class="audio-label">Live Events</p></div>
+  </div>
+</section>
+
+<!-- GEAR -->
+<section id="gear" style="background: var(--deep); border-top: 1px solid var(--border); padding: 4rem 3rem;">
+  <p class="section-eyebrow">Kit</p>
+  <h2 class="section-heading fade-up">Camera Gear</h2>
+  <p class="section-sub fade-up">Both Sony bodies available as a package. Setup is always briefed first.</p>
+  <div class="gear-grid fade-up">
+    <div class="gear-item"><span class="gear-role">Primary Body</span><p class="gear-name">Sony A7C5</p><p class="gear-note">Full-frame. Flagship.</p></div>
+    <div class="gear-item"><span class="gear-role">Second Body</span><p class="gear-name">Sony A7C</p><p class="gear-note">Full-frame compact. Dual-camera setups.</p></div>
+    <div class="gear-item"><span class="gear-role">Run & Gun</span><p class="gear-name">Sony ZV-E10</p><p class="gear-note">Fast, lightweight. BTS and handheld.</p></div>
+    <div class="gear-item"><span class="gear-role">Backup</span><p class="gear-name">Sony A6000</p><p class="gear-note">APS-C. Additional angles.</p></div>
+    <div class="gear-item"><span class="gear-role">Stabilisation</span><p class="gear-name">Gimbal</p><p class="gear-note">Smooth movement. Entrances, transitions.</p></div>
+    <div class="gear-item"><span class="gear-role">Multi-Source</span><p class="gear-name">Audio Kit</p><p class="gear-note">Multiple sources across full-day productions.</p></div>
+  </div>
+</section>
+
+<!-- CAPABILITIES -->
+<section style="border-top: 1px solid var(--border); padding: 4rem 3rem;">
+  <p class="section-eyebrow">Honest Assessment</p>
+  <h2 class="section-heading fade-up">Where I'm at.</h2>
+  <p class="section-sub fade-up">I give percentages. I ask when unsure — fewer mistakes on the day.</p>
+  <div class="caps-grid fade-up">
+    <div class="cap-item">
+      <div class="cap-header"><span class="cap-name">Video — Corporate & Events</span><span class="cap-pct">95%</span></div>
+      <div class="cap-bar"><div class="cap-fill" style="width:95%"></div></div>
+      <span class="cap-note">First camera in live environments.</span>
+    </div>
+    <div class="cap-item">
+      <div class="cap-header"><span class="cap-name">Camera Operation — Brand/Commercial</span><span class="cap-pct">90%</span></div>
+      <div class="cap-bar"><div class="cap-fill" style="width:90%"></div></div>
+      <span class="cap-note">3 years production-trained at CineOne.</span>
+    </div>
+    <div class="cap-item">
+      <div class="cap-header"><span class="cap-name">Wedding Video</span><span class="cap-pct">80%</span></div>
+      <div class="cap-bar"><div class="cap-fill" style="width:80%"></div></div>
+      <span class="cap-note">8 shoots. Second shooter, building primary.</span>
+    </div>
+    <div class="cap-item">
+      <div class="cap-header"><span class="cap-name">Multi-Source Audio</span><span class="cap-pct">85%</span></div>
+      <div class="cap-bar"><div class="cap-fill" style="width:85%"></div></div>
+      <span class="cap-note">Commercial, film, weddings, documentaries.</span>
+    </div>
+    <div class="cap-item">
+      <div class="cap-header"><span class="cap-name">Studio Shoots</span><span class="cap-pct">90%</span></div>
+      <div class="cap-bar"><div class="cap-fill" style="width:90%"></div></div>
+      <span class="cap-note">Controlled-light studio experience.</span>
+    </div>
+    <div class="cap-item">
+      <div class="cap-header"><span class="cap-name">Editing</span><span class="cap-pct">85%</span></div>
+      <div class="cap-bar"><div class="cap-fill" style="width:85%"></div></div>
+      <span class="cap-note">Junior Editor trained at CineOne.</span>
+    </div>
+  </div>
+</section>
+
+<!-- FOUNDER PHOTO -->
+<div class="founder-section fade-up">
+  <div class="founder-img">
+    <img src="../kuda-founder.png" alt="Kudakwashe Francis Jnr">
+  </div>
+  <div class="founder-text">
+    <p class="section-eyebrow" style="margin-bottom:1.5rem">The operator</p>
+    <p class="founder-quote">Every frame either<br><em>earns its place</em><br>or it doesn't.</p>
+    <p class="founder-attr">Kudakwashe Francis Jnr &nbsp;·&nbsp; Camera Operator &nbsp;·&nbsp; Johannesburg</p>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<section id="contact" class="contact-section">
+  <div class="contact-grid">
+    <div>
+      <p class="section-eyebrow" style="margin-bottom:1.5rem">Get in Touch</p>
+      <h2 class="contact-h">Your next production<br>needs <em>the right eye.</em></h2>
+      <p class="contact-para">Send a brief, a date, or just a concept. I'll confirm availability and what's possible — same day.</p>
+      <a href="https://wa.me/27614353601" target="_blank" class="btn-primary">Message on WhatsApp</a>
+    </div>
+    <div class="contact-detail">
+      <div class="contact-row"><span class="contact-lbl">Based in</span><span class="contact-val">Johannesburg · SA-wide</span></div>
+      <div class="contact-row"><span class="contact-lbl">Email</span><a href="mailto:kuda@marimbastudios.co.za" class="contact-val">kuda@marimbastudios.co.za</a></div>
+      <div class="contact-row"><span class="contact-lbl">Instagram</span><a href="https://instagram.com/kudakwashe_francis_jnr" target="_blank" class="contact-val">@kudakwashe_francis_jnr</a></div>
+      <div class="contact-row"><span class="contact-lbl">Website</span><a href="https://marimbastudios.co.za" target="_blank" class="contact-val">marimbastudios.co.za</a></div>
+      <div class="contact-row"><span class="contact-lbl">References</span><span class="contact-val" style="color:var(--muted)">CineOne & Optics Media — per request</span></div>
+      <div class="contact-row"><span class="contact-lbl">Drone</span><span class="contact-val" style="color:var(--muted)">Not available</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p class="footer-copy">© 2026 Marimba Studios · Kuda Francis Jnr · South Africa</p>
+  <p class="footer-right">marimbastudios.co.za/kuda</p>
+</footer>
+
+<script>
+  // BTS — click to play YouTube
+  function playBts(tile) {
+    const thumb = tile.querySelector('.bts-thumb');
+    const iframe = tile.querySelector('iframe');
+    if (iframe.src) return;
+    iframe.src = 'https://www.youtube.com/embed/WY6jY8eKypw?autoplay=1&rel=0&modestbranding=1';
+    iframe.style.display = 'block';
+    thumb.style.display = 'none';
+  }
+
+  // Lightbox for individual videos
+  function openLightbox(src) {
+    const lb = document.getElementById('lightbox');
+    const vid = document.getElementById('lightboxVideo');
+    vid.src = src;
+    vid.play();
+    lb.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox(e) {
+    if (e && e.target !== document.getElementById('lightbox') && !e.target.closest('.lightbox-close')) return;
+    const lb = document.getElementById('lightbox');
+    const vid = document.getElementById('lightboxVideo');
+    vid.pause();
+    vid.src = '';
+    lb.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  // Escape key closes lightbox
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox({ target: document.getElementById('lightbox') }); });
+
+  // Fade-up on scroll
+  const fadeEls = document.querySelectorAll('.fade-up');
+  const fadeObs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); fadeObs.unobserve(e.target); } });
+  }, { threshold: 0.08 });
+  fadeEls.forEach(el => fadeObs.observe(el));
+
+  // Animate capability bars on scroll
+  const fills = document.querySelectorAll('.cap-fill');
+  const capObs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.style.animationPlayState = 'running'; capObs.unobserve(e.target); } });
+  }, { threshold: 0.3 });
+  fills.forEach(f => { f.style.animationPlayState = 'paused'; capObs.observe(f); });
+</script>
+</body>
+</html>
