@@ -203,7 +203,7 @@ nav a:hover { color: var(--ivory); }
 }
 .port-tile-bts {
   grid-column: span 2;
-  aspect-ratio: 16/9;
+  aspect-ratio: 21/9;
 }
 /* all other tiles default 16/9 */
 
@@ -226,8 +226,13 @@ nav a:hover { color: var(--ivory); }
 .yt-thumb img {
   position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.6; pointer-events: none;
   transition: opacity 0.35s, transform 0.45s;
+  animation: kbZoom 9s ease-in-out infinite alternate;
 }
-.port-tile:hover .yt-thumb img { opacity: 0.85; transform: scale(1.04); }
+@keyframes kbZoom {
+  from { transform: scale(1) translateX(0); }
+  to   { transform: scale(1.07) translateX(-1%); }
+}
+.port-tile:hover .yt-thumb img { opacity: 0.85; transform: scale(1.05); animation-play-state: paused; }
 .port-tile iframe {
   position: absolute; inset: 0; width: 100%; height: 100%; border: none; display: none;
   pointer-events: auto;
@@ -410,7 +415,7 @@ footer { padding: 1.8rem 3rem; border-top: 1px solid var(--border); display: fle
   .portfolio, .services-section, section { padding: 3.5rem 1.5rem; }
   .stats { grid-template-columns: repeat(2, 1fr); }
   .port-grid { grid-template-columns: 1fr; }
-  .port-tile-bts { grid-column: span 1; aspect-ratio: 16/9; }
+  .port-tile-bts { grid-column: span 1; aspect-ratio: 21/9; }
   .port-tile-trailer { grid-column: span 1; aspect-ratio: 16/9; }
   .shorts-row { grid-template-columns: 1fr 1fr; }
   .film-callout { padding: 1.5rem; }
