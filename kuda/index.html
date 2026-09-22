@@ -121,18 +121,27 @@ nav a:hover { color: var(--ivory); }
 /* Hero loop video — small, right panel */
 .hero-right {
   position: relative; overflow: hidden;
-  border-left: 1px solid var(--border);
+  /* no hard border — melts into the left panel */
 }
 .hero-right video {
   width: 100%; height: 100%;
-  object-fit: cover; opacity: 0.7;
+  object-fit: cover; opacity: 0.55;
+  filter: grayscale(25%) brightness(0.85) saturate(0.8);
 }
+/* Left-edge melt: fades the video into the page background */
+.hero-right::before {
+  content: ''; position: absolute; inset: 0; z-index: 2; pointer-events: none;
+  background:
+    linear-gradient(90deg, var(--black) 0%, rgba(11,11,11,0.55) 22%, transparent 55%),
+    linear-gradient(180deg, rgba(11,11,11,0.55) 0%, transparent 20%, transparent 80%, rgba(11,11,11,0.7) 100%);
+}
+/* Purple tint overlay — ties the video to the site palette */
 .hero-right::after {
-  content: ''; position: absolute; inset: 0;
-  background: linear-gradient(180deg, rgba(11,11,11,0.4) 0%, transparent 30%, transparent 70%, rgba(11,11,11,0.6) 100%);
+  content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background: rgba(98, 72, 204, 0.18);
 }
 .hero-right-label {
-  position: absolute; bottom: 1.5rem; left: 1.2rem; z-index: 2;
+  position: absolute; bottom: 1.5rem; left: 1.2rem; z-index: 3;
   font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(237,233,227,0.5);
 }
 
@@ -203,7 +212,7 @@ nav a:hover { color: var(--ivory); }
 }
 .port-tile-bts {
   grid-column: span 2;
-  aspect-ratio: 21/9;
+  height: 280px;
 }
 /* all other tiles default 16/9 */
 
@@ -415,7 +424,7 @@ footer { padding: 1.8rem 3rem; border-top: 1px solid var(--border); display: fle
   .portfolio, .services-section, section { padding: 3.5rem 1.5rem; }
   .stats { grid-template-columns: repeat(2, 1fr); }
   .port-grid { grid-template-columns: 1fr; }
-  .port-tile-bts { grid-column: span 1; aspect-ratio: 21/9; }
+  .port-tile-bts { grid-column: span 1; height: 220px; }
   .port-tile-trailer { grid-column: span 1; aspect-ratio: 16/9; }
   .shorts-row { grid-template-columns: 1fr 1fr; }
   .film-callout { padding: 1.5rem; }
