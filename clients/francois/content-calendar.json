@@ -20,6 +20,14 @@
     "note": "Next batch (Pillars 05–06) gets produced during this window before the next posting run starts — no post dates yet, on purpose."
   },
   {
+    "type": "phase",
+    "id": "shoot-day-oct1",
+    "startDate": "2026-10-01",
+    "endDate": "2026-10-01",
+    "label": "Confirmed Shoot Day — Klipspringer",
+    "note": "Script signed off; shoot confirmed for 1 Oct, 12:00–16:00 (Francois's reply, 22 Sept)."
+  },
+  {
     "type": "arc",
     "id": "arc-sept",
     "key": "2026-09",
