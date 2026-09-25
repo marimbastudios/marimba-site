@@ -61,6 +61,43 @@
   {
     "date": "2026-09-22",
     "summary": "Francois replied to all three pending review items: approved the Pillar 03 \"New Ways of Seeing\" carousel (with a caption addition) for posting today; confirmed the pre-production shoot for 1 Oct, 12:00–16:00. Story Bank reply is still outstanding, due 23 Sept.",
-    "completed": []
+    "completed": [
+      "Story Bank request fulfilled — 4 new stories received"
+    ],
+    "completedPosts": [
+      "pillar03-newwaysofseeing"
+    ]
+  },
+  {
+    "date": "2026-09-24",
+    "summary": "Francois's Story Bank voice note fully transcribed and banked (elephant/terrapin, water monitor/crocodile, small buffalo calf, snake in the tree). Two of the four turned out to be richer retellings of existing signature stories; two are genuinely new. KD sent the actual shipped Pillar 04 reference file — corrected against real pixels, not memory: the campfire icon is a real Midjourney-rendered 3D icon (extracted from the original asset, not the superseded line-icon set in 03_Icons), the animal reference sits inline at the end of the headline sentence (not as a top accent), and slide 2/3 use the ornamental rust divider + sign-off + real circular badge exactly as shipped. Both stories rebuilt a second time against this confirmed reference, still with 2 design variations each (1A/1B buffalo calf, 2A/2B water monitor) in one approval PDF.",
+    "completed": [
+      "Story Bank fully transcribed and banked with real content, not placeholders",
+      "Corrected against the actual shipped Pillar 04 reference file KD sent (not assumption)",
+      "Extracted the real campfire icon from its original Midjourney asset — retired the superseded 03_Icons line-icon set",
+      "Moved the animal reference inline into the headline text, matching the real shipped convention",
+      "Added the rust ornamental divider, sign-off, and real circular badge to slide 2 (previously only on slide 3)",
+      "Delivered 2 design variations per story (4 total) in one combined approval PDF, v2"
+    ]
+  },
+  {
+    "date": "2026-09-24",
+    "summary": "Added client-specific approval notes to both review cards — why each design option fits Francois's own voice/psychology (verbatim story material, 'integrated Francois' identity preserved, banned-word check), pushed the send date to Friday 25 Sept to avoid posting into today's Heritage Day/Braai Day social noise, and included a request for a ~1-month Zoom progress update next week.",
+    "completed": [
+      "Wrote option-specific approval notes for 1A/1B and 2A/2B grounded in Francois's known preferences",
+      "Recommended holding both posts for Friday 25 Sept instead of Heritage Day itself",
+      "Added a request for a next-week Zoom progress/update call into the client-facing notes"
+    ]
+  },
+  {
+    "date": "2026-09-24",
+    "summary": "Francois approved Option 1A (buffalo calf, firelight cover) and Option 2A (water monitor, starlit fire cover) — both post Friday 25 Sept. Options 1B and 2B are banked for future posts, keeping the Story Bank ahead of schedule with an extra ready-to-go carousel beyond this month's plan. This closes out September's two-week posting cadence (Pillar 03 + Pillar 04), with pre-production materials and all client-facing questions already sent ahead of the 1 Oct shoot.",
+    "completed": [
+      "Francois approved Option 1A and Option 2A for Friday posting",
+      "Banked Option 1B and Option 2B as an extra ready-made carousel beyond the planned two-week run",
+      "Confirmed two weeks of September posting cadence complete (Pillar 03 + Pillar 04)",
+      "Pre-production pack and all outstanding client questions already sent ahead of 1 Oct shoot",
+      "Requested a Zoom progress update for next week; proposed specific times since none were given"
+    ]
   }
 ]

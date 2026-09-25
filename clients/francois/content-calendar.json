@@ -12,6 +12,24 @@
     "title": "Bush Lessons, Applied"
   },
   {
+    "id": "pillar03-newwaysofseeing",
+    "date": "2026-09-22",
+    "pillar": "Pillar 03",
+    "title": "New Ways of Seeing"
+  },
+  {
+    "id": "pillar04-shot-i-almost-had",
+    "date": "2026-09-25",
+    "pillar": "Pillar 04",
+    "title": "The Shot I Almost Had (Option 1A)"
+  },
+  {
+    "id": "pillar04-what-i-didnt-see-coming",
+    "date": "2026-09-25",
+    "pillar": "Pillar 04",
+    "title": "What I Didn't See Coming (Option 2A)"
+  },
+  {
     "type": "phase",
     "id": "preprod-shoot-batch2",
     "startDate": "2026-09-29",

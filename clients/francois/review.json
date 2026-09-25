@@ -5,7 +5,7 @@
       "id": "pillar03-new-ways-of-seeing",
       "title": "Pillar 03 — \"New Ways of Seeing\" carousel",
       "subtitle": "3 slides + caption",
-      "status": "pending",
+      "status": "approved",
       "due": "2026-09-22",
       "images": [
         {
@@ -21,7 +21,8 @@
           "caption": "3. The Point"
         }
       ],
-      "ask": "Reply APPROVED (or flag a tweak) and this posts Tuesday."
+      "ask": "Reply APPROVED (or flag a tweak) and this posts Tuesday.",
+      "bankedDate": "2026-09-22"
     },
     {
       "id": "pillar04-story-bank-request",
@@ -36,6 +37,42 @@
       "subtitle": "Klipspringer script + 3 bonus interview questions",
       "status": "pending",
       "ask": "Confirm the script is good to shoot, and pick a day next week — 3 to 4 hours, either 10am–2pm or 12pm–4pm."
+    },
+    {
+      "id": "buffalo-calf-imperfect-shot",
+      "title": "\"The Shot I Almost Had\" (small buffalo calf) — Option 1A approved",
+      "subtitle": "Francois approved Option 1A (firelight cover). Posting Friday 25 Sept. Option 1B banked for a future post.",
+      "status": "approved",
+      "due": "2026-09-25",
+      "images": [
+        {
+          "src": "/clients/francois/review/buffalo_calf_option1a_cover.png",
+          "caption": "1A — Firelight cover"
+        },
+        {
+          "src": "/clients/francois/review/buffalo_calf_option1b_cover.png",
+          "caption": "1B — Green bushveld cover"
+        }
+      ],
+      "ask": "<strong>Timing:</strong> Holding this for tomorrow (Fri 25 Sept), not today — today's feed is wall-to-wall Heritage Day/Braai Day content, and organic posts tend to get buried in that noise. Posting the day after clears the clutter.<br><br><strong>Cover:</strong> The Shot I Almost Had<br><br><strong>Option 1A — firelight:</strong> Keeps the campfire visual thread running (the 'told at a fire, not a slide' identity) — moodier, intimate, night-time read.<br><strong>Option 1B — green bushveld, daylight:</strong> Closer to the literal moment as you told it — calf alone on a gravel road in daylight. More grounded, less staged.<br>Both keep your exact story beats and your own line, word for word — nothing paraphrased into coach-speak.<br><br><strong>Caption:</strong> I had a small buffalo calf lined up — alone on a gravel road, completely still. I wanted a better angle. Moved the car a few metres. By the time I looked back up, it was gone. Just an empty road where the shot used to be.<br><br>I didn't miss it because I was too slow. I missed it because I was waiting for perfect.<br><br>That's the trap for a lot of business owners too — holding back the imperfect version because the perfect one is still one adjustment away. It never comes. The opportunity does, once, and then it's back in the bush.<br><br>Don't wait to be perfect in your imperfection.<br><br>What's the shot you've been waiting to line up perfectly, instead of just taking?<br><br>#BushLessons #NewWaysOfSeeing #Leadership #ExecutiveCoaching<br><br>Reply 1A or 1B, or APPROVED for your favorite as-is.<br><br><strong>Also:</strong> we're coming up on a month working together — would love to grab 20-30 min on Zoom next week for an update and progress check. Let us know a time that works."
+    },
+    {
+      "id": "water-monitor-crocodile",
+      "title": "\"What I Didn't See Coming\" (water monitor / crocodile) — Option 2A approved",
+      "subtitle": "Francois approved Option 2A (starlit fire cover). Posting Friday 25 Sept. Option 2B banked for a future post.",
+      "status": "approved",
+      "due": "2026-09-25",
+      "images": [
+        {
+          "src": "/clients/francois/review/water_monitor_option2a_cover.png",
+          "caption": "2A — Starlit fire cover"
+        },
+        {
+          "src": "/clients/francois/review/water_monitor_option2b_cover.png",
+          "caption": "2B — Green bushveld road cover"
+        }
+      ],
+      "ask": "<strong>Timing:</strong> Same as Option 1 — holding for tomorrow (Fri 25 Sept) rather than posting into today's Heritage Day noise.<br><br><strong>Cover:</strong> What I Didn't See Coming<br><br><strong>Option 2A — starlit fire:</strong> Same campfire-storytelling thread as 1A, tenser and moodier — fits the 'zoomed in, then it exploded' beat.<br><strong>Option 2B — green bushveld road, daylight:</strong> A calmer, literal establishing shot of the riverbank setting — lets the caption carry the tension instead of the image.<br>This is genuinely new material (no earlier post covers this one) and it's self-contained — good one to bank cleanly either way.<br><br><strong>Caption:</strong> I was in a hide on a riverbank, camera zoomed right in on a water monitor moving toward a crocodile's nest. I had the shot lined up, patient, waiting.<br><br>Then the whole scene exploded. The monitor bolted at full speed.<br><br>What I hadn't seen — because it was outside my frame — was the crocodile, already moving to protect its eggs.<br><br>Most business owners live zoomed in. Day-to-day, task to task, deal to deal. That's necessary. But it isn't enough on its own — you also need to zoom out. Scan the wider landscape. Notice what's shifting before it's already on top of you.<br><br>Whatever's coming for your business rarely announces itself inside the frame you're already watching.<br><br>Where in your business are you zoomed in, when you need to be zoomed out?<br><br>#BushLessons #NewWaysOfSeeing #Leadership #ExecutiveCoaching<br><br>Reply 2A or 2B, or APPROVED for your favorite as-is."
     }
   ]
 }
