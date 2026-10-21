@@ -88,6 +88,21 @@
         }
       ],
       "ask": "Approved: \"Cover: B. Rest is good.\""
+    },
+    {
+      "id": "pillar06-break-away-from-the-herd",
+      "title": "Pillar 06 — \"Break away from the herd\" carousel — Cover B approved",
+      "subtitle": "Francois approved Cover B (storm sky) and changed 'happy' to 'curious' in the story slide and caption. Ready to post.",
+      "status": "approved",
+      "due": "2026-10-13",
+      "bankedDate": "2026-10-13",
+      "images": [
+        {
+          "src": "/clients/francois/review/pillar06_break_away_from_herd_cover.jpg",
+          "caption": "Cover B — Storm sky"
+        }
+      ],
+      "ask": "Approved: Cover B, with 'curious' in place of 'happy'."
     }
   ]
 }
