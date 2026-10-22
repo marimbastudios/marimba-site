@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kuda Francis Jnr — Live Events & Music Coverage · Marimba Studios</title>
+<meta name="description" content="Camera operator available for live events, music productions and multi-day shoots. Sony kit. Johannesburg.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --black:        #0b0b0b;
+  --surface:      #111019;
+  --deep:         #0E0D14;
+  --purple:       #6248CC;
+  --purple-vivid: #7C5CE8;
+  --purple-soft:  #A78BF0;
+  --purple-deep:  #2E1E6E;
+  --gold:         #C4A86A;
+  --border-gold:  rgba(196,168,106,0.15);
+  --ivory:        #EDE9E3;
+  --muted:        #908A83;
+  --border:       #1A1820;
+  --border-mid:   #252030;
+  --serif: 'Cormorant Garamond', serif;
+  --sans:  'Inter', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  background: var(--black);
+  color: var(--ivory);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+a { text-decoration: none; color: inherit; }
+
+/* ── NAV ── */
+nav {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.2rem 3rem;
+  border-bottom: 1px solid var(--border);
+  background: var(--black);
+}
+.nav-logo { display: flex; align-items: center; gap: 0.65rem; }
+.nav-name { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ivory); }
+.nav-cta {
+  padding: 0.5rem 1.3rem;
+  background: var(--purple); color: var(--ivory);
+  font-size: 0.7rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+  transition: background 0.2s;
+}
+.nav-cta:hover { background: var(--purple-vivid); }
+
+/* ── HERO ── */
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+.hero-glow {
+  position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(ellipse 45% 55% at 10% 55%, rgba(98,72,204,0.09) 0%, transparent 60%);
+}
+.hero-left {
+  position: relative; z-index: 1;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 6rem 3rem 4rem;
+}
+.available-pill {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ivory);
+  background: rgba(255,255,255,0.04); border: 1px solid var(--border-mid);
+  padding: 0.3rem 0.85rem; margin-bottom: 2.5rem; width: fit-content;
+}
+.available-pill::before {
+  content: ''; width: 6px; height: 6px; border-radius: 50%;
+  background: #4ADE80; box-shadow: 0 0 6px #4ADE80; flex-shrink: 0;
+}
+.hero-name {
+  font-family: var(--serif);
+  font-size: clamp(3.2rem, 7vw, 6.2rem);
+  font-weight: 600; line-height: 0.92; letter-spacing: -0.01em;
+  color: var(--ivory); margin-bottom: 0.2em;
+}
+.hero-name em { font-style: italic; color: var(--purple-soft); display: block; }
+.hero-role {
+  font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--muted); margin: 1.4rem 0 2rem;
+}
+.hero-bio {
+  max-width: 440px; font-size: 0.92rem; color: var(--muted); line-height: 1.8; margin-bottom: 2.5rem;
+}
+.hero-bio strong { color: var(--ivory); font-weight: 500; }
+.hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.8rem 1.8rem; background: var(--purple); color: var(--ivory);
+  font-size: 0.7rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase;
+  transition: background 0.2s;
+}
+.btn-primary:hover { background: var(--purple-vivid); }
+.btn-ghost {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.8rem 1.8rem; border: 1px solid var(--border-mid); color: var(--muted);
+  font-size: 0.7rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase;
+  transition: border-color 0.2s, color 0.2s;
+}
+.btn-ghost:hover { border-color: var(--purple-soft); color: var(--ivory); }
+
+/* Hero photo — right panel */
+.hero-right {
+  position: relative; overflow: hidden;
+}
+.hero-right img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: top center;
+  opacity: 0.8;
+  filter: grayscale(8%);
+}
+.hero-right::before {
+  content: ''; position: absolute; inset: 0; z-index: 2; pointer-events: none;
+  background: linear-gradient(90deg, #0b0b0b 0%, transparent 35%);
+}
+.hero-right::after {
+  content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background: linear-gradient(180deg, rgba(11,11,11,0.5) 0%, transparent 20%, transparent 80%, rgba(11,11,11,0.7) 100%);
+}
+.hero-right-label {
+  position: absolute; bottom: 1.5rem; left: 1.5rem; z-index: 3;
+  font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(237,233,227,0.45);
+}
+
+/* ── STATS ── */
+.stats {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+  background: var(--deep);
+}
+.stat { padding: 2rem; border-right: 1px solid var(--border); text-align: center; }
+.stat:last-child { border-right: none; }
+.stat-number { font-family: var(--serif); font-size: 2.4rem; font-weight: 600; color: var(--purple-soft); line-height: 1; display: block; margin-bottom: 0.3rem; }
+.stat-label { font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
+
+/* ── SECTION ── */
+.section { padding: 5rem 3rem; }
+.section-eyebrow {
+  display: flex; align-items: center; gap: 0.8rem;
+  font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--purple-soft); margin-bottom: 1.5rem;
+}
+.section-eyebrow::before { content: ''; display: block; width: 24px; height: 1px; background: var(--purple); }
+.section-heading { font-family: var(--serif); font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 600; line-height: 1.05; color: var(--ivory); margin-bottom: 0.6rem; }
+.section-heading em { font-style: italic; color: var(--purple-soft); }
+.section-sub { font-size: 0.875rem; color: var(--muted); max-width: 520px; line-height: 1.75; margin-bottom: 3rem; }
+
+/* ── VIDEO GRID — MAIN ── */
+.port-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  background: var(--border);
+}
+.port-tile {
+  position: relative; overflow: hidden;
+  background: var(--surface); cursor: pointer;
+  aspect-ratio: 16/9;
+}
+.port-tile-wide {
+  grid-column: span 2;
+}
+
+.yt-thumb {
+  width: 100%; height: 100%; background: var(--surface);
+  display: flex; align-items: center; justify-content: center;
+  position: relative; pointer-events: none;
+}
+.yt-thumb img {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; opacity: 0.6; pointer-events: none;
+  transition: opacity 0.35s, transform 0.45s;
+  animation: kbZoom 9s ease-in-out infinite alternate;
+}
+@keyframes kbZoom {
+  from { transform: scale(1) translateX(0); }
+  to   { transform: scale(1.07) translateX(-1%); }
+}
+.port-tile:hover .yt-thumb img { opacity: 0.85; animation-play-state: paused; }
+.port-tile iframe {
+  position: absolute; inset: 0; width: 100%; height: 100%; border: none; display: none;
+  pointer-events: auto;
+}
+
+.play-btn {
+  position: relative; z-index: 2;
+  width: 60px; height: 60px; border-radius: 50%; background: var(--purple);
+  display: flex; align-items: center; justify-content: center;
+  transition: transform 0.2s, background 0.2s;
+}
+.play-btn svg { margin-left: 4px; }
+.port-tile:hover .play-btn { background: var(--purple-vivid); transform: scale(1.1); }
+
+.port-label {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 2.5rem 1.2rem 1rem;
+  background: linear-gradient(transparent, rgba(11,11,11,0.92));
+  z-index: 3; pointer-events: none;
+}
+.port-label-type { font-size: 0.56rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--purple-soft); display: block; margin-bottom: 0.2rem; }
+.port-label-name { font-family: var(--serif); font-size: 1rem; font-weight: 600; color: var(--ivory); }
+
+/* ── SHORTS / VERTICAL ── */
+.shorts-section { background: var(--deep); border-top: 1px solid var(--border); }
+.shorts-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2px;
+  background: var(--border);
+}
+.short-tile {
+  position: relative; overflow: hidden; cursor: pointer;
+  aspect-ratio: 9/16;
+  background: var(--surface);
+}
+.short-tile .yt-thumb img { opacity: 0.65; }
+.short-tile:hover .yt-thumb img { opacity: 0.9; }
+.play-btn-sm {
+  width: 48px; height: 48px; border-radius: 50%; background: var(--purple);
+  display: flex; align-items: center; justify-content: center;
+  position: relative; z-index: 2;
+  transition: transform 0.2s, background 0.2s;
+}
+.play-btn-sm svg { margin-left: 3px; }
+.short-tile:hover .play-btn-sm { background: var(--purple-vivid); transform: scale(1.1); }
+.short-tile iframe {
+  position: absolute; inset: 0; width: 100%; height: 100%; border: none; display: none;
+  pointer-events: auto;
+}
+
+/* ── KIT STRIP ── */
+.kit-strip {
+  border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+  background: var(--surface);
+  display: grid; grid-template-columns: repeat(4, 1fr);
+}
+.kit-item {
+  padding: 2rem 1.8rem; border-right: 1px solid var(--border);
+}
+.kit-item:last-child { border-right: none; }
+.kit-role { font-size: 0.58rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--purple-soft); display: block; margin-bottom: 0.4rem; }
+.kit-name { font-family: var(--serif); font-size: 1.15rem; font-weight: 600; color: var(--ivory); line-height: 1.2; }
+.kit-note { font-size: 0.72rem; color: var(--muted); margin-top: 0.2rem; }
+
+/* ── FULL PORTFOLIO SPLIT ── */
+.portfolio-split {
+  display: grid; grid-template-columns: 1fr 1fr;
+  border-top: 1px solid var(--border);
+}
+.portfolio-split-left {
+  padding: 4rem 3rem;
+  border-right: 1px solid var(--border);
+}
+.portfolio-split-right {
+  background: var(--deep);
+  padding: 4rem 3rem;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.portfolio-split-right .section-eyebrow { margin-bottom: 1rem; }
+.film-callout {
+  border-left: 3px solid var(--purple);
+  padding-left: 1.5rem;
+  margin-bottom: 2rem;
+}
+.film-callout-label { font-size: 0.6rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--purple-soft); display: block; margin-bottom: 0.5rem; }
+.film-callout-title { font-family: var(--serif); font-size: 1.6rem; font-weight: 600; color: var(--ivory); line-height: 1.2; margin-bottom: 0.6rem; }
+.film-callout-title em { font-style: italic; color: var(--purple-soft); }
+.film-callout-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.7; }
+
+/* ── CONTACT ── */
+.contact-section {
+  background: var(--deep); border-top: 1px solid var(--border);
+  padding: 5rem 3rem;
+}
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+.contact-h { font-family: var(--serif); font-size: clamp(2rem, 4.5vw, 3.5rem); font-weight: 600; line-height: 1; color: var(--ivory); margin-bottom: 1rem; }
+.contact-h em { font-style: italic; color: var(--purple-soft); }
+.contact-para { font-size: 0.875rem; color: var(--muted); line-height: 1.75; margin-bottom: 2rem; }
+.contact-rows { display: flex; flex-direction: column; gap: 1rem; margin-top: 1rem; }
+.contact-row { display: flex; gap: 1.5rem; align-items: baseline; }
+.contact-lbl { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); min-width: 80px; flex-shrink: 0; }
+.contact-val { font-size: 0.875rem; color: var(--ivory); transition: color 0.2s; }
+.contact-val:hover { color: var(--purple-soft); }
+
+/* ── FOOTER ── */
+footer {
+  padding: 1.8rem 3rem; border-top: 1px solid var(--border);
+  display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
+}
+.footer-copy { font-size: 0.7rem; color: var(--muted); }
+.footer-right { font-size: 0.68rem; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; }
+
+/* ── FADE UP ── */
+.fade-up { opacity: 0; transform: translateY(18px); transition: opacity 0.65s ease, transform 0.65s ease; }
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  nav { padding: 1rem 1.5rem; }
+  .hero { grid-template-columns: 1fr; }
+  .hero-right { display: none; }
+  .hero-left { padding: 5rem 1.5rem 3rem; }
+  .section { padding: 3.5rem 1.5rem; }
+  .stats { grid-template-columns: repeat(2, 1fr); }
+  .port-grid { grid-template-columns: 1fr; }
+  .port-tile-wide { grid-column: span 1; }
+  .shorts-row { grid-template-columns: 1fr; }
+  .kit-strip { grid-template-columns: repeat(2, 1fr); }
+  .portfolio-split { grid-template-columns: 1fr; }
+  .portfolio-split-left { border-right: none; border-bottom: 1px solid var(--border); }
+  .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  footer { padding: 1.5rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="https://marimbastudios.co.za" target="_blank" class="nav-logo">
+    <svg width="26" height="26" viewBox="0 0 28 28" fill="none">
+      <polygon points="14,2 25,8 25,20 14,26 3,20 3,8" fill="none" stroke="#6248CC" stroke-width="1.5"/>
+      <polygon points="14,7 21,11 21,19 14,23 7,19 7,11" fill="none" stroke="#6248CC" stroke-width="0.8" opacity="0.4"/>
+    </svg>
+    <span class="nav-name">Marimba Studios</span>
+  </a>
+  <a href="https://marimbastudios.co.za/kuda" target="_blank" class="nav-cta">Full Portfolio →</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glow"></div>
+
+  <div class="hero-left fade-up">
+    <div class="available-pill">Available · Events &amp; Music Shoots</div>
+    <h1 class="hero-name">
+      Kuda
+      <em>Francis Jnr</em>
+    </h1>
+    <p class="hero-role">Camera Operator &nbsp;·&nbsp; Live Events &nbsp;·&nbsp; Music Coverage</p>
+    <p class="hero-bio">
+      Johannesburg-based filmmaker with on-ground experience in <strong>live music events, performances and multi-day productions.</strong>
+      Sony kit. Production-disciplined. Integrates into any crew on day one.
+    </p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Get in Touch</a>
+      <a href="#work" class="btn-ghost">See the Work ↓</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <img src="https://marimbastudios.co.za/kuda.png" alt="Kuda Francis Jnr — Camera Operator on set with gimbal at live event">
+    <span class="hero-right-label">On Set · Live Event</span>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat"><span class="stat-number">3+</span><span class="stat-label">Years On-Set</span></div>
+  <div class="stat"><span class="stat-number">Sony</span><span class="stat-label">A7C5 · A7C · ZV-E10</span></div>
+  <div class="stat"><span class="stat-number">JHB</span><span class="stat-label">SA-Wide Available</span></div>
+  <div class="stat"><span class="stat-number">Full</span><span class="stat-label">Shoot &amp; Edit Package</span></div>
+</div>
+
+<!-- MAIN VIDEO SECTION -->
+<section class="section" id="work">
+  <div class="section-eyebrow fade-up">Live Events &amp; Music</div>
+  <h2 class="section-heading fade-up">Live Coverage.<br><em>From the floor up.</em></h2>
+  <p class="section-sub fade-up">Three clips from recent productions — live performance coverage, crowd energy, cinematic artist coverage, and behind the scenes on set. Click any tile to play.</p>
+
+  <div class="port-grid fade-up">
+
+    <!-- Video 1: Group Performance / Crowd Energy — spans 2 cols -->
+    <div class="port-tile port-tile-wide" onclick="playYT(this,'WzZdlsR8IWA')">
+      <div class="yt-thumb">
+        <img src="https://img.youtube.com/vi/WzZdlsR8IWA/maxresdefault.jpg" alt="Group Performance & Crowd Energy Edit">
+        <div class="play-btn"><svg width="18" height="18" viewBox="0 0 18 18" fill="white"><polygon points="4,2 16,9 4,16"/></svg></div>
+      </div>
+      <iframe allow="autoplay; fullscreen" allowfullscreen></iframe>
+      <div class="port-label">
+        <span class="port-label-type">Live Events · Performance</span>
+        <span class="port-label-name">Group Performance &amp; Crowd Energy Edit</span>
+      </div>
+    </div>
+
+    <!-- Video 2: Artist Airport Arrival — 1 col -->
+    <div class="port-tile" onclick="playYT(this,'Nh1PcVD-v2k')">
+      <div class="yt-thumb">
+        <img src="https://img.youtube.com/vi/Nh1PcVD-v2k/maxresdefault.jpg" alt="Artist Airport Arrival — Cinematic Coverage">
+        <div class="play-btn"><svg width="18" height="18" viewBox="0 0 18 18" fill="white"><polygon points="4,2 16,9 4,16"/></svg></div>
+      </div>
+      <iframe allow="autoplay; fullscreen" allowfullscreen></iframe>
+      <div class="port-label">
+        <span class="port-label-type">Live Events · Cinematic</span>
+        <span class="port-label-name">Artist Airport Arrival — Cinematic Coverage</span>
+      </div>
+    </div>
+
+    <!-- Video 3: Music Video BTS — spans full width -->
+    <div class="port-tile" style="grid-column: span 1;" onclick="playYT(this,'vL6ewx-eXWc')">
+      <div class="yt-thumb">
+        <img src="https://img.youtube.com/vi/vL6ewx-eXWc/maxresdefault.jpg" alt="Music Video BTS — Set Series 01">
+        <div class="play-btn"><svg width="18" height="18" viewBox="0 0 18 18" fill="white"><polygon points="4,2 16,9 4,16"/></svg></div>
+      </div>
+      <iframe allow="autoplay; fullscreen" allowfullscreen></iframe>
+      <div class="port-label">
+        <span class="port-label-type">Music Video · Behind The Scenes</span>
+        <span class="port-label-name">Music Video Set — BTS Series 01</span>
+      </div>
+    </div>
+
+    <!-- Callout card -->
+    <div style="grid-column: span 2; background: var(--deep); border-top: none; display: flex; flex-direction: column; justify-content: center; padding: 2.5rem;">
+      <p style="font-size:0.58rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--purple-soft); margin-bottom:0.8rem;">Available Now</p>
+      <p style="font-family:var(--serif); font-size:1.6rem; font-weight:600; color:var(--ivory); line-height:1.2; margin-bottom:0.7rem;">Multi-day productions, live sets, and music coverage.</p>
+      <p style="font-size:0.82rem; color:var(--muted); line-height:1.7; margin-bottom:1.5rem;">Experienced working alongside larger production crews. Full kit — Sony A7C5, A7C, ZV-E10, gimbal, audio. Shoot-and-edit package available.</p>
+      <a href="#contact" class="btn-ghost" style="width:fit-content;">Talk About Your Project →</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- VERTICAL / SOCIAL SECTION -->
+<section class="shorts-section section">
+  <div class="section-eyebrow fade-up">Short Form · Vertical</div>
+  <h2 class="section-heading fade-up">Social <em>Content</em>.</h2>
+  <p class="section-sub fade-up">Vertical cuts — designed for Reels, TikTok and social-first distribution.</p>
+  <div class="shorts-row fade-up">
+
+    <div class="short-tile" onclick="playYT(this,'NvyW-JEUDJM')">
+      <div class="yt-thumb">
+        <img src="https://img.youtube.com/vi/NvyW-JEUDJM/hqdefault.jpg" alt="Vertical Cut 01">
+        <div class="play-btn play-btn-sm"><svg width="14" height="14" viewBox="0 0 18 18" fill="white"><polygon points="4,2 16,9 4,16"/></svg></div>
+      </div>
+      <iframe allow="autoplay; fullscreen" allowfullscreen></iframe>
+      <div class="port-label">
+        <span class="port-label-type">Short · Vertical</span>
+        <span class="port-label-name">Vertical Cut 01</span>
+      </div>
+    </div>
+
+    <div class="short-tile" onclick="playYT(this,'h1NAF7z3vzU')">
+      <div class="yt-thumb">
+        <img src="https://img.youtube.com/vi/h1NAF7z3vzU/hqdefault.jpg" alt="Vertical Cut 02">
+        <div class="play-btn play-btn-sm"><svg width="14" height="14" viewBox="0 0 18 18" fill="white"><polygon points="4,2 16,9 4,16"/></svg></div>
+      </div>
+      <iframe allow="autoplay; fullscreen" allowfullscreen></iframe>
+      <div class="port-label">
+        <span class="port-label-type">Short · Vertical</span>
+        <span class="port-label-name">Vertical Cut 02</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- KIT -->
+<div class="kit-strip fade-up">
+  <div class="kit-item">
+    <span class="kit-role">Primary Body</span>
+    <p class="kit-name">Sony A7C5</p>
+    <p class="kit-note">Full-frame. Flagship.</p>
+  </div>
+  <div class="kit-item">
+    <span class="kit-role">Second Body</span>
+    <p class="kit-name">Sony A7C + ZV-E10</p>
+    <p class="kit-note">Multi-camera setups.</p>
+  </div>
+  <div class="kit-item">
+    <span class="kit-role">Stabilisation</span>
+    <p class="kit-name">Gimbal + Handheld</p>
+    <p class="kit-note">Smooth entrances, transitions.</p>
+  </div>
+  <div class="kit-item">
+    <span class="kit-role">Post-Production</span>
+    <p class="kit-name">DaVinci Resolve + Premiere Pro</p>
+    <p class="kit-note">Full colour grading and edit.</p>
+  </div>
+</div>
+
+<!-- FULL PORTFOLIO SPLIT -->
+<div class="portfolio-split fade-up">
+  <div class="portfolio-split-left">
+    <div class="section-eyebrow">Full Portfolio</div>
+    <h2 class="section-heading">Three years on-set.<br><em>All the work.</em></h2>
+    <p style="font-size:0.875rem; color:var(--muted); line-height:1.75; margin-bottom:2rem; max-width:420px;">
+      Conferences, corporate productions, weddings, pageants, independent film — the full range is on the profile page. Three years at CineOne across major national brand productions.
+    </p>
+    <a href="https://marimbastudios.co.za/kuda" target="_blank" class="btn-primary">marimbastudios.co.za/kuda →</a>
+  </div>
+  <div class="portfolio-split-right">
+    <p class="section-eyebrow">Experience</p>
+    <div class="film-callout">
+      <span class="film-callout-label">CineOne · 3 Years</span>
+      <h3 class="film-callout-title">Production Assistant &amp; <em>Camera Operator.</em></h3>
+      <p class="film-callout-desc">Major national brand productions. Full credits available on request — NDA applies.</p>
+    </div>
+    <div class="film-callout">
+      <span class="film-callout-label">Marimba Studios · Founder</span>
+      <h3 class="film-callout-title">First Camera on <em>live productions.</em></h3>
+      <p class="film-callout-desc">Corporate events, conferences, private productions — shoot, audio and edit package.</p>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<section id="contact" class="contact-section">
+  <div class="contact-grid">
+    <div>
+      <p class="section-eyebrow" style="margin-bottom:1.5rem">Book KD</p>
+      <h2 class="contact-h">Your next event<br>needs <em>the right eye.</em></h2>
+      <p class="contact-para">Send a brief, dates, or just a concept. I'll confirm availability and what kit comes — same day.</p>
+      <a href="https://wa.me/27614353601" target="_blank" class="btn-primary">Message on WhatsApp</a>
+    </div>
+    <div class="contact-rows" style="padding-top:0.5rem">
+      <div class="contact-row"><span class="contact-lbl">Based</span><span class="contact-val">Johannesburg · SA-Wide</span></div>
+      <div class="contact-row"><span class="contact-lbl">Email</span><a href="mailto:kuda@marimbastudios.co.za" class="contact-val">kuda@marimbastudios.co.za</a></div>
+      <div class="contact-row"><span class="contact-lbl">Profile</span><a href="https://marimbastudios.co.za/kuda" target="_blank" class="contact-val">marimbastudios.co.za/kuda</a></div>
+      <div class="contact-row"><span class="contact-lbl">Response</span><span class="contact-val" style="color:var(--muted)">Within 4 hours · business days</span></div>
+      <div class="contact-row"><span class="contact-lbl">Format</span><span class="contact-val" style="color:var(--muted)">Multi-day, single event, recurring</span></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p class="footer-copy">© 2026 Marimba Studios · Kuda Francis Jnr · Johannesburg</p>
+  <p class="footer-right">marimbastudios.co.za</p>
+</footer>
+
+<script>
+  function playYT(tile, videoId) {
+    const thumb = tile.querySelector('.yt-thumb');
+    const iframe = tile.querySelector('iframe');
+    if (iframe.src && iframe.src !== 'about:blank') return;
+    iframe.src = 'https://www.youtube.com/embed/' + videoId + '?autoplay=1&rel=0&modestbranding=1';
+    iframe.style.display = 'block';
+    if (thumb) thumb.style.display = 'none';
+  }
+
+  const fadeEls = document.querySelectorAll('.fade-up');
+  const fadeObs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); fadeObs.unobserve(e.target); } });
+  }, { threshold: 0.06 });
+  fadeEls.forEach(el => fadeObs.observe(el));
+</script>
+</body>
+</html>
