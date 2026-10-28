@@ -399,7 +399,8 @@ const ROWS = [
   {category:"Execution — Posting Sprint", item:"Animated video — October", note:"Scheduled for October, after September's posting run. Not part of September's content.", phase:"execution", scheduled:true},
   {category:"Execution — Posting Sprint", item:"Pre-production & shooting — next batch", note:"Producing Pillars 05–06 for the next posting run (29 Sept – 6 Oct).", phase:"execution"},
   {category:"Execution — Posting Sprint", item:"Pre-production pack and all outstanding client questions already sent ahead of 1 Oct shoot", note:"Francois has everything he needs ahead of the shoot day — nothing outstanding on Marimba's side.", phase:"execution"},
-  {category:"Execution — Posting Sprint", item:"Banked Option 1B and Option 2B as an extra ready-made carousel beyond the planned two-week run", note:"Story Bank is running ahead of schedule — a third carousel is ready to go whenever it's needed.", phase:"execution"}
+  {category:"Execution — Posting Sprint", item:"Banked Option 1B and Option 2B as an extra ready-made carousel beyond the planned two-week run", note:"Story Bank is running ahead of schedule — a third carousel is ready to go whenever it's needed.", phase:"execution"},
+  {category:"Execution — Posting Sprint", item:"World pack: six places, A or B", note:"Approved character placed in a bushveld place for each pillar, two options each. Awaiting your choice before any animation.", phase:"execution", externallyBlocked:true}
 ];
 // Movement history — one snapshot per dashboard-update-prep run, sourced
 // from the "Francois — Progress Movement Log" Drive doc (source of truth).
@@ -498,8 +499,11 @@ async function loadData(){
                          .sort((a,b) => a.date.localeCompare(b.date));
   const phases = calendar.filter(c => c.type === "phase")
                           .sort((a,b) => a.startDate.localeCompare(b.startDate));
-  const undone = posts.filter(c => !c.done);
-  const next = undone.length ? undone.reduce((a,b) => a.date <= b.date ? a : b) : null;
+  const undone = posts.filter(c => !c.done && c.type !== "open-slot");
+  const todayISO = new Date().toISOString().slice(0,10);
+  const upcoming = undone.filter(c => c.date >= todayISO);
+  const pool = upcoming.length ? upcoming : undone;
+  const next = pool.length ? pool.reduce((a,b) => a.date <= b.date ? a : b) : null;
 
   const keynoteBody = document.getElementById("keynoteBody");
   if (next) {

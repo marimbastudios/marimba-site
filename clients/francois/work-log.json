@@ -101,6 +101,14 @@
     ]
   },
   {
+    "date": "2026-09-25",
+    "summary": "Options 1A (\"The Shot I Almost Had\") and 2A (\"What I Didn't See Coming\") posted, closing out September's posting run.",
+    "completedPosts": [
+      "pillar04-shot-i-almost-had",
+      "pillar04-what-i-didnt-see-coming"
+    ]
+  },
+  {
     "date": "2026-10-06",
     "summary": "Francois approved the Pillar 05 carousel, \"The snake was never hidden\" (Cover B, slides and caption as sent). Ready to post today. October plan agreed after the 5 Oct meeting: Tuesday carousels, Thursday videos, October calendar and invoice summary sent for the R5,000 plan, with the optional R1,500 animation add-on awaiting his approval.",
     "completed": [
@@ -108,6 +116,37 @@
       "October content calendar (v2) and invoice summary produced",
       "Studio session meeting outcomes captured: 5 videos, 4 stories plus intro, animation add-on option",
       "Introduction video draft in progress for Thursday 8 Oct"
+    ],
+    "completedPosts": [
+      "pillar05-snake-never-hidden"
+    ]
+  },
+  {
+    "date": "2026-10-07",
+    "summary": "Introduction video finished in two versions, vertical and horizontal. Francois chose the vertical version.",
+    "completed": [
+      "Introduction video edited: vertical and horizontal versions"
+    ]
+  },
+  {
+    "date": "2026-10-08",
+    "summary": "Introduction video posted (vertical version, captioned).",
+    "completedPosts": [
+      "intro-video"
+    ]
+  },
+  {
+    "date": "2026-10-12",
+    "summary": "9–12 Oct: Francois travelled and posted his own content over the weekend. Marimba drafted the \"Your days\" calendar (v3), with Mondays and Saturdays open for Francois's own travel and life posts. Last month's work is complete; the new month starts with Tuesday 13 Oct's carousel.",
+    "completed": [
+      "\"Your days\" calendar v3 drafted"
+    ]
+  },
+  {
+    "date": "2026-10-28",
+    "summary": "Dashboard brought up to date. Your approved character was placed into six bushveld places, one per pillar, each in two options (A wide, B close). The world pack is ready for your A or B choice before anything is animated.",
+    "completed": [
+      "World pack: six places, Option A and B for each pillar, prepared for approval"
     ]
   }
 ]

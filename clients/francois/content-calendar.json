@@ -3,37 +3,43 @@
     "id": "pillar-03",
     "date": "2026-09-15",
     "pillar": "Pillar 03",
-    "title": "Executive Leadership"
+    "title": "Executive Leadership",
+    "format": "carousel"
   },
   {
     "id": "pillar-04",
     "date": "2026-09-17",
     "pillar": "Pillar 04",
-    "title": "Bush Lessons, Applied"
+    "title": "Bush Lessons, Applied",
+    "format": "carousel"
   },
   {
     "id": "pillar03-newwaysofseeing",
     "date": "2026-09-22",
     "pillar": "Pillar 03",
-    "title": "New Ways of Seeing"
+    "title": "New Ways of Seeing",
+    "format": "carousel"
   },
   {
     "id": "pillar04-shot-i-almost-had",
     "date": "2026-09-25",
     "pillar": "Pillar 04",
-    "title": "The Shot I Almost Had (Option 1A)"
+    "title": "The Shot I Almost Had (Option 1A)",
+    "format": "carousel"
   },
   {
     "id": "pillar04-what-i-didnt-see-coming",
     "date": "2026-09-25",
     "pillar": "Pillar 04",
-    "title": "What I Didn't See Coming (Option 2A)"
+    "title": "What I Didn't See Coming (Option 2A)",
+    "format": "carousel"
   },
   {
     "id": "pillar05-snake-never-hidden",
     "date": "2026-10-06",
     "pillar": "Pillar 05",
-    "title": "The snake was never hidden"
+    "title": "The snake was never hidden",
+    "format": "carousel"
   },
   {
     "type": "phase",
@@ -74,5 +80,87 @@
       "Animated video"
     ],
     "note": "Practical coaching content, once trust from September has landed."
+  },
+  {
+    "id": "intro-video",
+    "date": "2026-10-08",
+    "pillar": "Introduction",
+    "title": "Introduction video",
+    "format": "video",
+    "note": "Vertical version, captioned."
+  },
+  {
+    "id": "pillar06-view-from-higher-ground",
+    "date": "2026-10-13",
+    "pillar": "Pillar 06",
+    "title": "The view from higher ground",
+    "format": "carousel",
+    "note": "First post of the new month."
+  },
+  {
+    "id": "video-klipspringer",
+    "date": "2026-10-15",
+    "pillar": "Video",
+    "title": "The Klipspringer",
+    "format": "video"
+  },
+  {
+    "type": "open-slot",
+    "id": "your-day-12",
+    "date": "2026-10-12",
+    "label": "Your day: travel, life, behind the scenes"
+  },
+  {
+    "type": "open-slot",
+    "id": "your-day-17",
+    "date": "2026-10-17",
+    "label": "Your day: travel, life, behind the scenes"
+  },
+  {
+    "type": "open-slot",
+    "id": "your-day-19",
+    "date": "2026-10-19",
+    "label": "Your day: travel, life, behind the scenes"
+  },
+  {
+    "type": "open-slot",
+    "id": "your-day-24",
+    "date": "2026-10-24",
+    "label": "Your day: travel, life, behind the scenes"
+  },
+  {
+    "type": "open-slot",
+    "id": "your-day-26",
+    "date": "2026-10-26",
+    "label": "Your day: travel, life, behind the scenes"
+  },
+  {
+    "type": "open-slot",
+    "id": "your-day-31",
+    "date": "2026-10-31",
+    "label": "Your day: travel, life, behind the scenes"
+  },
+  {
+    "id": "pillar01-possibility",
+    "date": "2026-10-20",
+    "pillar": "Pillar 01",
+    "title": "Possibility",
+    "format": "carousel"
+  },
+  {
+    "id": "pillar02-tracks-you-can-see",
+    "date": "2026-10-27",
+    "pillar": "Pillar 02",
+    "title": "The Tracks You Can See",
+    "format": "carousel",
+    "note": "Post 1 of 2 on Tracks."
+  },
+  {
+    "id": "pillar02-tracks-you-cannot-see",
+    "date": "2026-10-27",
+    "pillar": "Pillar 02",
+    "title": "The Tracks You Cannot See",
+    "format": "carousel",
+    "note": "Post 2 of 2 on Tracks."
   }
 ]
