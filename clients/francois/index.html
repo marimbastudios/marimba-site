@@ -266,7 +266,7 @@
 
     <div class="stats-row">
       <div class="stat"><div class="stat-num" id="pctNum">—</div><div class="stat-label">Complete</div></div>
-      <div class="stat"><div class="stat-num" id="momentumNum">—</div><div class="stat-label" id="momentumLabel">Since September</div></div>
+      <div class="stat"><div class="stat-num" id="momentumNum">—</div><div class="stat-label" id="momentumLabel">Approved by you</div></div>
       <div class="stat"><div class="stat-num"><span class="live-dot"></span><span id="liveClock">--:--:--</span></div><div class="stat-label">Live — Right Now</div></div>
       <div class="stat"><div class="stat-num" id="daysNum">—</div><div class="stat-label">Days Working Together</div></div>
     </div>
@@ -288,6 +288,14 @@
           <div class="keynote-title">Loading…</div>
         </div>
       </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="sec-title">Content Calendar</div>
+    <div class="arc" id="arcStrip"></div>
+    <div class="calendar-list" id="calendarList">
+      <div class="data-unavailable">Loading…</div>
     </div>
   </div>
 
@@ -326,14 +334,6 @@
           <div class="note">Every public page captured before launch — a dated record to measure real growth against, kept permanently, never overwritten.</div>
         </div>
       </div>
-    </div>
-  </div>
-
-  <div class="section">
-    <div class="sec-title">Content Calendar</div>
-    <div class="arc" id="arcStrip"></div>
-    <div class="calendar-list" id="calendarList">
-      <div class="data-unavailable">Loading…</div>
     </div>
   </div>
 
@@ -400,7 +400,7 @@ const ROWS = [
   {category:"Execution — Posting Sprint", item:"Pre-production & shooting — next batch", note:"Producing Pillars 05–06 for the next posting run (29 Sept – 6 Oct).", phase:"execution"},
   {category:"Execution — Posting Sprint", item:"Pre-production pack and all outstanding client questions already sent ahead of 1 Oct shoot", note:"Francois has everything he needs ahead of the shoot day — nothing outstanding on Marimba's side.", phase:"execution"},
   {category:"Execution — Posting Sprint", item:"Banked Option 1B and Option 2B as an extra ready-made carousel beyond the planned two-week run", note:"Story Bank is running ahead of schedule — a third carousel is ready to go whenever it's needed.", phase:"execution"},
-  {category:"Execution — Posting Sprint", item:"World pack: six places, A or B", note:"Approved character placed in a bushveld place for each pillar, two options each. Awaiting your choice before any animation.", phase:"execution", externallyBlocked:true}
+  {category:"Execution — Posting Sprint", item:"World pack: six places, A or B", note:"Approved character placed in a bushveld place for each pillar, two options each. Your choices are approved.", phase:"execution"}
 ];
 // Movement history — one snapshot per dashboard-update-prep run, sourced
 // from the "Francois — Progress Movement Log" Drive doc (source of truth).
@@ -598,6 +598,22 @@ async function loadData(){
     </div>`;
   });
   document.getElementById("calendarList").innerHTML = calHtml || '<div class="data-unavailable">No posts scheduled yet.</div>';
+  // Keep "where we are" at the top: earlier months fold away, current month onward stays open.
+  (function(){
+    const monthStart = new Date().toISOString().slice(0,7) + "-01";
+    const items = [...document.querySelectorAll('#calendarList .cal-item')];
+    const early = timeline.map((c,i) => ({c, el: items[i]})).filter(x => x.el && (x.c.type === "phase" ? x.c.endDate : x.c.date) < monthStart);
+    if (early.length && early.length < items.length) {
+      const d = document.createElement('details');
+      d.className = 'cal-earlier';
+      d.innerHTML = '<summary style="cursor:pointer;color:#9b8bff;font-size:13px;margin:4px 0 10px;">Earlier — ' + early.length + ' items before this month</summary>';
+      early[0].el.parentNode.insertBefore(d, early[0].el);
+      early.forEach(x => d.appendChild(x.el));
+    }
+  })();
+  // "Approved by you": a plain count of approved items, from review.json
+  document.getElementById("momentumNum").textContent = (review.items || []).filter(i => i.status === "approved").length;
+  document.getElementById("momentumLabel").textContent = "Approved by you";
 
   // ---- Daily Activity: a simple "Approved" status + most-recent highlight ----
   const latest = log.slice().sort((a,b) => a.date.localeCompare(b.date)).pop();
@@ -612,8 +628,6 @@ loadData();
 // stays intact below purely as the historical Foundation-phase snapshot
 // log it always was.
 document.getElementById("pctNum").textContent = OVERALL_PCT + "%";
-document.getElementById("momentumNum").textContent = SINCE_SEPT_PCT + "%";
-document.getElementById("momentumLabel").textContent = "Since September";
 
 // days working together — total since Foundation-phase kickoff (2026-08-19).
 // Reverted 2026-09-17 by KD: this briefly counted from the 14 Sept

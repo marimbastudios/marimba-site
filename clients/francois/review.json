@@ -3,33 +3,21 @@
   "items": [
     {
       "id": "world-pack-a-or-b",
-      "title": "Your world: six places, A or B",
-      "subtitle": "Your approved character placed in a bushveld place for each pillar, two options each",
-      "status": "pending",
+      "title": "Your world: six places — your choices approved",
+      "subtitle": "Possibility B, Tracks B, Leadership B, Bush Lessons A, Diagnostics B, Perspective A. Nothing is animated before the next step is agreed.",
+      "status": "approved",
       "images": [
         {
           "src": "/clients/francois/review/character_sheet_locked.jpg",
           "caption": "Your approved character"
         },
         {
-          "src": "/clients/francois/review/world_p1_a.jpg",
-          "caption": "1 Possibility: the fork — Option A (wide)"
-        },
-        {
           "src": "/clients/francois/review/world_p1_b.jpg",
           "caption": "1 Possibility: the fork — Option B (close, golden hour)"
         },
         {
-          "src": "/clients/francois/review/world_p2_a.jpg",
-          "caption": "2 Tracks: the sand — Option A (wide)"
-        },
-        {
           "src": "/clients/francois/review/world_p2_b.jpg",
           "caption": "2 Tracks: the sand — Option B (close, golden hour)"
-        },
-        {
-          "src": "/clients/francois/review/world_p3_a.jpg",
-          "caption": "3 Leadership: the veranda — Option A (wide)"
         },
         {
           "src": "/clients/francois/review/world_p3_b.jpg",
@@ -40,27 +28,16 @@
           "caption": "4 Bush Lessons: the campfire — Option A (wide)"
         },
         {
-          "src": "/clients/francois/review/world_p4_b.jpg",
-          "caption": "4 Bush Lessons: the campfire — Option B (close, golden hour)"
-        },
-        {
-          "src": "/clients/francois/review/world_p5_a.jpg",
-          "caption": "5 Diagnostics: the koppie — Option A (wide)"
-        },
-        {
           "src": "/clients/francois/review/world_p5_b.jpg",
           "caption": "5 Diagnostics: the koppie — Option B (close, golden hour)"
         },
         {
           "src": "/clients/francois/review/world_p6_a.jpg",
           "caption": "6 Perspective: the koppie — Option A (wide)"
-        },
-        {
-          "src": "/clients/francois/review/world_p6_b.jpg",
-          "caption": "6 Perspective: the koppie — Option B (close, golden hour)"
         }
       ],
-      "ask": "Pick A or B for each of the six pillars (or flag a tweak). Nothing is animated until you approve the world. Full pack: <a href=\"/clients/francois/review/world_pack_a_or_b.pdf\">open the PDF</a>."
+      "ask": "Approved: B, B, B, A, B, A.",
+      "bankedDate": "2026-10-30"
     },
     {
       "id": "pillar03-new-ways-of-seeing",
