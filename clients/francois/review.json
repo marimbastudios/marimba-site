@@ -2,6 +2,48 @@
   "_how": "Add an item to 'items' to show it under 'For Your Review'. Fields: id, title, subtitle, due (YYYY-MM-DD), status ('pending' or 'approved'), images [{src:'/clients/francois/review/<file>', caption}], video (embed URL), ask (one line). Empty list = all-caught-up state.",
   "items": [
     {
+      "id": "anniversary-18-golden-edition",
+      "special": true,
+      "stage": "Special occasion · working design, v1",
+      "title": "Your 18 years (Friday 13 November): working design, v1",
+      "subtitle": "A first working design in gold for your 18 years. It is where we have got to so far, not a finished piece: the words, the moments and the look will change with your input.",
+      "status": "pending",
+      "due": "2026-11-06",
+      "images": [
+        {
+          "src": "/clients/francois/review/anniv_v4_1_golden_path.jpg",
+          "caption": "1  The golden path"
+        },
+        {
+          "src": "/clients/francois/review/anniv_v4_2_the_journey.jpg",
+          "caption": "2  The journey"
+        },
+        {
+          "src": "/clients/francois/review/anniv_v4_3_thank_you.jpg",
+          "caption": "3  Thank you"
+        }
+      ],
+      "ask": "Your ideas shape version 2: who would you most like to see this, what should people feel, which moments matter most to you, should your 2008 cartoon be part of it, and what would you add, change or take away? A voice note or 15 minutes on a call is perfect. Version 2 comes back to you before the 13th."
+    },
+    {
+      "id": "business-thought-cards",
+      "title": "Business Thought cards for Trevor: pick a direction",
+      "subtitle": "One card per pillar, sent instead of 'I'll email you'. Each asks one question and ends with an invitation to a 20-minute conversation.",
+      "status": "pending",
+      "due": "2026-11-10",
+      "images": [
+        {
+          "src": "/clients/francois/review/bt_card_a.jpg",
+          "caption": "A  A note in your world"
+        },
+        {
+          "src": "/clients/francois/review/bt_card_b.jpg",
+          "caption": "B  Your field journal"
+        }
+      ],
+      "ask": "Reply A or B. The first two cards come to you this month."
+    },
+    {
       "id": "world-pack-a-or-b",
       "title": "Your world: six places — your choices approved",
       "subtitle": "Possibility B, Tracks B, Leadership B, Bush Lessons A, Diagnostics B, Perspective A. Nothing is animated before the next step is agreed.",
@@ -66,15 +108,16 @@
       "id": "pillar04-story-bank-request",
       "title": "Pillar 04 — Story Bank Request",
       "subtitle": "A request for more bush stories — not a post",
-      "status": "pending",
+      "status": "done",
       "ask": "Send a voice note describing a bush encounter — four prompts are in the request doc."
     },
     {
       "id": "pre-production-pack",
-      "title": "Pre-Production Pack",
+      "title": "Pre-Production Pack: script signed off, Klipspringer shot 1 Oct",
       "subtitle": "Klipspringer script + 3 bonus interview questions",
-      "status": "pending",
-      "ask": "Confirm the script is good to shoot, and pick a day next week — 3 to 4 hours, either 10am–2pm or 12pm–4pm."
+      "status": "approved",
+      "ask": "Confirm the script is good to shoot, and pick a day next week — 3 to 4 hours, either 10am–2pm or 12pm–4pm.",
+      "bankedDate": "2026-09-22"
     },
     {
       "id": "buffalo-calf-imperfect-shot",

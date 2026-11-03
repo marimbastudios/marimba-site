@@ -157,10 +157,119 @@
   },
   {
     "id": "pillar02-tracks-you-cannot-see",
-    "date": "2026-10-27",
+    "date": "2026-11-03",
     "pillar": "Pillar 02",
     "title": "The Tracks You Cannot See",
     "format": "carousel",
-    "note": "Post 2 of 2 on Tracks."
+    "note": "Post 2 of 2 on Tracks. Approved last week; posts today."
+  },
+  {
+    "type": "arc",
+    "id": "arc-nov",
+    "key": "2026-11",
+    "month": "November",
+    "label": "Eighteen Years",
+    "items": [
+      "Pillars 02 to 05",
+      "Weekly lines",
+      "13 Nov: your 18-year Golden Edition",
+      "Motion poster"
+    ],
+    "note": "Standard plan. Your world starts working in your feed."
+  },
+  {
+    "id": "nov-studio-video-last",
+    "date": "2026-11-05",
+    "pillar": "Video",
+    "title": "Last video from the studio session",
+    "format": "video"
+  },
+  {
+    "id": "nov-p03-leadership",
+    "date": "2026-11-10",
+    "pillar": "Pillar 03",
+    "title": "Leadership",
+    "format": "carousel"
+  },
+  {
+    "id": "nov-line-1",
+    "date": "2026-11-11",
+    "pillar": "Weekly line",
+    "title": "Weekly line 1",
+    "format": "image"
+  },
+  {
+    "id": "nov-anniversary-18",
+    "date": "2026-11-13",
+    "pillar": "18 years",
+    "title": "Golden Edition: your 18-year anniversary",
+    "format": "carousel",
+    "note": "Special edition. Direction chosen with you."
+  },
+  {
+    "id": "nov-p04-bushlessons",
+    "date": "2026-11-17",
+    "pillar": "Pillar 04",
+    "title": "Bush Lessons",
+    "format": "carousel"
+  },
+  {
+    "id": "nov-line-2",
+    "date": "2026-11-18",
+    "pillar": "Weekly line",
+    "title": "Weekly line 2",
+    "format": "image"
+  },
+  {
+    "id": "nov-motion-poster",
+    "date": "2026-11-20",
+    "pillar": "Motion",
+    "title": "Motion poster (about 5 s)",
+    "format": "video"
+  },
+  {
+    "id": "nov-p05-diagnostics",
+    "date": "2026-11-24",
+    "pillar": "Pillar 05",
+    "title": "Diagnostics",
+    "format": "carousel"
+  },
+  {
+    "id": "nov-line-3",
+    "date": "2026-11-25",
+    "pillar": "Weekly line",
+    "title": "Weekly line 3",
+    "format": "image"
+  },
+  {
+    "id": "nov-black-friday",
+    "date": "2026-11-27",
+    "pillar": "World",
+    "title": "Black Friday world image",
+    "format": "image"
+  },
+  {
+    "type": "open-slot",
+    "id": "your-day-nov-8",
+    "date": "2026-11-08",
+    "label": "Your day: your own posts"
+  },
+  {
+    "type": "open-slot",
+    "id": "your-day-nov-15",
+    "date": "2026-11-15",
+    "label": "Your day: your own posts"
+  },
+  {
+    "type": "open-slot",
+    "id": "your-day-nov-22",
+    "date": "2026-11-22",
+    "label": "Your day: your own posts"
+  },
+  {
+    "type": "open-slot",
+    "id": "your-day-nov-29",
+    "date": "2026-11-29",
+    "label": "Your day: your own posts"
   }
 ]

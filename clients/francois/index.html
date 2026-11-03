@@ -169,6 +169,16 @@
   .banked-chip{font-size:12px; color:var(--sub); border:1px solid rgba(79,206,139,0.3); border-radius:999px; padding:5px 12px;}
   .banked-chip b{color:var(--ink); font-weight:600;}
   .review-ask{padding:14px 20px 18px; font-size:13px; color:var(--ink); border-top:1px solid var(--panel-line);}
+  /* special occasion review item (added 2026-11-03) */
+  .review-special{position:relative; margin:14px; border-radius:18px; border:1.5px solid rgba(214,178,94,0.75); background:linear-gradient(160deg, rgba(214,178,94,0.16), rgba(214,178,94,0.03) 55%); box-shadow:0 0 0 4px rgba(214,178,94,0.08);}
+  .review-special .review-head{border-bottom-color:rgba(214,178,94,0.35); padding-right:96px;}
+  .review-special .review-eyebrow{color:#E2C27A;}
+  .review-special .review-ask{border-top-color:rgba(214,178,94,0.35);}
+  .special-seal{position:absolute; top:12px; right:14px; width:70px; height:70px;}
+  .special-tag{display:inline-block; margin-top:8px; font-size:11px; font-weight:700; color:#1b1f17; background:#E2C27A; border-radius:999px; padding:3px 10px;}
+  .review-video{padding:18px 20px 0;}
+  .review-video video{width:100%; max-width:360px; display:block; margin:0 auto; border-radius:12px; border:1px solid var(--panel-line);}
+  .review-video span{display:block; text-align:center; font-size:11px; color:var(--sub); margin-top:6px;}
 
   .footer-note{padding:40px 0 60px; text-align:center; font-size:12px; color:var(--sub); border-top:1px solid var(--panel-line); margin-top:20px;}
   .footer-note b{color:var(--ink);}
@@ -536,18 +546,21 @@ async function loadData(){
   // "approved" shows with its images/video; otherwise an all-caught-up state. ----
   let review = {items: []};
   try { const rr = await fetch("/clients/francois/review.json"); if (rr.ok) review = await rr.json(); } catch (e) {}
-  const pending = (review.items || []).filter(i => i.status !== "approved");
+  const pending = (review.items || []).filter(i => i.status !== "approved" && i.status !== "done")
+    .sort((a,b) => (b.special ? 1 : 0) - (a.special ? 1 : 0));
   const reviewEl = document.getElementById("reviewCard");
   if (pending.length) {
-    reviewEl.innerHTML = pending.map(it => `
+    reviewEl.innerHTML = pending.map(it => `${it.special ? '<div class="review-special"><img class="special-seal" src="/clients/francois/review/anniv_seal.png" alt="">' : ''}
       <div class="review-head">
-        <div class="review-eyebrow">Awaiting your review${it.due ? ' · by ' + formatCalDate(it.due) : ''}</div>
+        <div class="review-eyebrow">${it.special ? (it.stage || 'Special occasion') : 'Awaiting your review'}${it.due ? ' · by ' + formatCalDate(it.due) : ''}</div>
         <div class="t">${it.title}</div>
         ${it.subtitle ? `<div class="s">${it.subtitle}</div>` : ''}
+        ${it.special ? '<span class="special-tag">Working design · shaped with you</span>' : ''}
       </div>
       ${it.video ? `<div class="video-frame"><iframe src="${it.video}" title="${it.title}" allowfullscreen></iframe></div>` : ''}
+      ${it.videoFile ? `<div class="review-video"><video src="${it.videoFile}" controls playsinline muted loop preload="metadata"></video>${it.videoCaption ? `<span>${it.videoCaption}</span>` : ''}</div>` : ''}
       ${(it.images || []).length ? `<div class="deliverable-gallery">${it.images.map(im => `<div class="deliverable-item"><img src="${im.src}" alt="${im.caption || it.title}" loading="lazy"><span>${im.caption || ''}</span></div>`).join('')}</div>` : ''}
-      ${it.ask ? `<div class="review-ask">${it.ask}</div>` : ''}`).join('');
+      ${it.ask ? `<div class="review-ask">${it.ask}</div>` : ''}${it.special ? '</div>' : ''}`).join('');
   } else {
     const lastDone = posts.filter(c => c.done).pop();
     reviewEl.innerHTML = `<div class="review-empty"><div class="review-tick">✓</div>
