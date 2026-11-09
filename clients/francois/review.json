@@ -4,44 +4,41 @@
     {
       "id": "anniversary-18-golden-edition",
       "special": true,
-      "stage": "Special occasion · working design, v1",
-      "title": "Your 18 years (Friday 13 November): working design, v1",
-      "subtitle": "A first working design in gold for your 18 years. It is where we have got to so far, not a finished piece: the words, the moments and the look will change with your input.",
+      "stage": "Special occasion · working design, v2",
+      "title": "Your 18 years: working design v2, with your changes",
+      "subtitle": "Updated from your feedback: your words on the cover, the ActionCOACH logo, no date, '18 years with ActionCOACH', a line that runs before 2008 (your banking years) and on past 2026, and spirals for days, events, seasons and lessons.",
       "status": "pending",
       "due": "2026-11-06",
       "images": [
         {
-          "src": "/clients/francois/review/anniv_v4_1_golden_path.jpg",
+          "src": "/clients/francois/review/anniv_v5_1_golden_path.jpg",
           "caption": "1  The golden path"
         },
         {
-          "src": "/clients/francois/review/anniv_v4_2_the_journey.jpg",
+          "src": "/clients/francois/review/anniv_v5_2_the_journey.jpg",
           "caption": "2  The journey"
         },
         {
-          "src": "/clients/francois/review/anniv_v4_3_thank_you.jpg",
+          "src": "/clients/francois/review/anniv_v5_3_thank_you.jpg",
           "caption": "3  Thank you"
         }
       ],
-      "ask": "Your ideas shape version 2: who would you most like to see this, what should people feel, which moments matter most to you, should your 2008 cartoon be part of it, and what would you add, change or take away? A voice note or 15 minutes on a call is perfect. Version 2 comes back to you before the 13th."
+      "ask": "Anything else you would like changed? A quick reply is perfect. We post it on the 13th."
     },
     {
       "id": "business-thought-cards",
-      "title": "Business Thought cards for Trevor: pick a direction",
-      "subtitle": "One card per pillar, sent instead of 'I'll email you'. Each asks one question and ends with an invitation to a 20-minute conversation.",
-      "status": "pending",
+      "title": "Business Thought cards: Option A, the handwritten note",
+      "subtitle": "You chose A, with a 30-minute conversation as the invitation.",
+      "status": "approved",
       "due": "2026-11-10",
       "images": [
         {
           "src": "/clients/francois/review/bt_card_a.jpg",
-          "caption": "A  A note in your world"
-        },
-        {
-          "src": "/clients/francois/review/bt_card_b.jpg",
-          "caption": "B  Your field journal"
+          "caption": "Option A, updated to 30 minutes"
         }
       ],
-      "ask": "Reply A or B. The first two cards come to you this month."
+      "ask": "Approved: Option A, 30 minutes.",
+      "bankedDate": "2026-11-04"
     },
     {
       "id": "world-pack-a-or-b",

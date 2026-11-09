@@ -271,5 +271,13 @@
     "id": "your-day-nov-29",
     "date": "2026-11-29",
     "label": "Your day: your own posts"
+  },
+  {
+    "type": "phase",
+    "id": "studio-session-dec2",
+    "startDate": "2026-12-02",
+    "endDate": "2026-12-02",
+    "label": "Studio session, 10:00 to 13:00",
+    "note": "In your diary (your reply, 4 Nov)."
   }
 ]
